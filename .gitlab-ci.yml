@@ -31,6 +31,9 @@ build:
 test:
   stage: test
   script:
-     - ./gradlew check
+     - ./gradlew --info test
      # code coverage here maybe
 
+
+# general ideas:
+# add artifacts with expire date

@@ -18,12 +18,13 @@ stages:
   - test
   - build
 
+build:
+    stage: build
+    script:
+       - ./gradlew assemble
+
 test:
   stage: test
   script:
      - ./gradlew check
 
-build:
-  stage: build
-  script:
-     - ./gradlew assemble

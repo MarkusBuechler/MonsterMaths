@@ -1,6 +1,7 @@
 image: registry.gitlab.com/showcheap/android-ci:master
 
 before_script:
+    - echo "Starting ..."
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - chmod +x ./gradlew
     - sdkmanager "platforms;android-22"         # Specify compileSdkVersion Depends on your android project
@@ -8,6 +9,8 @@ before_script:
     - sdkmanager "extras;android;m2repository"  # You can add sdkmanager command to install another package here
     - sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2" # If you need constraint-layout support
 
+after_script:
+    - echo "Finished."
 
 cache:
   key: "$CI_COMMIT_REF_NAME"
@@ -17,6 +20,8 @@ cache:
 stages:
   - build
   - test
+  # maybe split into unit, component and gui tests
+  # analysis
 
 build:
     stage: build
@@ -27,4 +32,5 @@ test:
   stage: test
   script:
      - ./gradlew check
+     # code coverage here maybe
 

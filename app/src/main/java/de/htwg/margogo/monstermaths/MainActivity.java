@@ -21,7 +21,6 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "Gehe zum nächsten Screen!",
                         Toast.LENGTH_LONG).show();
-
                 // Create intent and start activity
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 //intent.putExtra("key", targetGoal);
@@ -34,9 +33,6 @@ public class MainActivity extends Activity {
         btnBla.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Gehe zum nächsten Screen!",
-                        Toast.LENGTH_LONG).show();
-
                 // Create intent and start activity
                 Intent intent = new Intent(MainActivity.this, ScrollingActivity.class);
                 //intent.putExtra("key", targetGoal);
@@ -49,9 +45,6 @@ public class MainActivity extends Activity {
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Gehe zum nächsten Screen!",
-                        Toast.LENGTH_LONG).show();
-
                 // Create intent and start activity
                 Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                 //intent.putExtra("key", targetGoal);

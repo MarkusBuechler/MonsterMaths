@@ -30,6 +30,36 @@ public class MainActivity extends Activity {
             }
         });
 
+        Button btnBla = findViewById(R.id.btnBla);
+        btnBla.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "Gehe zum nächsten Screen!",
+                        Toast.LENGTH_LONG).show();
+
+                // Create intent and start activity
+                Intent intent = new Intent(MainActivity.this, ScrollingActivity.class);
+                //intent.putExtra("key", targetGoal);
+                startActivity(intent);
+
+            }
+        });
+
+        Button btnSettings = findViewById(R.id.btnSettings);
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "Gehe zum nächsten Screen!",
+                        Toast.LENGTH_LONG).show();
+
+                // Create intent and start activity
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                //intent.putExtra("key", targetGoal);
+                startActivity(intent);
+
+            }
+        });
+
     }
 
 

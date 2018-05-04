@@ -1,5 +1,12 @@
 # Monster Maths
 
+# CI Status
+
+| Branch      | Status |
+| ----------- | ------ |
+| master      | [![build status](https://gitlab.in.htwg-konstanz.de/mobile-ss18/mobile-ss18-13/badges/master/build.svg)](https://gitlab.in.htwg-konstanz.de/mobile-ss18/mobile-ss18-13/commits/master) |
+| dev      | [![build status](https://gitlab.in.htwg-konstanz.de/mobile-ss18/mobile-ss18-13/badges/dev/build.svg)](https://gitlab.in.htwg-konstanz.de/mobile-ss18/mobile-ss18-13/commits/dev) |
+
 In dem Spiel Monster Maths geht es darum mathematische Gleichung auf eine spielerische Art zu lösen.  
 Der Spieler steuert einen Avatar mit Hilfe des Beschleunigungssensors am Handy durch eine kleine Spielwelt.  
 Ziel eines Levels ist es auf ein vorgegebenes Ergebnis zu kommen.   

@@ -1,5 +1,18 @@
 package de.htwg.margogo.monstermaths;
 
+
+/**
+ * Class representing a level.
+ * What should every level have ?
+ * - String: Name
+ * - ID : int
+ * - Boolean: Locked
+ * - String Description maybe
+ * - ? : Personal high score -> need to be saved somewhere
+ * - ? : High score List -> List of other scores from different players
+ * - ? : Badge : Bronze, Silver, Gold, Platin if Player is in top 30, 20, 10 or top 5% in the highscore list.
+ * TODO: think
+ */
 public class DataModel {
 
     String name;

@@ -1,11 +1,8 @@
 package de.htwg.margogo.monstermaths;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -42,7 +39,7 @@ public class ScrollingActivity extends AppCompatActivity {
         dataModels.add(new DataModel("Lollipop","Android 5.0","21","November 12, 2014"));
         dataModels.add(new DataModel("Marshmallow", "Android 6.0", "23","October 5, 2015"));
 
-        adapter= new CustomAdapter(dataModels,getApplicationContext());
+        adapter = new CustomAdapter(dataModels,getApplicationContext());
 
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

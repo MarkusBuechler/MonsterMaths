@@ -121,7 +121,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
      * A particle system is just a collection of particles
      */
     class ParticleSystem {
-        static final int NUM_PARTICLES = 5;
+        static final int NUM_PARTICLES = 1;
         private Particle mBalls[] = new Particle[NUM_PARTICLES];
 
         ParticleSystem() {
@@ -143,7 +143,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
         private void updatePositions(float sx, float sy, long timestamp) {
             final long t = timestamp;
             if (mLastT != 0) {
-                final float dT = (float) (t - mLastT) / 1000.f /** (1.0f / 1000000000.0f)*/;
+                final float dT = (float) (t - mLastT) / 3000.f /** (1.0f / 3000000000.0f)*/;
                     final int count = mBalls.length;
                     for (int i = 0; i < count; i++) {
                         Particle ball = mBalls[i];

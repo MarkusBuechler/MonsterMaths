@@ -130,7 +130,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
              */
             for (int i = 0; i < mBalls.length; i++) {
                 mBalls[i] = new Particle(getContext());
-                mBalls[i].setBackgroundResource(R.drawable.ball);
+                mBalls[i].setBackgroundResource(R.drawable.emoji_smile_256);
                 mBalls[i].setLayerType(LAYER_TYPE_HARDWARE, null);
                 addView(mBalls[i], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
             }

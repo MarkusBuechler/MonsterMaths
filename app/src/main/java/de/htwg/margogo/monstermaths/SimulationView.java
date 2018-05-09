@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 /**
  * This is an highly adopted example of using the accelerometer to integrate the device's
@@ -205,6 +206,8 @@ class SimulationView extends FrameLayout implements SensorEventListener {
             mLastT = t;
         }
 
+
+
         /*
          * Performs one iteration of the simulation. First updating the
          * position of all the particles and resolving the constraints and
@@ -212,9 +215,10 @@ class SimulationView extends FrameLayout implements SensorEventListener {
          */
         public void update(float sx, float sy, long now) {
             // update the system's positions
-            //updateMonsters(sx, sy, now);
             updatePositions(sx, sy, now);
-            //updateMonsters(sx, sy, now);
+
+            //checkCollision()
+            checkCollsion();
 
             // We do no more than a limited number of iterations
             final int NUM_MAX_ITERATIONS = 10;
@@ -292,6 +296,40 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                     curr.resolveCollisionWithBounds();
                 }
             }
+
+        }
+
+        /**
+         * Check if player crashed into a monster
+         * TODO: Do it
+         */
+        private void checkCollsion() {
+
+            final int count = mBalls.length;
+            final int count2 = mMonsters.length;
+            for (int i = 0; i < count; i++) {
+                Particle ball = mBalls[i];
+                final float x1 = ball.mPosX;
+                final float y1 = ball.mVelY;
+
+                for (int j = 0; j < count2; j++) {
+                    Particle monster = mMonsters[j];
+                    final float x2 = monster.mPosX;
+                    final float y2 = monster.mVelY;
+
+                    final float diff_x = x1 - x2;
+                    final float diff_y = y1 - y2;
+
+                    if (Math.abs(diff_x) < 0.001 && Math.abs(diff_y) < 0.001f)  {
+                        Toast.makeText(getContext(), "ssss", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+
+                }
+               // ball.computePhysics(sx, sy, dT);
+
+            }
+
 
         }
 

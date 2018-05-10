@@ -217,9 +217,6 @@ class SimulationView extends FrameLayout implements SensorEventListener {
             // update the system's positions
             updatePositions(sx, sy, now);
 
-            //checkCollision()
-            checkCollsion();
-
             // We do no more than a limited number of iterations
             final int NUM_MAX_ITERATIONS = 10;
 
@@ -262,6 +259,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                             more = true;
                         }
                     }
+                    checkCollision();
                     curr.resolveCollisionWithBounds();
                 }
 
@@ -301,36 +299,45 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
         /**
          * Check if player crashed into a monster
-         * TODO: Do it
+         * TODO: Optimize this
          */
-        private void checkCollsion() {
+        private void checkCollision() {
 
             final int count = mBalls.length;
             final int count2 = mMonsters.length;
-            for (int i = 0; i < count; i++) {
-                Particle ball = mBalls[i];
-                final float x1 = ball.mPosX;
-                final float y1 = ball.mVelY;
 
-                for (int j = 0; j < count2; j++) {
-                    Particle monster = mMonsters[j];
-                    final float x2 = monster.mPosX;
-                    final float y2 = monster.mVelY;
+            Particle ball = mBalls[0];
+            final float x1 = ball.mPosX;
+            final float y1 = ball.mPosY;
 
-                    final float diff_x = x1 - x2;
-                    final float diff_y = y1 - y2;
+            Particle monster = mMonsters[0];
+            final float x2 = monster.mPosX;
+            final float y2 = monster.mPosY;
 
-                    if (Math.abs(diff_x) < 0.001 && Math.abs(diff_y) < 0.001f)  {
-                        Toast.makeText(getContext(), "ssss", Toast.LENGTH_SHORT).show();
-                    }
-                    break;
+            final double dis = distance(x1,y1,x2,y2);
 
-                }
-               // ball.computePhysics(sx, sy, dT);
-
+            if (dis < 0.0030)  {
+                Log.d("c", "checkCollsion: " + dis);
+                Toast.makeText(getContext(), "Hey", Toast.LENGTH_SHORT).show();
             }
 
 
+        }
+
+        /**
+         * Returns the difference between two points
+         * @param xd_1 x value of first point
+         * @param yd_1 y value of first point
+         * @param xd_2 x value of second point
+         * @param yd_2 y value of second point
+         * @return
+         */
+        public double distance(float xd_1, float yd_1, float xd_2, float yd_2) {
+
+            xd_1 -= xd_2;
+            yd_1 -= yd_2;
+
+            return Math.sqrt(xd_1 * xd_1 + yd_1 * yd_1);
         }
 
         public int getParticleCount() {

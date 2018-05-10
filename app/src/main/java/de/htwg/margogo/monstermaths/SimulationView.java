@@ -12,12 +12,10 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 /**
@@ -107,7 +105,6 @@ class SimulationView extends FrameLayout implements SensorEventListener {
             final float ax = -0.5f/5;
             final float ay = -0/5;
 
-
             if (counter > 90) {
                 mPosX -= mVelX * dT - ax * dT * dT / 2;
                 mVelX -= ax * dT;
@@ -155,9 +152,16 @@ class SimulationView extends FrameLayout implements SensorEventListener {
      */
     class ParticleSystem {
         static final int NUM_MONSTERS = 1;
+        static final int NUM_NUMBERS = 2;
         private Particle mBall = new Particle(getContext(),1);
         private Particle mMonsters[] = new Particle[NUM_MONSTERS];
         private Particle mGoal = new Particle(getContext(),1);
+        private Particle mNumber[] = new Particle[NUM_NUMBERS];
+
+        private boolean lockFinish = false;
+        private int goalUnlocked = 0;
+        private boolean uniqueLockNumber1 = false;
+        private boolean uniqueLockNumber2 = false;
 
         ParticleSystem() {
             /*
@@ -183,6 +187,22 @@ class SimulationView extends FrameLayout implements SensorEventListener {
             mGoal.setBackgroundResource(R.drawable.treasure_closed_128);
             mGoal.setLayerType(LAYER_TYPE_HARDWARE, null);
             addView(mGoal, new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
+
+            mNumber[0] = new Particle(getContext(),2);
+            mNumber[0].mPosX = 0f;
+            mNumber[0].mPosY = -0.015f;
+            mNumber[0].setBackgroundResource(R.drawable.one);
+            mNumber[0].setLayerType(LAYER_TYPE_HARDWARE, null);
+            addView(mNumber[0], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
+
+            mNumber[1] = new Particle(getContext(),2);
+            mNumber[1].mPosX = 0.02f;
+            mNumber[1].mPosY = 0.0065f;
+            mNumber[1].setBackgroundResource(R.drawable.eigth);
+            mNumber[1].setLayerType(LAYER_TYPE_HARDWARE, null);
+            addView(mNumber[1], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
+
+
 
         }
 
@@ -228,6 +248,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
             checkFinish();
             checkCollision();
+            checkNumberCollected();
             mBall.resolveCollisionWithBounds();
 
             final int count2 = mMonsters.length;
@@ -258,7 +279,6 @@ class SimulationView extends FrameLayout implements SensorEventListener {
             final double dis = distance(x1,y1,x2,y2);
 
             if (dis < 0.004)  {
-                Log.d("c", "checkCollsion: " + dis);
                 Toast.makeText(getContext(), "Hey", Toast.LENGTH_SHORT).show();
             }
         }
@@ -278,9 +298,43 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
             final double dis = distance(x1,y1,x2,y2);
 
-            if (dis < 0.004)  {
-                Toast.makeText(getContext(), "Goal", Toast.LENGTH_SHORT).show();
+            if (dis < 0.004 && goalUnlocked >= 2 && !lockFinish)  {
                 mGoal.setBackgroundResource(R.drawable.treasure_open_128);
+                Toast.makeText(getContext(), ""+ goalUnlocked, Toast.LENGTH_SHORT).show();
+                lockFinish = true;
+            }
+        }
+
+        /**
+         * Check if player collected the correct numbers.
+         * TODO: make this abstract !
+         */
+        private void checkNumberCollected() {
+
+            Particle ball = mBall;
+            final float x1 = ball.mPosX;
+            final float y1 = ball.mPosY;
+
+            final float x1_2 = mNumber[0].mPosX;
+            final float y1_2 = mNumber[0].mPosY;
+
+            final double dis = distance(x1,y1,x1_2,y1_2);
+
+            if (dis < 0.004 && !uniqueLockNumber1)  {
+                mNumber[0].setVisibility(INVISIBLE);
+                goalUnlocked += 1;
+                uniqueLockNumber1 = true;
+            }
+
+            final float x2_2 = mNumber[1].mPosX;
+            final float y2_2 = mNumber[1].mPosY;
+
+            final double dis2 = distance(x1,y1,x2_2,y2_2);
+
+            if (dis2 < 0.004 && !uniqueLockNumber2)  {
+                mNumber[1].setVisibility(INVISIBLE);
+                goalUnlocked += 1;
+                uniqueLockNumber2 = true;
             }
         }
 
@@ -310,6 +364,18 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
         public float getPosY2(int i) {
             return mMonsters[i].mPosY;
+        }
+
+        public int getParticleCount3() {
+            return mNumber.length;
+        }
+
+        public float getPosX3(int i) {
+            return mNumber[i].mPosX;
+        }
+
+        public float getPosY3(int i) {
+            return mNumber[i].mPosY;
         }
 
     }
@@ -423,14 +489,15 @@ class SimulationView extends FrameLayout implements SensorEventListener {
         particleSystem.mBall.setTranslationX(x);
         particleSystem.mBall.setTranslationY(y);
 
+        /*
+         * MonsterS
+         * We transform the canvas so that the coordinate system matches
+         * the sensors coordinate system with the origin in the center
+         * of the screen and the unit is the meter.
+         */
         final int count2 = particleSystem.getParticleCount2();
         for (int i = 0; i < count2; i++) {
-            /*
-             * MonsterS
-             * We transform the canvas so that the coordinate system matches
-             * the sensors coordinate system with the origin in the center
-             * of the screen and the unit is the meter.
-             */
+
             final float x2 = xc + particleSystem.getPosX2(i) * xs;
             final float y2 = yc - particleSystem.getPosY2(i) * ys;
             particleSystem.mMonsters[i].setTranslationX(x2);
@@ -447,6 +514,21 @@ class SimulationView extends FrameLayout implements SensorEventListener {
         final float y3 = yc - particleSystem.mGoal.mPosY * ys;
         particleSystem.mGoal.setTranslationX(x3);
         particleSystem.mGoal.setTranslationY(y3);
+
+        /*
+         * NumberS
+         * We transform the canvas so that the coordinate system matches
+         * the sensors coordinate system with the origin in the center
+         * of the screen and the unit is the meter.
+         */
+        final int count3 = particleSystem.getParticleCount3();
+        for (int i = 0; i < count3; i++) {
+
+            final float x4 = xc + particleSystem.getPosX3(i) * xs;
+            final float y4 = yc - particleSystem.getPosY3(i) * ys;
+            particleSystem.mNumber[i].setTranslationX(x4);
+            particleSystem.mNumber[i].setTranslationY(y4);
+        }
 
         // and make sure to redraw asap
         invalidate();

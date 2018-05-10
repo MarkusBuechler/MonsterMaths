@@ -34,6 +34,8 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
 
     }
 
+    // TODO Optional disable locked levels.
+
     @Override
     public void onClick(View v) {
 

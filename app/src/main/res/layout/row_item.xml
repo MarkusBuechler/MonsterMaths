@@ -20,24 +20,24 @@
 
     <LinearLayout
         android:id="@+id/linearLayoutScore"
-        android:layout_below="@+id/name"
-        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_marginTop="5dp">
 
         <TextView
             android:id="@+id/score_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:text="Score: "/>
+            android:text="Score: "
+            android:textColor="@android:color/black" />
 
         <TextView
             android:id="@+id/score_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="23s"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black" />
 
     </LinearLayout>
 

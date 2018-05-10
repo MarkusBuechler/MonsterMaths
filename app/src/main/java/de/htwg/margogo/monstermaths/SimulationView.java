@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import static de.htwg.margogo.monstermaths.MiscUtilities.distance;
+
 /**
  * This is an highly adopted example of using the accelerometer to integrate the device's
  * acceleration to a position using the Verlet method. This is illustrated with
@@ -336,22 +338,6 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 goalUnlocked += 1;
                 uniqueLockNumber2 = true;
             }
-        }
-
-        /**
-         * Returns the difference between two points
-         * @param xd_1 x value of first point
-         * @param yd_1 y value of first point
-         * @param xd_2 x value of second point
-         * @param yd_2 y value of second point
-         * @return
-         */
-        public double distance(float xd_1, float yd_1, float xd_2, float yd_2) {
-
-            xd_1 -= xd_2;
-            yd_1 -= yd_2;
-
-            return Math.sqrt(xd_1 * xd_1 + yd_1 * yd_1);
         }
 
         public int getParticleCount2() {

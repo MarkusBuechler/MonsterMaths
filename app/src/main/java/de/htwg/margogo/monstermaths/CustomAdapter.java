@@ -16,14 +16,15 @@ import java.util.ArrayList;
 public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnClickListener{
 
     private ArrayList<DataModel> dataSet;
-    Context mContext;
+    private Context mContext;
 
     // View lookup cache
     private static class ViewHolder {
-        TextView txtName;
-        TextView txtType;
-        TextView txtVersion;
-        ImageView info;
+        TextView name;
+        TextView score_text;
+        TextView score_value;
+        TextView description;
+        ImageView badge;
     }
 
     public CustomAdapter(ArrayList<DataModel> data, Context context) {
@@ -36,14 +37,15 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
     @Override
     public void onClick(View v) {
 
-        int position=(Integer) v.getTag();
-        Object object= getItem(position);
-        DataModel dataModel=(DataModel)object;
+        int position = (Integer) v.getTag();
+        Object object = getItem (position);
+        DataModel dataModel = (DataModel) object;
 
+        // overwrite click listener for badge: show highscore instead.
         switch (v.getId())
         {
-            case R.id.item_info:
-                Snackbar.make(v, "Release date " +dataModel.getFeature(), Snackbar.LENGTH_LONG)
+            case R.id.bagde:
+                Snackbar.make(v, "Showing highscores for " + dataModel.getName(), Snackbar.LENGTH_SHORT)
                         .setAction("No action", null).show();
                 break;
         }
@@ -65,10 +67,12 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.row_item, parent, false);
-            viewHolder.txtName = convertView.findViewById(R.id.name);
-            viewHolder.txtType = convertView.findViewById(R.id.type);
-            viewHolder.txtVersion = convertView.findViewById(R.id.version_number);
-            viewHolder.info = convertView.findViewById(R.id.item_info);
+            viewHolder.name = convertView.findViewById(R.id.name);
+            viewHolder.score_text = convertView.findViewById(R.id.score_text);
+            viewHolder.score_value = convertView.findViewById(R.id.score_value);
+            viewHolder.description = convertView.findViewById(R.id.description);
+            viewHolder.badge = convertView.findViewById(R.id.bagde);
+
 
             result=convertView;
 
@@ -82,12 +86,31 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
         result.startAnimation(animation);
         lastPosition = position;
 
-        viewHolder.txtName.setText(dataModel.getName());
-        viewHolder.txtType.setText(dataModel.getType());
-        viewHolder.txtVersion.setText(dataModel.getVersion_number());
-        viewHolder.info.setOnClickListener(this);
-        viewHolder.info.setTag(position);
+        viewHolder.name.setText(dataModel.getName());
+        viewHolder.score_text.setText("Score: ");
+        viewHolder.score_value.setText(dataModel.getPersonal_highscore().toString());
+        viewHolder.description.setText(dataModel.getDescription());
+
+        updateMedal(dataModel, viewHolder);
+        viewHolder.badge.setOnClickListener(this);
+        viewHolder.badge.setTag(position);
         // Return the completed view to render on screen
         return convertView;
+    }
+
+    /**
+     * TODO: Add platin state and default(none) like empty
+     * Comment: Java doesn't support switch casing on enums..
+     * @param dataModel
+     * @param viewHolder
+     */
+    private void updateMedal(DataModel dataModel, ViewHolder viewHolder) {
+        if (dataModel.getBadge() == Badge.Bronze) {
+            viewHolder.badge.setImageResource(R.drawable.medal_bronze_128);
+        } else if (dataModel.getBadge() == Badge.Silver) {
+            viewHolder.badge.setImageResource(R.drawable.medal_silver_128);
+        } else if (dataModel.getBadge() == Badge.Gold){
+            viewHolder.badge.setImageResource(R.drawable.medal_gold_128);
+        }
     }
 }

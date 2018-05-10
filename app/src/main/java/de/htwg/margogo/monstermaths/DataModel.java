@@ -1,6 +1,8 @@
 package de.htwg.margogo.monstermaths;
 
 
+import java.util.List;
+
 /**
  * Class representing a level.
  * What should every level have ?
@@ -16,32 +18,78 @@ package de.htwg.margogo.monstermaths;
 public class DataModel {
 
     String name;
-    String type;
-    String version_number;
-    String feature;
+    Integer id;
+    Boolean locked;
+    String description;
+    Double personal_highscore;
+    List<Double> highscore_list;
+    Badge badge;
 
-    public DataModel(String name, String type, String version_number, String feature ) {
-        this.name=name;
-        this.type=type;
-        this.version_number=version_number;
-        this.feature=feature;
 
+    public DataModel(String name, Integer id, Boolean locked, String description, Double personal_highscore, Badge badge) {
+        this.name = name;
+        this.id = id;
+        this.locked = locked;
+        this.description = description;
+        this.personal_highscore = personal_highscore;
+        this.badge = badge;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getType() {
-        return type;
+    public Integer getId() {
+        return id;
     }
 
-    public String getVersion_number() {
-        return version_number;
+    public Boolean getLocked() {
+        return locked;
     }
 
-    public String getFeature() {
-        return feature;
+    public String getDescription() {
+        return description;
     }
+
+    public Double getPersonal_highscore() {
+        return personal_highscore;
+    }
+
+    public List<Double> getHighscore_list() {
+        return highscore_list;
+    }
+
+    public Badge getBadge() {
+        return badge;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setLocked(Boolean locked) {
+        this.locked = locked;
+    }
+
+    public void setPersonal_highscore(Double personal_highscore) {
+        this.personal_highscore = personal_highscore;
+    }
+
+    public void setHighscore_list(List<Double> highscore_list) {
+        this.highscore_list = highscore_list;
+    }
+
+    public void setBadge(Badge badge) {
+        this.badge = badge;
+    }
+
 
 }

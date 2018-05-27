@@ -1,7 +1,9 @@
 package de.htwg.margogo.monstermaths;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -10,6 +12,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.Surface;
@@ -19,6 +22,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import static de.htwg.margogo.monstermaths.MiscUtilities.distance;
+import static java.lang.Thread.sleep;
 
 /**
  * This is an highly adopted example of using the accelerometer to integrate the device's
@@ -160,10 +164,11 @@ class SimulationView extends FrameLayout implements SensorEventListener {
         private Particle mGoal = new Particle(getContext(),1);
         private Particle mNumber[] = new Particle[NUM_NUMBERS];
 
-        private boolean lockFinish = false;
+        public boolean lockFinish = false;
         private int goalUnlocked = 0;
         private boolean uniqueLockNumber1 = false;
         private boolean uniqueLockNumber2 = false;
+
 
         ParticleSystem() {
             /*
@@ -304,6 +309,26 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 mGoal.setBackgroundResource(R.drawable.treasure_open_128);
                 Toast.makeText(getContext(), ""+ goalUnlocked, Toast.LENGTH_SHORT).show();
                 lockFinish = true;
+
+                // share data between singleton class !
+                DataHolder holder = DataHolder.getInstace();
+                holder.setLock(true);
+
+
+                // after 1 sec activity is closed
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent submit = new Intent();
+                        submit.putExtra("result", "value");
+                        accelerometerPlayActivity.setResult(Activity.RESULT_OK, submit);
+                        accelerometerPlayActivity.finish(); // finished activity, maybe add finish screen before
+                    }
+                }, 1000);
+
+
+
             }
         }
 

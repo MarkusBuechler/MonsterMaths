@@ -1,12 +1,14 @@
 package de.htwg.margogo.monstermaths;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
@@ -35,9 +37,11 @@ public class GameActivity extends Activity {
     TextView textViewTimer2;
     long startTime = 0;
 
+    DataHolder dataHolder = DataHolder.getInstace();
+
     //runs without a timer by reposting this handler at the end of the runnable
     Handler timerHandler = new Handler();
-    Runnable timerRunnable = new Runnable() {
+    final Runnable timerRunnable = new Runnable() {
 
         @Override
         public void run() {
@@ -47,6 +51,13 @@ public class GameActivity extends Activity {
             seconds = seconds % 60;
 
             textViewTimer2.setText(String.format("%d:%02d", minutes, seconds));
+
+            if (dataHolder.getLock()) {
+                Log.i("asd", "onActivityResult: " + seconds);
+                // save first time when executed here. cut the next 3 times..
+            } else {
+                 // lock again to prevent loop. this shouldn't be done here, refactored for every level. still buggy
+            }
 
             timerHandler.postDelayed(this, 500);
         }
@@ -113,6 +124,23 @@ public class GameActivity extends Activity {
         setContentView(mSimulationView);
 
     }
+
+    /*
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.i("asd", "onActivityResult: ");
+
+        if (resultCode == Activity.RESULT_OK) {
+            String result = data.getStringExtra("result");
+            Log.i("asd", "onActivityResult: " + result);
+            Log.i("asd", "onActivityResult: " + timerHandler.getLooper().toString());
+
+        }
+        if (resultCode == Activity.RESULT_CANCELED) {
+            // TODO: No score returned.
+            Log.i("asd", "onActivityResult: nothing");
+        }
+    }
+    */
 
 
     @Override

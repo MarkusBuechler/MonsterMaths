@@ -7,9 +7,12 @@ import android.util.Log;
  */
 public class DataHolderLevel1 implements DataHolderInterface {
 
-    public boolean lock;
-    public int time;
-    public String name;
+    private boolean lock;
+    private int score;
+    private String name = "Level 1";
+    private String description = "Basic Introduction to the game concept";
+    private Badge badge = Badge.Bronze;
+    private int id = 1;
 
     public void setLock(boolean lock) {
         this.lock = lock;
@@ -19,23 +22,37 @@ public class DataHolderLevel1 implements DataHolderInterface {
         return lock;
     }
 
-    public void setTime(int time) {
-        this.time = time;
-        Log.i("level1!", "setTime: called");
+    public void setScore(int score) {
+        this.score = score;
     }
 
-    public int getTime() {
-        return time;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
+    public int getScore() {
+        return score;
     }
 
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public Badge getBadge() {
+        return badge;
+    }
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public void setBadge(Badge badge) {
+        this.badge = badge;
     }
 
     private static final DataHolderLevel1 holder = new DataHolderLevel1();

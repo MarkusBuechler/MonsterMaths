@@ -2,9 +2,7 @@ package de.htwg.margogo.monstermaths;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,11 +25,13 @@ public class ScrollingActivity extends AppCompatActivity {
 
         dataModels = new ArrayList<>();
 
+
+        // TODO: get datamodel from dataholder
         DataHolderLevel1 dt1 = DataHolderLevel1.getInstance();
-        DataModel dm1 = new DataModel(dt1.getName(), 1, false, "1eee", (double) dt1.getTime(), Badge.Silver);
+        DataModel dm1 = new DataModel(dt1.getName(), dt1.getId(), false, dt1.getDescription(), dt1.getScore(), dt1.getBadge());
 
         DataHolderLevel2 dt2 = DataHolderLevel2.getInstance();
-        DataModel dm2 = new DataModel(dt2.getName(), 2, false, "2er", (double) dt1.getTime(), Badge.Gold);
+        DataModel dm2 = new DataModel(dt2.getName(), dt2.getId(), false, dt2.getDescription(), dt2.getScore(), dt2.getBadge());
 
         dataModels.add(dm1);
         dataModels.add(dm2);

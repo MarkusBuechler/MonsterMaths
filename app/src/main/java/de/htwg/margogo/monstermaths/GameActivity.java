@@ -61,7 +61,7 @@ public class GameActivity extends Activity {
             textViewTimer2.setText(String.format("%d:%02d", minutes, seconds));
 
             if (dataHolder.getLock()) {
-                dataHolder.setTime(seconds);
+                dataHolder.setScore(seconds);
                 dataHolder.setLock(false);
             } else {
                  // nothing to do here

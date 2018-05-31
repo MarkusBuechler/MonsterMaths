@@ -2,12 +2,16 @@ package de.htwg.margogo.monstermaths;
 
 public interface DataHolderInterface {
 
-    public void setLock(boolean lock);
+    void setLock(boolean lock);
 
-    public boolean getLock();
+    boolean getLock();
 
-    public void setTime(int time);
+    void setTime(int time);
 
-    public int getTime();
+    int getTime();
+
+    void setName(String name);
+
+    String getName();
 
 }

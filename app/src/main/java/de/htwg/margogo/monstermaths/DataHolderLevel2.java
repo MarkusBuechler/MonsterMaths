@@ -10,6 +10,7 @@ public class DataHolderLevel2 implements DataHolderInterface {
 
     public boolean lock;
     public int time;
+    public String name;
 
     public void setLock(boolean lock) {
         this.lock = lock;
@@ -26,6 +27,16 @@ public class DataHolderLevel2 implements DataHolderInterface {
 
     public int getTime() {
         return time;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     private static final DataHolderLevel2 holder = new DataHolderLevel2();

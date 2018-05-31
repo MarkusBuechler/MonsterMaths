@@ -27,6 +27,16 @@ public class ScrollingActivity extends AppCompatActivity {
 
         dataModels = new ArrayList<>();
 
+        DataHolderLevel1 dt1 = DataHolderLevel1.getInstance();
+        DataModel dm1 = new DataModel(dt1.getName(), 1, false, "1eee", (double) dt1.getTime(), Badge.Silver);
+
+        DataHolderLevel2 dt2 = DataHolderLevel2.getInstance();
+        DataModel dm2 = new DataModel(dt2.getName(), 2, false, "2er", (double) dt1.getTime(), Badge.Gold);
+
+        dataModels.add(dm1);
+        dataModels.add(dm2);
+
+        /*
         dataModels.add(new DataModel("Level 1", 1, false,"Basic Introduction to the game concept", 10.0 , Badge.Gold));
         dataModels.add(new DataModel("Level 2", 2, false,"Introduction to Addition", 100.0 , Badge.Silver));
         dataModels.add(new DataModel("Level 3", 3, false,"Addition 2", 0.0 , Badge.Bronze));
@@ -37,6 +47,7 @@ public class ScrollingActivity extends AppCompatActivity {
         dataModels.add(new DataModel("Level 8", 3, true,"Introduction to Multiplication", 0.0 , Badge.Bronze));
         dataModels.add(new DataModel("Level 9", 4, true,"Multiplication 2", 0.0 , Badge.Bronze));
         dataModels.add(new DataModel("Level 10", 5, true,"Introduction to Division", 0.0 , Badge.Gold));
+        */
 
 
         adapter = new CustomAdapter(dataModels,getApplicationContext());
@@ -57,6 +68,8 @@ public class ScrollingActivity extends AppCompatActivity {
         });
 
     }
+
+    /** Needs method refresh !! Only updates data when restart activity. **/
 
     /**
     @Override

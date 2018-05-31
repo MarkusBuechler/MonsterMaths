@@ -2,6 +2,7 @@ package de.htwg.margogo.monstermaths;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -304,11 +305,13 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
             if (dis < 0.004 && goalUnlocked >= 2 && !lockFinish)  {
                 mGoal.setBackgroundResource(R.drawable.treasure_open_128);
-                Toast.makeText(getContext(), ""+ goalUnlocked, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), ""+ goalUnlocked, Toast.LENGTH_SHORT).show();
                 lockFinish = true;
 
+
+
                 // share data between singleton class !
-                DataHolderLevel1 holder = DataHolderLevel1.getInstace();
+                DataHolderInterface holder = accelerometerPlayActivity.dataHolder;
                 holder.setLock(true);
 
 

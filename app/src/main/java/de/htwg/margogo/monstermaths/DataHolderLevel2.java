@@ -1,11 +1,12 @@
 package de.htwg.margogo.monstermaths;
 
 import android.util.Log;
+import android.widget.Toast;
 
 /*
- * Singleton class. Dataholder for Level 1
+ * Singleton class. Dataholder for Level 2
  */
-public class DataHolderLevel1 implements DataHolderInterface {
+public class DataHolderLevel2 implements DataHolderInterface {
 
     public boolean lock;
     public int time;
@@ -20,17 +21,16 @@ public class DataHolderLevel1 implements DataHolderInterface {
 
     public void setTime(int time) {
         this.time = time;
-        Log.i("level1!", "setTime: called");
+        Log.i("level2!", "setTime: called");
     }
 
     public int getTime() {
         return time;
     }
 
-    private static final DataHolderLevel1 holder = new DataHolderLevel1();
+    private static final DataHolderLevel2 holder = new DataHolderLevel2();
 
-    public static DataHolderLevel1 getInstance() {
+    public static DataHolderLevel2 getInstance() {
         return holder;
     }
-
 }

@@ -1,5 +1,6 @@
 package de.htwg.margogo.monstermaths;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -48,8 +49,10 @@ public class ScrollingActivity extends AppCompatActivity {
 
                 DataModel dataModel = dataModels.get(position);
 
-                Snackbar.make(view, dataModel.getName()+ " will be started now" , Snackbar.LENGTH_SHORT)
-                        .setAction(dataModel.getDescription(), null).show();
+                Intent intent = new Intent(ScrollingActivity.this, GameActivity.class);
+                intent.putExtra("id", dataModel.id.toString());
+                startActivity(intent);
+
             }
         });
 

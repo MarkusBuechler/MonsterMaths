@@ -8,6 +8,7 @@ import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
@@ -15,6 +16,8 @@ import android.view.WindowManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.widget.TextView;
+
+import static java.lang.Integer.parseInt;
 
 /**
  * This activity handles the game activity for one level.
@@ -36,7 +39,12 @@ public class GameActivity extends Activity {
     TextView textViewTimer2;
     long startTime = 0;
 
-    DataHolderLevel1 dataHolderLevel1 = DataHolderLevel1.getInstace();
+    DataHolderInterface dataHolder;
+    Intent intent;
+    String id;
+    int bla;
+
+
 
     //runs without a timer by reposting this handler at the end of the runnable
     Handler timerHandler = new Handler();
@@ -44,6 +52,7 @@ public class GameActivity extends Activity {
 
         @Override
         public void run() {
+
             long millis = System.currentTimeMillis() - startTime;
             int seconds = (int) (millis / 1000);
             int minutes = seconds / 60;
@@ -51,9 +60,9 @@ public class GameActivity extends Activity {
 
             textViewTimer2.setText(String.format("%d:%02d", minutes, seconds));
 
-            if (dataHolderLevel1.getLock()) {
-                dataHolderLevel1.setTime(seconds);
-                dataHolderLevel1.setLock(false);
+            if (dataHolder.getLock()) {
+                dataHolder.setTime(seconds);
+                dataHolder.setLock(false);
             } else {
                  // nothing to do here
             }
@@ -91,6 +100,23 @@ public class GameActivity extends Activity {
         myButton.setX(myButton.getX() + 50);
         myButton.setY(myButton.getY() + 50);
          **/
+
+        intent  = getIntent();
+        Bundle extra = intent.getExtras();
+        if (extra != null) {
+            id = intent.getStringExtra("id");
+            bla = parseInt(id);
+        }
+
+        if (bla == 1) {
+            dataHolder = DataHolderLevel1.getInstance();
+            Log.i("dataholder", "chosen 1");
+        } else if (bla == 2){
+            dataHolder = DataHolderLevel2.getInstance();
+            Log.i("dataholder", "chosen 2");
+        }
+
+        Log.i("dataholder", "datatholder is" + dataHolder.toString());
 
         // TODO: Do the same for expected sum, current sum, current operation ?
 

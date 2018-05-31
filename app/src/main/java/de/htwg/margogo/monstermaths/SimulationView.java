@@ -1,9 +1,7 @@
 package de.htwg.margogo.monstermaths;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -22,7 +20,6 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import static de.htwg.margogo.monstermaths.MiscUtilities.distance;
-import static java.lang.Thread.sleep;
 
 /**
  * This is an highly adopted example of using the accelerometer to integrate the device's
@@ -311,7 +308,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 lockFinish = true;
 
                 // share data between singleton class !
-                DataHolder holder = DataHolder.getInstace();
+                DataHolderLevel1 holder = DataHolderLevel1.getInstace();
                 holder.setLock(true);
 
 
@@ -320,9 +317,6 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Intent submit = new Intent();
-                        submit.putExtra("result", "value");
-                        accelerometerPlayActivity.setResult(Activity.RESULT_OK, submit);
                         accelerometerPlayActivity.finish(); // finished activity, maybe add finish screen before
                     }
                 }, 1000);

@@ -8,7 +8,6 @@ import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
@@ -37,7 +36,7 @@ public class GameActivity extends Activity {
     TextView textViewTimer2;
     long startTime = 0;
 
-    DataHolder dataHolder = DataHolder.getInstace();
+    DataHolderLevel1 dataHolderLevel1 = DataHolderLevel1.getInstace();
 
     //runs without a timer by reposting this handler at the end of the runnable
     Handler timerHandler = new Handler();
@@ -52,11 +51,11 @@ public class GameActivity extends Activity {
 
             textViewTimer2.setText(String.format("%d:%02d", minutes, seconds));
 
-            if (dataHolder.getLock()) {
-                Log.i("asd", "onActivityResult: " + seconds);
-                // save first time when executed here. cut the next 3 times..
+            if (dataHolderLevel1.getLock()) {
+                dataHolderLevel1.setTime(seconds);
+                dataHolderLevel1.setLock(false);
             } else {
-                 // lock again to prevent loop. this shouldn't be done here, refactored for every level. still buggy
+                 // nothing to do here
             }
 
             timerHandler.postDelayed(this, 500);
@@ -124,24 +123,6 @@ public class GameActivity extends Activity {
         setContentView(mSimulationView);
 
     }
-
-    /*
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i("asd", "onActivityResult: ");
-
-        if (resultCode == Activity.RESULT_OK) {
-            String result = data.getStringExtra("result");
-            Log.i("asd", "onActivityResult: " + result);
-            Log.i("asd", "onActivityResult: " + timerHandler.getLooper().toString());
-
-        }
-        if (resultCode == Activity.RESULT_CANCELED) {
-            // TODO: No score returned.
-            Log.i("asd", "onActivityResult: nothing");
-        }
-    }
-    */
-
 
     @Override
     protected void onResume() {

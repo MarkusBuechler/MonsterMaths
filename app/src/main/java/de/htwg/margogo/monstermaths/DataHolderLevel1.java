@@ -14,6 +14,13 @@ public class DataHolderLevel1 implements DataHolderInterface {
     private Badge badge = Badge.Bronze;
     private int id = 1;
 
+    static final int NUM_MONSTERS = 1;
+    static final int NUM_NUMBERS = 2;
+
+    MonsterDataHolder m1 = new MonsterDataHolder(0.0275f,-0.03f,1);
+
+    public MonsterDataHolder monsterDataHolder[] = new MonsterDataHolder[] {m1};;
+
     public void setLock(boolean lock) {
         this.lock = lock;
     }
@@ -48,6 +55,21 @@ public class DataHolderLevel1 implements DataHolderInterface {
     @Override
     public Integer getId() {
         return id;
+    }
+
+    @Override
+    public Integer getNumMonsters() {
+        return NUM_MONSTERS;
+    }
+
+    @Override
+    public Integer getNumNumbers() {
+        return NUM_NUMBERS;
+    }
+
+    @Override
+    public MonsterDataHolder[] getMonsterDataHolderList() {
+        return monsterDataHolder;
     }
 
     @Override

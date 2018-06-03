@@ -14,6 +14,12 @@ public interface DataHolderInterface {
 
     Integer getId();
 
+    Integer getNumMonsters();
+
+    Integer getNumNumbers();
+
+    MonsterDataHolder[] getMonsterDataHolderList();
+
     void setLock(boolean lock);
 
     void setScore(int time);

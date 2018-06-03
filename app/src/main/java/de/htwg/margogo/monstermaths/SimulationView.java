@@ -55,6 +55,11 @@ class SimulationView extends FrameLayout implements SensorEventListener {
     private final ParticleSystem mParticleSystem;
     private float counter = 0;
 
+    int NUM_MONSTERS;
+    int NUM_NUMBERS;
+
+    MonsterDataHolder monsterDataHolder[];
+
 
     /*
      * Each of our particle holds its previous and current position, its
@@ -155,11 +160,15 @@ class SimulationView extends FrameLayout implements SensorEventListener {
      * A particle system is just a collection of particles
      */
     class ParticleSystem {
-        static final int NUM_MONSTERS = 1;
-        static final int NUM_NUMBERS = 2;
+
+        final int NUM_MONSTERS = accelerometerPlayActivity.dataHolder.getNumMonsters();
+        final int NUM_NUMBERS = accelerometerPlayActivity.dataHolder.getNumNumbers();
+        MonsterDataHolder monsterDataHolder[] = accelerometerPlayActivity.dataHolder.getMonsterDataHolderList();
+
         private Particle mBall = new Particle(getContext(),1);
-        private Particle mMonsters[] = new Particle[NUM_MONSTERS];
         private Particle mGoal = new Particle(getContext(),1);
+
+        private Particle mMonsters[] = new Particle[NUM_MONSTERS];
         private Particle mNumber[] = new Particle[NUM_NUMBERS];
 
         public boolean lockFinish = false;
@@ -172,6 +181,10 @@ class SimulationView extends FrameLayout implements SensorEventListener {
             /*
              * Initially our particles have no speed or acceleration
              */
+
+            //monsterDataHolder = accelerometerPlayActivity.dataHolder.getMonsterDataHolderList();
+
+            // Ball has always same start position
             mBall.mPosX = 0f;
             mBall.mPosY = -0.045f;
             mBall.setBackgroundResource(R.drawable.emoji_smile_256);
@@ -180,18 +193,20 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
             for (int i = 0; i < mMonsters.length; i++) {
                 mMonsters[i] = new Particle(getContext(),2);
-                mMonsters[i].mPosX = 0.0275f;
-                mMonsters[i].mPosY = -0.03f;
-                mMonsters[i].setBackgroundResource(R.drawable.blue_monster_128);
+                mMonsters[i].mPosX = monsterDataHolder[i].xPos;
+                mMonsters[i].mPosY = monsterDataHolder[i].yPos;
+                mMonsters[i].setBackgroundResource(R.drawable.blue_monster_128); // validate getType
                 mMonsters[i].setLayerType(LAYER_TYPE_HARDWARE, null);
                 addView(mMonsters[i], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
             }
 
+            // Goal is always same
             mGoal.mPosX = 0.f;
             mGoal.mPosY = 0.045f;
             mGoal.setBackgroundResource(R.drawable.treasure_closed_128);
             mGoal.setLayerType(LAYER_TYPE_HARDWARE, null);
             addView(mGoal, new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
+
 
             mNumber[0] = new Particle(getContext(),2);
             mNumber[0].mPosX = 0f;
@@ -208,6 +223,16 @@ class SimulationView extends FrameLayout implements SensorEventListener {
             addView(mNumber[1], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
 
 
+            /*
+            for (int i = 0; i < mNumber.length; i++) {
+                mNumber[i] = new Particle(getContext(),2);
+                mNumber[i].mPosX = monsterDataHolder[i].xPos;
+                mNumber[i].mPosY = monsterDataHolder[i].yPos;
+                mNumber[i].setBackgroundResource(R.drawable.one); // validate getType
+                mNumber[i].setLayerType(LAYER_TYPE_HARDWARE, null);
+                addView(mNumber[i], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
+            }
+            */
 
         }
 
@@ -252,8 +277,8 @@ class SimulationView extends FrameLayout implements SensorEventListener {
              */
 
             checkFinish();
-            checkCollision();
-            checkNumberCollected();
+            //checkCollision();
+            //checkNumberCollected();
             mBall.resolveCollisionWithBounds();
 
             final int count2 = mMonsters.length;
@@ -363,15 +388,15 @@ class SimulationView extends FrameLayout implements SensorEventListener {
         }
 
         public int getParticleCount2() {
-            return mMonsters.length;
+            return monsterDataHolder.length;
         }
 
         public float getPosX2(int i) {
-            return mMonsters[i].mPosX;
+            return monsterDataHolder[i].getxPos();
         }
 
         public float getPosY2(int i) {
-            return mMonsters[i].mPosY;
+            return monsterDataHolder[i].getyPos();
         }
 
         public int getParticleCount3() {

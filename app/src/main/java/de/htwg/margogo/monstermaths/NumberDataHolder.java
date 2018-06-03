@@ -21,7 +21,7 @@ public class NumberDataHolder {
         return yPos;
     }
 
-    public int getTyp() {
+    public int getValue() {
         return value;
     }
 

@@ -19,7 +19,13 @@ public class DataHolderLevel2 implements DataHolderInterface {
 
     MonsterDataHolder m1 = new MonsterDataHolder(0.0275f,-0.03f,1);
 
+    NumberDataHolder n1 = new NumberDataHolder(0f,-0.015f,1);
+    NumberDataHolder n2 = new NumberDataHolder(0.02f,0.0065f,2);
+
+
     public MonsterDataHolder monsterDataHolder[] = new MonsterDataHolder[] {m1};;
+
+    public NumberDataHolder numberDataHolder[] = new NumberDataHolder[] {n1,n2};
 
     public void setLock(boolean lock) {
         this.lock = lock;
@@ -60,17 +66,22 @@ public class DataHolderLevel2 implements DataHolderInterface {
 
     @Override
     public Integer getNumMonsters() {
-        return null;
+        return NUM_MONSTERS;
     }
 
     @Override
     public Integer getNumNumbers() {
-        return null;
+        return NUM_NUMBERS;
     }
 
     @Override
     public MonsterDataHolder[] getMonsterDataHolderList() {
         return monsterDataHolder;
+    }
+
+    @Override
+    public NumberDataHolder[] getNumberDataHolderList() {
+        return numberDataHolder;
     }
 
     @Override

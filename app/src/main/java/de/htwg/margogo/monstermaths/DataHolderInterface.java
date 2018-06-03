@@ -20,6 +20,8 @@ public interface DataHolderInterface {
 
     MonsterDataHolder[] getMonsterDataHolderList();
 
+    NumberDataHolder[] getNumberDataHolderList();
+
     void setLock(boolean lock);
 
     void setScore(int time);

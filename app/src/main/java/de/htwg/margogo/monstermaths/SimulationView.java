@@ -164,6 +164,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
         final int NUM_MONSTERS = accelerometerPlayActivity.dataHolder.getNumMonsters();
         final int NUM_NUMBERS = accelerometerPlayActivity.dataHolder.getNumNumbers();
         MonsterDataHolder monsterDataHolder[] = accelerometerPlayActivity.dataHolder.getMonsterDataHolderList();
+        NumberDataHolder numberDataHolder[] = accelerometerPlayActivity.dataHolder.getNumberDataHolderList();
 
         private Particle mBall = new Particle(getContext(),1);
         private Particle mGoal = new Particle(getContext(),1);
@@ -182,23 +183,12 @@ class SimulationView extends FrameLayout implements SensorEventListener {
              * Initially our particles have no speed or acceleration
              */
 
-            //monsterDataHolder = accelerometerPlayActivity.dataHolder.getMonsterDataHolderList();
-
             // Ball has always same start position
             mBall.mPosX = 0f;
             mBall.mPosY = -0.045f;
             mBall.setBackgroundResource(R.drawable.emoji_smile_256);
             mBall.setLayerType(LAYER_TYPE_HARDWARE, null);
             addView(mBall, new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
-
-            for (int i = 0; i < mMonsters.length; i++) {
-                mMonsters[i] = new Particle(getContext(),2);
-                mMonsters[i].mPosX = monsterDataHolder[i].xPos;
-                mMonsters[i].mPosY = monsterDataHolder[i].yPos;
-                mMonsters[i].setBackgroundResource(R.drawable.blue_monster_128); // validate getType
-                mMonsters[i].setLayerType(LAYER_TYPE_HARDWARE, null);
-                addView(mMonsters[i], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
-            }
 
             // Goal is always same
             mGoal.mPosX = 0.f;
@@ -207,32 +197,25 @@ class SimulationView extends FrameLayout implements SensorEventListener {
             mGoal.setLayerType(LAYER_TYPE_HARDWARE, null);
             addView(mGoal, new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
 
-
-            mNumber[0] = new Particle(getContext(),2);
-            mNumber[0].mPosX = 0f;
-            mNumber[0].mPosY = -0.015f;
-            mNumber[0].setBackgroundResource(R.drawable.one);
-            mNumber[0].setLayerType(LAYER_TYPE_HARDWARE, null);
-            addView(mNumber[0], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
-
-            mNumber[1] = new Particle(getContext(),2);
-            mNumber[1].mPosX = 0.02f;
-            mNumber[1].mPosY = 0.0065f;
-            mNumber[1].setBackgroundResource(R.drawable.eigth);
-            mNumber[1].setLayerType(LAYER_TYPE_HARDWARE, null);
-            addView(mNumber[1], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
-
-
-            /*
+            // Loop over numbers
             for (int i = 0; i < mNumber.length; i++) {
                 mNumber[i] = new Particle(getContext(),2);
-                mNumber[i].mPosX = monsterDataHolder[i].xPos;
-                mNumber[i].mPosY = monsterDataHolder[i].yPos;
+                mNumber[i].mPosX = numberDataHolder[i].xPos;
+                mNumber[i].mPosY = numberDataHolder[i].yPos;
                 mNumber[i].setBackgroundResource(R.drawable.one); // validate getType
                 mNumber[i].setLayerType(LAYER_TYPE_HARDWARE, null);
                 addView(mNumber[i], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
             }
-            */
+
+            // Loop over monsters
+            for (int i = 0; i < mMonsters.length; i++) {
+                mMonsters[i] = new Particle(getContext(),2);
+                mMonsters[i].mPosX = monsterDataHolder[i].xPos;
+                mMonsters[i].mPosY = monsterDataHolder[i].yPos;
+                mMonsters[i].setBackgroundResource(R.drawable.blue_monster_128); // validate getType
+                mMonsters[i].setLayerType(LAYER_TYPE_HARDWARE, null);
+                addView(mMonsters[i], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
+            }
 
         }
 
@@ -243,8 +226,8 @@ class SimulationView extends FrameLayout implements SensorEventListener {
          */
         private void updatePositions(float sx, float sy, long timestamp) {
 
-            // sx:: links + 5-10, rechts, -5-10
-            //sy :: senkrecht nach vorne 10, rückseite vorne -10
+            // sx :: links + 5-10, rechts, -5-10
+            // sy :: senkrecht nach vorne 10, rückseite vorne -10
             final long t = timestamp;
             if (mLastT != 0) {
                 final float dT = (float) (t - mLastT) / 3000.f /** (1.0f / 3000000000.0f)*/;
@@ -277,8 +260,8 @@ class SimulationView extends FrameLayout implements SensorEventListener {
              */
 
             checkFinish();
-            //checkCollision();
-            //checkNumberCollected();
+            checkCollision();
+            checkNumberCollected();
             mBall.resolveCollisionWithBounds();
 
             final int count2 = mMonsters.length;
@@ -388,17 +371,18 @@ class SimulationView extends FrameLayout implements SensorEventListener {
         }
 
         public int getParticleCount2() {
-            return monsterDataHolder.length;
+            return mMonsters.length;
         }
 
         public float getPosX2(int i) {
-            return monsterDataHolder[i].getxPos();
+            return mMonsters[i].mPosX;
         }
 
         public float getPosY2(int i) {
-            return monsterDataHolder[i].getyPos();
+            return mMonsters[i].mPosY;
         }
 
+        // numbern dürften sich nicht bewegen ...
         public int getParticleCount3() {
             return mNumber.length;
         }

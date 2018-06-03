@@ -1,7 +1,5 @@
 package de.htwg.margogo.monstermaths;
 
-import android.util.Log;
-
 /*
  * Singleton class. Dataholder for Level 2
  */
@@ -14,18 +12,18 @@ public class DataHolderLevel2 implements DataHolderInterface {
     private Badge badge = Badge.Bronze; // need dafault type
     private int id = 2;
 
-    static final int NUM_MONSTERS = 1;
-    static final int NUM_NUMBERS = 2;
+    private static final int NUM_MONSTERS = 1;
+    private static final int NUM_NUMBERS = 2;
 
-    MonsterDataHolder m1 = new MonsterDataHolder(0.0275f,-0.03f,1);
+    private MonsterDataHolder m1 = new MonsterDataHolder(0.0275f,-0.03f,1);
 
-    NumberDataHolder n1 = new NumberDataHolder(0f,-0.015f,1);
-    NumberDataHolder n2 = new NumberDataHolder(0.02f,0.0065f,2);
+    private NumberDataHolder n1 = new NumberDataHolder(0f,-0.015f,1);
+    private NumberDataHolder n2 = new NumberDataHolder(0.02f,0.0065f,2);
 
 
-    public MonsterDataHolder monsterDataHolder[] = new MonsterDataHolder[] {m1};;
+    private MonsterDataHolder monsterDataHolder[] = new MonsterDataHolder[] {m1};
 
-    public NumberDataHolder numberDataHolder[] = new NumberDataHolder[] {n1,n2};
+    private NumberDataHolder numberDataHolder[] = new NumberDataHolder[] {n1,n2};
 
     public void setLock(boolean lock) {
         this.lock = lock;
@@ -37,7 +35,6 @@ public class DataHolderLevel2 implements DataHolderInterface {
 
     public void setScore(int score) {
         this.score = score;
-        Log.i("level2!", "setScore: called");
     }
 
     public int getScore() {
@@ -61,7 +58,7 @@ public class DataHolderLevel2 implements DataHolderInterface {
 
     @Override
     public Integer getId() {
-        return id;
+        return 2;
     }
 
     @Override

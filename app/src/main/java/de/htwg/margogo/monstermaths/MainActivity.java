@@ -16,12 +16,13 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // TODO: Remove this soon
         Button btnStartGame = findViewById(R.id.btnStartGame);
         btnStartGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
-                startActivity(intent);
+                //startActivity(intent);
 
             }
         });

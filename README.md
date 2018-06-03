@@ -23,7 +23,7 @@ Oder benutze alternativ die git clone Funktion um das Projekt in Android Studio 
 kommt später noch hinzu
 
 ## Planung
-- __Woche 1__ [ ] Initiale App mit Ansteuerung des Sensors und Verarbeitung der Sensordaten.
+- __Woche 1__ [x] Initiale App mit Ansteuerung des Sensors und Verarbeitung der Sensordaten.
 - __Woche 2__ [ ] Auswahl der Buttons, Icons, Spielelemente und deren Animation. Design und Anpassung an ausgewählte Geräte. 
 - __Woche 3__ [ ] Implementierung der Businesslogik + Unit Tests 
 - __Woche 4__ [ ] Level Design (20+ angestrebt) 

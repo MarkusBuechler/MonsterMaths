@@ -1,9 +1,8 @@
 package de.htwg.margogo.monstermaths;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,6 +25,18 @@ public class ScrollingActivity extends AppCompatActivity {
 
         dataModels = new ArrayList<>();
 
+
+        // TODO: get datamodel from dataholder
+        DataHolderLevel1 dt1 = DataHolderLevel1.getInstance();
+        DataModel dm1 = new DataModel(dt1.getName(), dt1.getId(), false, dt1.getDescription(), dt1.getScore(), dt1.getBadge());
+
+        DataHolderLevel2 dt2 = DataHolderLevel2.getInstance();
+        DataModel dm2 = new DataModel(dt2.getName(), dt2.getId(), false, dt2.getDescription(), dt2.getScore(), dt2.getBadge());
+
+        dataModels.add(dm1);
+        dataModels.add(dm2);
+
+        /*
         dataModels.add(new DataModel("Level 1", 1, false,"Basic Introduction to the game concept", 10.0 , Badge.Gold));
         dataModels.add(new DataModel("Level 2", 2, false,"Introduction to Addition", 100.0 , Badge.Silver));
         dataModels.add(new DataModel("Level 3", 3, false,"Addition 2", 0.0 , Badge.Bronze));
@@ -36,6 +47,7 @@ public class ScrollingActivity extends AppCompatActivity {
         dataModels.add(new DataModel("Level 8", 3, true,"Introduction to Multiplication", 0.0 , Badge.Bronze));
         dataModels.add(new DataModel("Level 9", 4, true,"Multiplication 2", 0.0 , Badge.Bronze));
         dataModels.add(new DataModel("Level 10", 5, true,"Introduction to Division", 0.0 , Badge.Gold));
+        */
 
 
         adapter = new CustomAdapter(dataModels,getApplicationContext());
@@ -48,12 +60,16 @@ public class ScrollingActivity extends AppCompatActivity {
 
                 DataModel dataModel = dataModels.get(position);
 
-                Snackbar.make(view, dataModel.getName()+ " will be started now" , Snackbar.LENGTH_SHORT)
-                        .setAction(dataModel.getDescription(), null).show();
+                Intent intent = new Intent(ScrollingActivity.this, GameActivity.class);
+                intent.putExtra("id", dataModel.id.toString());
+                startActivity(intent);
+
             }
         });
 
     }
+
+    /** Needs method refresh !! Only updates data when restart activity. **/
 
     /**
     @Override

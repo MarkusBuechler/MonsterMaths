@@ -11,9 +11,9 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,18 +23,13 @@ import android.widget.Toast;
 import static de.htwg.margogo.monstermaths.MiscUtilities.distance;
 
 /**
- * This is an highly adopted example of using the accelerometer to integrate the device's
- * acceleration to a position using the Verlet method. This is illustrated with
- * a very simple particle system comprised of a few iron balls freely moving on
- * an inclined wooden table. The inclination of the virtual table is controlled
- * by the device's accelerometer.
- * Should be later the prototype for each level
+ * This is an adopted example of using the accelerometer to integrate the device's
+ * acceleration to a position using the Verlet method.
+ * The inclination of the virtual table is controlled by the device's accelerometer.
  */
 class SimulationView extends FrameLayout implements SensorEventListener {
-    // diameter of the balls in meters
-    private static final float sBallDiameter = 0.010f;
-    private static final float sBallDiameter2 = sBallDiameter * sBallDiameter;
 
+    private static final float sBallDiameter = 0.010f;
     private GameActivity accelerometerPlayActivity;
     private final int mDstWidth;
     private final int mDstHeight;
@@ -53,7 +48,6 @@ class SimulationView extends FrameLayout implements SensorEventListener {
     private float mHorizontalBound;
     private float mVerticalBound;
     private final ParticleSystem mParticleSystem;
-    private float counter = 0;
 
 
     /*
@@ -66,6 +60,8 @@ class SimulationView extends FrameLayout implements SensorEventListener {
         private float mPosY = (float) Math.random();
         private float mVelX;
         private float mVelY;
+
+        private float counter = 0;
 
         public Particle(Context context) {
             super(context);
@@ -222,17 +218,15 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
             // sx :: links + 5-10, rechts, -5-10
             // sy :: senkrecht nach vorne 10, rückseite vorne -10
-            final long t = timestamp;
             if (mLastT != 0) {
-                final float dT = (float) (t - mLastT) / 3000.f /** (1.0f / 3000000000.0f)*/;
-                    myBall.computePhysics(sx, sy, dT);
-                    final int count2 = myMonsters.length;
-                    for (int i = 0; i < count2; i++) {
-                    Particle ball = myMonsters[i];
-                    ball.computePhysicsMonster();
+                final float dT = (float) (timestamp - mLastT) / 3000.f;
+                myBall.computePhysics(sx, sy, dT);
+
+                for (Particle monster : myMonsters) {
+                    monster.computePhysicsMonster();
                 }
             }
-            mLastT = t;
+            mLastT = timestamp;
         }
 
 
@@ -243,50 +237,54 @@ class SimulationView extends FrameLayout implements SensorEventListener {
          * collisions.
          */
         private void update(float sx, float sy, long now) {
-            // update the system's positions
-            updatePositions(sx, sy, now);
 
-            /*
-             * Resolve collisions, each particle is tested against every
-             * other particle for collision. If a collision is detected the
-             * particle is moved away using a virtual spring of infinite
-             * stiffness.
-             */
+            updatePositions(sx, sy, now);
 
             checkFinish();
             checkCollision();
             checkNumberCollected();
             myBall.resolveCollisionWithBounds();
 
-            final int count2 = myMonsters.length;
-            for (int i = 0; i < count2; i++) {
-                Particle curr = myMonsters[i];
-                curr.resolveCollisionWithBounds();
+            for (Particle monster : myMonsters) {
+                monster.resolveCollisionWithBounds();
             }
 
         }
 
         /**
          * Check if player crashed into a monster
-         * TODO: Optimize this
          */
         private void checkCollision() {
 
-            // use for loop if multiple monsters
-            final int count2 = myMonsters.length;
-
             Particle ball = myBall;
-            final float x1 = ball.mPosX;
-            final float y1 = ball.mPosY;
+            final float x1_1 = ball.mPosX;
+            final float y1_1 = ball.mPosY;
 
-            Particle monster = myMonsters[0];
-            final float x2 = monster.mPosX;
-            final float y2 = monster.mPosY;
+            Boolean catched = false;
 
-            final double dis = distance(x1,y1,x2,y2);
+            for (Particle monster : myMonsters) {
+                final float x1_2 = monster.mPosX;
+                final float y1_2 = monster.mPosY;
+                final double dis = distance(x1_1,y1_1,x1_2,y1_2);
 
-            if (dis < 0.004)  {
-                Toast.makeText(getContext(), "Hey", Toast.LENGTH_SHORT).show();
+                if (dis < 0.003 && !catched)  {
+
+                    catched = true;
+                    Toast.makeText(getContext(), "Game over!", Toast.LENGTH_SHORT).show();
+                    Vibrator v = (Vibrator) accelerometerPlayActivity.getSystemService(Context.VIBRATOR_SERVICE);
+                    if (v!= null) v.vibrate(300);
+
+                    // after 1 sec activity is closed
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            accelerometerPlayActivity.finish();
+                        }
+                    }, 1000);
+
+                }
             }
         }
 
@@ -398,7 +396,6 @@ class SimulationView extends FrameLayout implements SensorEventListener {
         super(context);
         this.accelerometerPlayActivity = accelerometerPlayActivity;
         mAccelerometer = accelerometerPlayActivity.mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-
         DisplayMetrics metrics = new DisplayMetrics();
         accelerometerPlayActivity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         mXDpi = metrics.xdpi;

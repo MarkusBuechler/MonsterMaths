@@ -7,10 +7,7 @@ public class DataHolderLevel1 implements DataHolderInterface {
 
     private boolean lock;
     private int score;
-    private String name = "Level 1";
-    private String description = "Basic Introduction to the game concept";
     private Badge badge = Badge.Bronze;
-    private int id = 1;
 
     private static final int NUM_MONSTERS = 1;
     private static final int NUM_NUMBERS = 2;
@@ -42,12 +39,12 @@ public class DataHolderLevel1 implements DataHolderInterface {
 
     @Override
     public String getName() {
-        return name;
+        return "Level 1";
     }
 
     @Override
     public String getDescription() {
-        return description;
+        return "Basic Introduction to the game concept";
     }
 
     @Override
@@ -57,7 +54,7 @@ public class DataHolderLevel1 implements DataHolderInterface {
 
     @Override
     public Integer getId() {
-        return id;
+        return 1;
     }
 
     @Override

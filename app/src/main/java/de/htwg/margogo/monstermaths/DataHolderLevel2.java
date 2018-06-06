@@ -7,23 +7,22 @@ public class DataHolderLevel2 implements DataHolderInterface {
 
     private boolean lock;
     private int score;
-    private String name = "Level 2";
-    private String descrption = "Introduction to Addition";
     private Badge badge = Badge.Bronze; // need dafault type
-    private int id = 2;
 
-    private static final int NUM_MONSTERS = 1;
-    private static final int NUM_NUMBERS = 2;
+    private static final int NUM_MONSTERS = 2;
+    private static final int NUM_NUMBERS = 3;
 
     private MonsterDataHolder m1 = new MonsterDataHolder(0.0275f,-0.03f,1);
+    private MonsterDataHolder m2 = new MonsterDataHolder(0.0200f,-0.01f,1);
 
     private NumberDataHolder n1 = new NumberDataHolder(0f,-0.015f,5);
     private NumberDataHolder n2 = new NumberDataHolder(0.02f,0.0065f,5);
+    private NumberDataHolder n3 = new NumberDataHolder(0.f,0.025f,2);
 
 
-    private MonsterDataHolder monsterDataHolder[] = new MonsterDataHolder[] {m1};
+    private MonsterDataHolder monsterDataHolder[] = new MonsterDataHolder[] {m1,m2};
 
-    private NumberDataHolder numberDataHolder[] = new NumberDataHolder[] {n1,n2};
+    private NumberDataHolder numberDataHolder[] = new NumberDataHolder[] {n1,n2,n3};
 
     public void setLock(boolean lock) {
         this.lock = lock;
@@ -43,12 +42,12 @@ public class DataHolderLevel2 implements DataHolderInterface {
 
     @Override
     public String getName() {
-        return name;
+        return "Level 2";
     }
 
     @Override
     public String getDescription() {
-        return descrption;
+        return "Introduction to Addition";
     }
 
     @Override

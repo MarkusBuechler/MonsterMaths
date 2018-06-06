@@ -194,7 +194,8 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 myNumbers[i] = new Particle(getContext());
                 myNumbers[i].mPosX = numberDataHolder[i].xPos;
                 myNumbers[i].mPosY = numberDataHolder[i].yPos;
-                myNumbers[i].setBackgroundResource(R.drawable.one); // validate getType
+                choosePicture(myNumbers[i], numberDataHolder[i].value);
+
                 myNumbers[i].setLayerType(LAYER_TYPE_HARDWARE, null);
                 addView(myNumbers[i], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
                 uniqueNumberLocks[i] = false;
@@ -534,5 +535,33 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    }
+
+    private void choosePicture(SimulationView.Particle particle, int i) {
+        switch (i) {
+            case 1: particle.setBackgroundResource(R.drawable.one);
+                break;
+            case 2: particle.setBackgroundResource(R.drawable.two);
+                break;
+            case 3: particle.setBackgroundResource(R.drawable.three);
+                break;
+            case 4: particle.setBackgroundResource(R.drawable.four);
+                break;
+            case 5: particle.setBackgroundResource(R.drawable.five);
+                break;
+            case 6: particle.setBackgroundResource(R.drawable.six);
+                break;
+            case 7: particle.setBackgroundResource(R.drawable.seven);
+                break;
+            case 8: particle.setBackgroundResource(R.drawable.eigth);
+                break;
+            case 9: particle.setBackgroundResource(R.drawable.nine);
+                break;
+            case 0: particle.setBackgroundResource(R.drawable.zero);
+                break;
+            default: particle.setBackgroundResource(R.drawable.emoji_smile_256);
+                break;
+        }
+
     }
 }

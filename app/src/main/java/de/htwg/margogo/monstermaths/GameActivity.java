@@ -37,14 +37,14 @@ public class GameActivity extends Activity {
     private PowerManager.WakeLock mWakeLock;
 
     TextView textViewTimer2;
+    TextView textViewCurrentOperation2;
+    TextView textViewResult2;
     long startTime = 0;
 
     DataHolderInterface dataHolder;
     Intent intent;
     String id;
     int bla;
-
-
 
     //runs without a timer by reposting this handler at the end of the runnable
     Handler timerHandler = new Handler();
@@ -59,6 +59,9 @@ public class GameActivity extends Activity {
             seconds = seconds % 60;
 
             textViewTimer2.setText(String.format("%d:%02d", minutes, seconds));
+
+            textViewCurrentOperation2.setText("+");
+            textViewResult2.setText("2");
 
             if (dataHolder.getLock()) {
                 dataHolder.setScore(seconds);
@@ -118,8 +121,6 @@ public class GameActivity extends Activity {
 
         Log.i("dataholder", "datatholder is" + dataHolder.toString());
 
-        // TODO: Do the same for expected sum, current sum, current operation ?
-
         LayoutParams params = new LayoutParams(300,150);
         TextView textViewTimer = new TextView(this);
         textViewTimer.setText("Zeit: ");
@@ -138,6 +139,41 @@ public class GameActivity extends Activity {
         textViewTimer2.setX(textViewTimer.getX() + 120);
         textViewTimer2.setY(textViewTimer.getY());
 
+        LayoutParams params2 = new LayoutParams(600,150);
+        TextView textViewCurrentOperation = new TextView(this);
+        textViewCurrentOperation.setText("Operation: ");
+        textViewCurrentOperation.setTextColor(Color.GRAY);
+        textViewCurrentOperation.setTextSize(18);
+        textViewCurrentOperation.setTypeface(null, Typeface.BOLD);
+        textViewCurrentOperation.setLayoutParams(params2);
+        textViewCurrentOperation.setX(textViewTimer.getX());
+        textViewCurrentOperation.setY(textViewTimer.getY() + 100);
+
+        textViewCurrentOperation2 = new TextView(this);
+        textViewCurrentOperation2.setTextColor(Color.GRAY);
+        textViewCurrentOperation2.setTextSize(18);
+        textViewCurrentOperation2.setTypeface(null, Typeface.BOLD);
+        textViewCurrentOperation2.setLayoutParams(params);
+        textViewCurrentOperation2.setX(textViewCurrentOperation.getX() + 270);
+        textViewCurrentOperation2.setY(textViewCurrentOperation.getY());
+
+        TextView textViewResult = new TextView(this);
+        textViewResult.setText("Ergebnis: ");
+        textViewResult.setTextColor(Color.GRAY);
+        textViewResult.setTextSize(18);
+        textViewResult.setTypeface(null, Typeface.BOLD);
+        textViewResult.setLayoutParams(params);
+        textViewResult.setX(textViewCurrentOperation.getX());
+        textViewResult.setY(textViewCurrentOperation.getY() + 100);
+
+        textViewResult2 = new TextView(this);
+        textViewResult2.setTextColor(Color.GRAY);
+        textViewResult2.setTextSize(18);
+        textViewResult2.setTypeface(null, Typeface.BOLD);
+        textViewResult2.setLayoutParams(params);
+        textViewResult2.setX(textViewResult.getX() + 250);
+        textViewResult2.setY(textViewResult.getY());
+
         startTime = System.currentTimeMillis();
         timerHandler.postDelayed(timerRunnable, 0);
 
@@ -146,6 +182,10 @@ public class GameActivity extends Activity {
         mSimulationView.setBackgroundResource(R.drawable.wood);
         mSimulationView.addView(textViewTimer);
         mSimulationView.addView(textViewTimer2);
+        mSimulationView.addView(textViewCurrentOperation);
+        mSimulationView.addView(textViewCurrentOperation2);
+        mSimulationView.addView(textViewResult);
+        mSimulationView.addView(textViewResult2);
         setContentView(mSimulationView);
 
     }

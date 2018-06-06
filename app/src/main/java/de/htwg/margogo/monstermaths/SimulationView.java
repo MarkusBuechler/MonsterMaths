@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
@@ -165,9 +166,8 @@ class SimulationView extends FrameLayout implements SensorEventListener {
         private Particle myNumbers[] = new Particle[NUM_NUMBERS];
 
         public boolean lockFinish = false;
-        private int goalUnlocked = 0;
-        private boolean uniqueLockNumber1 = false;
-        private boolean uniqueLockNumber2 = false;
+        private Boolean[] uniqueNumberLocks = new Boolean[NUM_NUMBERS];
+        private int currentResult = 0;
 
 
         ParticleSystem() {
@@ -197,6 +197,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 myNumbers[i].setBackgroundResource(R.drawable.one); // validate getType
                 myNumbers[i].setLayerType(LAYER_TYPE_HARDWARE, null);
                 addView(myNumbers[i], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
+                uniqueNumberLocks[i] = false;
             }
 
             // Loop over monsters
@@ -303,17 +304,14 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
             final double dis = distance(x1,y1,x2,y2);
 
-            if (dis < 0.004 && goalUnlocked >= 2 && !lockFinish)  {
+            if (dis < 0.004 && !lockFinish && currentResult == accelerometerPlayActivity.dataHolder.getExpectedResult())  {
+
                 myGoal.setBackgroundResource(R.drawable.treasure_open_128);
-                //Toast.makeText(getContext(), ""+ goalUnlocked, Toast.LENGTH_SHORT).show();
+
                 lockFinish = true;
 
-
-
                 // share data between singleton class !
-                DataHolderInterface holder = accelerometerPlayActivity.dataHolder;
-                holder.setLock(true);
-
+                accelerometerPlayActivity.dataHolder.setLock(true);
 
                 // after 1 sec activity is closed
                 Handler handler = new Handler();
@@ -331,34 +329,25 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
         /**
          * Check if player collected the correct numbers.
-         * TODO: make this abstract !
          */
         private void checkNumberCollected() {
 
             Particle ball = myBall;
-            final float x1 = ball.mPosX;
-            final float y1 = ball.mPosY;
+            final float x1_1 = ball.mPosX;
+            final float y1_1 = ball.mPosY;
 
-            final float x1_2 = myNumbers[0].mPosX;
-            final float y1_2 = myNumbers[0].mPosY;
+            for (int i = 0; i < myNumbers.length; i++) {
+                final float x1_2 = myNumbers[i].mPosX;
+                final float y1_2 = myNumbers[i].mPosY;
+                final double dis = distance(x1_1,y1_1,x1_2,y1_2);
 
-            final double dis = distance(x1,y1,x1_2,y1_2);
+                if (dis < 0.004 && !uniqueNumberLocks[i])  {
+                    myNumbers[i].setVisibility(INVISIBLE);
 
-            if (dis < 0.004 && !uniqueLockNumber1)  {
-                myNumbers[0].setVisibility(INVISIBLE);
-                goalUnlocked += 1;
-                uniqueLockNumber1 = true;
-            }
+                    currentResult += numberDataHolder[i].getValue();
+                    uniqueNumberLocks[i] = true;
 
-            final float x2_2 = myNumbers[1].mPosX;
-            final float y2_2 = myNumbers[1].mPosY;
-
-            final double dis2 = distance(x1,y1,x2_2,y2_2);
-
-            if (dis2 < 0.004 && !uniqueLockNumber2)  {
-                myNumbers[1].setVisibility(INVISIBLE);
-                goalUnlocked += 1;
-                uniqueLockNumber2 = true;
+                }
             }
         }
 

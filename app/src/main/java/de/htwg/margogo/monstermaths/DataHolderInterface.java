@@ -4,7 +4,7 @@ public interface DataHolderInterface {
 
     boolean getLock();
 
-    int getScore();
+    Integer getScore();
 
     String getName();
 
@@ -17,6 +17,8 @@ public interface DataHolderInterface {
     Integer getNumMonsters();
 
     Integer getNumNumbers();
+
+    Integer getExpectedResult();
 
     MonsterDataHolder[] getMonsterDataHolderList();
 

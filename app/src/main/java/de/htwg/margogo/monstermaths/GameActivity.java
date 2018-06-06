@@ -61,7 +61,7 @@ public class GameActivity extends Activity {
             textViewTimer2.setText(String.format("%d:%02d", minutes, seconds));
 
             textViewCurrentOperation2.setText("+");
-            textViewResult2.setText("2");
+            textViewResult2.setText(dataHolder.getExpectedResult().toString());
 
             if (dataHolder.getLock()) {
                 dataHolder.setScore(seconds);
@@ -93,16 +93,6 @@ public class GameActivity extends Activity {
         // Create a bright wake lock
         mWakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, getClass()
                 .getName());
-
-        /**
-        Button myButton = new Button(this);
-        myButton.setText("HI");
-
-        LayoutParams params = new LayoutParams(300,150);
-        myButton.setLayoutParams(params);
-        myButton.setX(myButton.getX() + 50);
-        myButton.setY(myButton.getY() + 50);
-         **/
 
         intent  = getIntent();
         Bundle extra = intent.getExtras();

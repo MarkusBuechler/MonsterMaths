@@ -62,6 +62,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
         private float mVelY;
 
         private float counter = 0;
+        private int typ;
 
         public Particle(Context context) {
             super(context);
@@ -94,6 +95,157 @@ class SimulationView extends FrameLayout implements SensorEventListener {
         }
 
         public void computePhysicsMonster() {
+
+            counter = counter % 180;
+
+            final float dT = 0.005f;
+
+            final float ay = 0.5f/5;
+            final float ax = 0/5;
+
+            if (counter <= 90) {
+                mPosY += mVelY * dT + ay * dT * dT / 2;
+                mVelY += ay * dT;
+                mPosX += mVelX * dT + ay * dT * dT / 2;
+                mVelX += ay * dT;
+            } else {
+                mPosY -= mVelY * dT - ay * dT * dT / 2;
+                mVelY -= ay * dT;
+                mPosX -= mVelX * dT - ay * dT * dT / 2;
+                mVelX -= ay * dT;
+            }
+
+            counter++;
+
+        }
+
+        public void computePhysicsMonsterDiagonaleRechtsHoch() {
+
+            counter = counter % 180;
+            counter++;
+
+            final float dT = -0.01f;
+
+            final float ay = 0.5f/5;
+
+            if (counter <= 90) {
+                mPosY += mVelY * dT + ay * dT * dT / 2;
+                mVelY += ay * dT;
+                mPosX += mVelX * dT + ay * dT * dT / 2;
+                mVelX += ay * dT;
+            } else {
+                mPosY -= mVelY * dT - ay * dT * dT / 2;
+                mVelY -= ay * dT;
+                mPosX -= mVelX * dT - ay * dT * dT / 2;
+                mVelX -= ay * dT;
+            }
+
+        }
+
+        public void computePhysicsMonsterDiagonalLinksHoch() {
+
+            counter = counter % 180;
+            counter++;
+
+            final float dT = -0.01f;
+
+            final float ay = 0.5f/5;
+            final float ax = -0.5f/5;
+
+            if (counter <= 90) {
+                mPosY += mVelY * dT + ay * dT * dT / 2;
+                mVelY += ay * dT;
+                mPosX += mVelX * dT + ax * dT * dT / 2;
+                mVelX += ax * dT;
+            } else {
+                mPosY -= mVelY * dT - ay * dT * dT / 2;
+                mVelY -= ay * dT;
+                mPosX -= mVelX * dT - ax * dT * dT / 2;
+                mVelX -= ax * dT;
+            }
+
+
+
+
+        }
+
+        public void computePhysicsMonsterDiagonalLinksHochSave() {
+
+            counter = counter % 180;
+
+            final float dT = 0.01f;
+
+            final float ay = 0.5f/5;
+            final float ax = -0.5f/5;
+
+            if (counter <= 90) {
+                mPosY += mVelY * dT + ay * dT * dT / 2;
+                mVelY += ay * dT;
+                mPosX -= mVelX * dT + ax * dT * dT / 2;
+                mVelX -= ax * dT;
+            } else {
+                mPosY -= mVelY * dT - ax * dT * dT / 2;
+                mVelY -= ay * dT;
+                mPosX += mVelX * dT - ax * dT * dT / 2;
+                mVelX += ax * dT;
+            }
+
+            counter++;
+
+
+        }
+
+        public void computePhysicsMonsterUpwards() {
+
+            counter = counter % 180;
+            counter++;
+
+            final float dT = -0.01f;
+
+            final float ay = 0.5f/5;
+            final float ax = 0/5;
+
+            if (counter <= 90) {
+                mPosY += mVelY * dT + ay * dT * dT / 2;
+                mVelY += ay * dT;
+            } else {
+                mPosY -= mVelY * dT - ay * dT * dT / 2;
+                mVelY -= ay * dT;
+            }
+
+            mPosX += mVelX * dT + ax * dT * dT / 2;
+            mVelX += ax * dT;
+
+            counter = counter % 180;
+            counter++;
+
+        }
+
+        public void computePhysicsMonsterNachRechts() {
+
+            counter = counter % 90;
+
+            final float dT = -0.01f;
+
+            final float ax = 0.5f/5;
+            final float ay = 0/5;
+
+            if (counter < 45) {
+                mPosX += mVelX * dT + ax * dT * dT / 2;
+                mVelX += ax * dT;
+            } else {
+                mPosX -= mVelX * dT - ax * dT * dT / 2;
+                mVelX -= ax * dT;
+            }
+
+            mPosY += mVelY * dT + ay * dT * dT / 2;
+            mVelY += ay * dT;
+
+            counter++;
+
+        }
+
+        public void computePhysicsMonsterNachLinks() {
 
             counter = counter % 180;
             counter++;
@@ -203,6 +355,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 myMonsters[i].mPosX = monsterDataHolder[i].xPos;
                 myMonsters[i].mPosY = monsterDataHolder[i].yPos;
                 myMonsters[i].setBackgroundResource(R.drawable.blue_monster_128); // validate getType
+                myMonsters[i].typ = monsterDataHolder[i].getTyp();
                 myMonsters[i].setLayerType(LAYER_TYPE_HARDWARE, null);
                 addView(myMonsters[i], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
             }
@@ -223,7 +376,19 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 myBall.computePhysics(sx, sy, dT);
 
                 for (Particle monster : myMonsters) {
-                    monster.computePhysicsMonster();
+                    //monster.computePhysicsMonster();
+                    if (monster.typ == 1) {
+                        //monster.computePhysicsMonster();
+                    }
+                    if (monster.typ == 2) {
+                        monster.computePhysicsMonsterNachRechts();
+                    }
+                    if (monster.typ == 3) {
+                        monster.computePhysicsMonsterDiagonaleRechtsHoch();
+                    }
+                    if (monster.typ == 4) {
+                        monster.computePhysicsMonsterDiagonalLinksHoch();
+                    }
                 }
             }
             mLastT = timestamp;

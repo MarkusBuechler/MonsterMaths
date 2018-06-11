@@ -20,6 +20,7 @@ import android.widget.Toast;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel1;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel2;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel3;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel4;
 
 import static java.lang.Integer.parseInt;
 
@@ -198,9 +199,9 @@ public class GameActivity extends Activity {
                 break;
             case 3 : dataHolder = DataHolderLevel3.getInstance();
                 break;
-                /*
             case 4: dataHolder = DataHolderLevel4.getInstance();
                 break;
+                /*
             case 5 : dataHolder = DataHolderLevel5.getInstance();
                 break;
             case 6: dataHolder = DataHolderLevel6.getInstance();

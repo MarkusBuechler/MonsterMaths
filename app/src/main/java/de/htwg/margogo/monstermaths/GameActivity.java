@@ -193,17 +193,18 @@ public class GameActivity extends Activity {
                 break;
             case 2: dataHolder = DataHolderLevel2.getInstance();
                 break;
-            /*case 3 : dataHolder = DataHolderLevel1.getInstance();
+            case 3 : dataHolder = DataHolderLevel3.getInstance();
                 break;
-            case 4: dataHolder = DataHolderLevel2.getInstance();
+                /*
+            case 4: dataHolder = DataHolderLevel4.getInstance();
                 break;
-            case 5 : dataHolder = DataHolderLevel1.getInstance();
+            case 5 : dataHolder = DataHolderLevel5.getInstance();
                 break;
-            case 6: dataHolder = DataHolderLevel2.getInstance();
+            case 6: dataHolder = DataHolderLevel6.getInstance();
                 break;
-            case 7 : dataHolder = DataHolderLevel1.getInstance();
+            case 7 : dataHolder = DataHolderLevel7.getInstance();
                 break;
-            case 8: dataHolder = DataHolderLevel2.getInstance();
+            case 8: dataHolder = DataHolderLevel8.getInstance();
                 break;*/
             default: dataHolder = DataHolderLevel1.getInstance();
                 break;

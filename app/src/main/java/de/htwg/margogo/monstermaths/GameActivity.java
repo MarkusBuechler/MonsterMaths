@@ -8,7 +8,6 @@ import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
@@ -17,6 +16,10 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel1;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel2;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel3;
 
 import static java.lang.Integer.parseInt;
 

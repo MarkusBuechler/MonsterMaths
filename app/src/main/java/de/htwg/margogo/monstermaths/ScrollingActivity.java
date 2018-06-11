@@ -10,6 +10,10 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel1;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel2;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel3;
+
 public class ScrollingActivity extends AppCompatActivity {
 
     ArrayList<DataModel> dataModels;

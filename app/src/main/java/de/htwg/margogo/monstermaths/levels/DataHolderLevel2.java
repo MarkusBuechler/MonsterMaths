@@ -1,4 +1,9 @@
-package de.htwg.margogo.monstermaths;
+package de.htwg.margogo.monstermaths.levels;
+
+import de.htwg.margogo.monstermaths.Badge;
+import de.htwg.margogo.monstermaths.DataHolderInterface;
+import de.htwg.margogo.monstermaths.MonsterDataHolder;
+import de.htwg.margogo.monstermaths.NumberDataHolder;
 
 /*
  * Singleton class. Dataholder for Level 2

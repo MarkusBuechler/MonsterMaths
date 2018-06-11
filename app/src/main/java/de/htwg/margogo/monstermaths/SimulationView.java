@@ -161,7 +161,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
         private Particle myMonsters[] = new Particle[NUM_MONSTERS];
         private Particle myNumbers[] = new Particle[NUM_NUMBERS];
 
-        public boolean lockFinish = false;
+        private boolean lockFinish = false;
         private Boolean[] uniqueNumberLocks = new Boolean[NUM_NUMBERS];
         private int currentResult = 0;
 

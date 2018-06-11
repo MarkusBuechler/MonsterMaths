@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static java.lang.Integer.parseInt;
 
@@ -44,7 +45,7 @@ public class GameActivity extends Activity {
     DataHolderInterface dataHolder;
     Intent intent;
     String id;
-    int bla;
+    int dt_id;
 
     //runs without a timer by reposting this handler at the end of the runnable
     Handler timerHandler = new Handler();
@@ -64,6 +65,9 @@ public class GameActivity extends Activity {
             textViewResult2.setText(dataHolder.getExpectedResult().toString());
 
             if (dataHolder.getLock()) {
+
+                updateScore(seconds);
+
                 dataHolder.setScore(seconds);
                 dataHolder.setLock(false);
             } else {
@@ -73,6 +77,15 @@ public class GameActivity extends Activity {
             timerHandler.postDelayed(this, 500);
         }
     };
+
+    private void updateScore(int score) {
+        if (score < dataHolder.getScore() || dataHolder.getScore() == 0) {
+            dataHolder.setScore(score);
+            Toast.makeText(getApplicationContext(), "New highscore!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "No new highscore!", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     /** Called when the activity is first created. */
     @Override
@@ -95,21 +108,14 @@ public class GameActivity extends Activity {
                 .getName());
 
         intent  = getIntent();
+
         Bundle extra = intent.getExtras();
         if (extra != null) {
             id = intent.getStringExtra("id");
-            bla = parseInt(id);
+            dt_id = parseInt(id);
         }
 
-        if (bla == 1) {
-            dataHolder = DataHolderLevel1.getInstance();
-            Log.i("dataholder", "chosen 1");
-        } else if (bla == 2){
-            dataHolder = DataHolderLevel2.getInstance();
-            Log.i("dataholder", "chosen 2");
-        }
-
-        Log.i("dataholder", "datatholder is" + dataHolder.toString());
+        init_data_holder(dt_id);
 
         LayoutParams params = new LayoutParams(300,150);
         TextView textViewTimer = new TextView(this);
@@ -180,6 +186,30 @@ public class GameActivity extends Activity {
 
     }
 
+    private void init_data_holder(int id) {
+
+        switch (id) {
+            case 1 : dataHolder = DataHolderLevel1.getInstance();
+                break;
+            case 2: dataHolder = DataHolderLevel2.getInstance();
+                break;
+            /*case 3 : dataHolder = DataHolderLevel1.getInstance();
+                break;
+            case 4: dataHolder = DataHolderLevel2.getInstance();
+                break;
+            case 5 : dataHolder = DataHolderLevel1.getInstance();
+                break;
+            case 6: dataHolder = DataHolderLevel2.getInstance();
+                break;
+            case 7 : dataHolder = DataHolderLevel1.getInstance();
+                break;
+            case 8: dataHolder = DataHolderLevel2.getInstance();
+                break;*/
+            default: dataHolder = DataHolderLevel1.getInstance();
+                break;
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -214,4 +244,5 @@ public class GameActivity extends Activity {
         // and release our wake-lock
        // mWakeLock.release();
     }
+
 }

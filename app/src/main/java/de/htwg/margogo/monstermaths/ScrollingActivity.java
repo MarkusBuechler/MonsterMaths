@@ -27,14 +27,7 @@ public class ScrollingActivity extends AppCompatActivity {
 
 
         // TODO: get datamodel from dataholder
-        DataHolderLevel1 dt1 = DataHolderLevel1.getInstance();
-        DataModel dm1 = new DataModel(dt1.getName(), dt1.getId(), false, dt1.getDescription(), dt1.getScore(), dt1.getBadge());
-
-        DataHolderLevel2 dt2 = DataHolderLevel2.getInstance();
-        DataModel dm2 = new DataModel(dt2.getName(), dt2.getId(), false, dt2.getDescription(), dt2.getScore(), dt2.getBadge());
-
-        dataModels.add(dm1);
-        dataModels.add(dm2);
+        updateList();
 
         /*
         dataModels.add(new DataModel("Level 1", 1, false,"Basic Introduction to the game concept", 10.0 , Badge.Gold));
@@ -69,6 +62,19 @@ public class ScrollingActivity extends AppCompatActivity {
 
     }
 
+    private void updateList() {
+        dataModels.clear();
+
+        DataHolderLevel1 dt1 = DataHolderLevel1.getInstance();
+        DataModel dm1 = new DataModel(dt1.getName(), dt1.getId(), false, dt1.getDescription(), dt1.getScore(), dt1.getBadge());
+
+        DataHolderLevel2 dt2 = DataHolderLevel2.getInstance();
+        DataModel dm2 = new DataModel(dt2.getName(), dt2.getId(), false, dt2.getDescription(), dt2.getScore(), dt2.getBadge());
+
+        dataModels.add(dm1);
+        dataModels.add(dm2);
+    }
+
     /** Needs method refresh !! Only updates data when restart activity. **/
 
     /**
@@ -79,7 +85,12 @@ public class ScrollingActivity extends AppCompatActivity {
         return true;
     }
 
-     **/
+     */
+
+    // needs to be connected
+    public void update() {
+         updateList();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

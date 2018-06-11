@@ -14,15 +14,6 @@ public class MonsterDataHolder {
     }
 
     // 1 is blueMonster
-
-    public float getxPos() {
-        return xPos;
-    }
-
-    public float getyPos() {
-        return yPos;
-    }
-
     public int getTyp() {
         return typ;
     }

@@ -223,9 +223,6 @@ class SimulationView extends FrameLayout implements SensorEventListener {
             mPosX += mVelX * dT + ax * dT * dT / 2;
             mVelX += ax * dT;
 
-            counter = counter % 180;
-            counter++;
-
         }
 
         public void computePhysicsMonsterNachRechts() {
@@ -409,6 +406,9 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                     }
                     if (monster.typ == 4) {
                         monster.computePhysicsMonsterDiagonalLinksHoch();
+                    }
+                    if (monster.typ == 5) {
+                        monster.computePhysicsMonsterUpwards();
                     }
                 }
             }

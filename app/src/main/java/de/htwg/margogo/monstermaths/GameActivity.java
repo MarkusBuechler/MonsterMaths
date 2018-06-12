@@ -17,17 +17,7 @@ import android.hardware.SensorEvent;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel1;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel10;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel2;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel3;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel4;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel5;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel6;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel7;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel8;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel9;
-
+import de.htwg.margogo.monstermaths.levels.*;
 import static java.lang.Integer.parseInt;
 
 /**
@@ -219,6 +209,26 @@ public class GameActivity extends Activity {
             case 9: dataHolder = DataHolderLevel9.getInstance();
                 break;
             case 10: dataHolder = DataHolderLevel10.getInstance();
+                break;
+            case 11: dataHolder = DataHolderLevel11.getInstance();
+                break;
+            case 12: dataHolder = DataHolderLevel12.getInstance();
+                break;
+            case 13: dataHolder = DataHolderLevel13.getInstance();
+                break;
+            case 14: dataHolder = DataHolderLevel14.getInstance();
+                break;
+            case 15: dataHolder = DataHolderLevel15.getInstance();
+                break;
+            case 16: dataHolder = DataHolderLevel16.getInstance();
+                break;
+            case 17: dataHolder = DataHolderLevel17.getInstance();
+                break;
+            case 18: dataHolder = DataHolderLevel18.getInstance();
+                break;
+            case 19: dataHolder = DataHolderLevel19.getInstance();
+                break;
+            case 20: dataHolder = DataHolderLevel20.getInstance();
                 break;
             default: dataHolder = DataHolderLevel1.getInstance();
                 break;

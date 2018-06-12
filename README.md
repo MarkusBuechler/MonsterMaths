@@ -26,7 +26,7 @@ kommt später noch hinzu
 - __Woche 1__ [x] Initiale App mit Ansteuerung des Sensors und Verarbeitung der Sensordaten.
 - __Woche 2__ [x] Auswahl der Buttons, Icons, Spielelemente und deren Animation. Design und Anpassung an ausgewählte Geräte. 
 - __Woche 3__ [x] Implementierung der Businesslogik + Unit Tests 
-- __Woche 4__ [ ] Level Design (20+ angestrebt) 
+- __Woche 4__ [x] Level Design (20 angestrebt) 
 - __Woche 5__ [ ] Highscore Listen inklusive Server, Social Media Features etc.
 - __Woche 6__ [ ] Vorbereitung für das Deployment (Ziel: Play Store), Buffer, Performance
 

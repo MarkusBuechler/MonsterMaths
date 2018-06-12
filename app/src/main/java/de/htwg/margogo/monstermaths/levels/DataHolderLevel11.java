@@ -6,38 +6,34 @@ import de.htwg.margogo.monstermaths.types.NumberDataHolder;
 import de.htwg.margogo.monstermaths.types.OperatorDataHolder;
 
 /*
- * Singleton class. Dataholder for Level 10
+ * Singleton class. Dataholder for Level 11
  */
-public class DataHolderLevel10 implements DataHolderInterface {
+public class DataHolderLevel11 implements DataHolderInterface {
 
     private boolean lock;
     private int score;
     private Badge badge = Badge.Bronze;
 
-    private static final int NUM_MONSTERS = 6;
+    private static final int NUM_MONSTERS = 3;
     private static final int NUM_NUMBERS = 4;
-    private static final int NUM_OPERATORS = 2;
+    private static final int NUM_OPERATORS = 1;
 
-    private MonsterDataHolder m1 = new MonsterDataHolder(-0.003f,-0.03f,5);
-    private MonsterDataHolder m2 = new MonsterDataHolder(0.003f,-0.03f,5);
-    private MonsterDataHolder m3 = new MonsterDataHolder(-0.003f,-0.015f,5);
-    private MonsterDataHolder m4 = new MonsterDataHolder(0.003f,-0.015f,5);
-    private MonsterDataHolder m5 = new MonsterDataHolder(-0.003f,0f,5);
-    private MonsterDataHolder m6 = new MonsterDataHolder(0.003f,0f,5);
+    private MonsterDataHolder m1 = new MonsterDataHolder(-0.005f,0.03f,2);
+    private MonsterDataHolder m2 = new MonsterDataHolder(-0.025f,-0.03f,3);
+    private MonsterDataHolder m3 = new MonsterDataHolder(0.025f,-0.03f,4);
 
-    private NumberDataHolder n1 = new NumberDataHolder(-0.028f,0.045f,9);
-    private NumberDataHolder n2 = new NumberDataHolder(0.028f,0.045f,9);
-    private NumberDataHolder n3 = new NumberDataHolder(-0.028f,-0.045f,1);
-    private NumberDataHolder n4 = new NumberDataHolder(0.028f,-0.045f,5);
+    private NumberDataHolder n1 = new NumberDataHolder(0f,-0.02f,1);
+    private NumberDataHolder n2 = new NumberDataHolder(0.025f,-0.025f,3);
+    private NumberDataHolder n3 = new NumberDataHolder(0.f,0.02f,3);
+    private NumberDataHolder n4 = new NumberDataHolder(-0.025f,-0.025f,3);
 
-    private OperatorDataHolder o1 = new OperatorDataHolder(0f, 0f, "+");
-    private OperatorDataHolder o2 = new OperatorDataHolder(0f, -0.01f, "-");
+    private OperatorDataHolder o1 = new OperatorDataHolder(0f, 0f, "*");
 
-    private MonsterDataHolder monsterDataHolder[] = new MonsterDataHolder[] {m1, m2, m3, m4, m5, m6};
+    private MonsterDataHolder monsterDataHolder[] = new MonsterDataHolder[] {m1, m2, m3};
 
     private NumberDataHolder numberDataHolder[] = new NumberDataHolder[] {n1,n2,n3, n4};
 
-    private OperatorDataHolder operatorDataHolder[] = new OperatorDataHolder[] {o1, o2};
+    private OperatorDataHolder operatorDataHolder[] = new OperatorDataHolder[] {o1};
 
     public void setLock(boolean lock) {
         this.lock = lock;
@@ -57,12 +53,12 @@ public class DataHolderLevel10 implements DataHolderInterface {
 
     @Override
     public String getName() {
-        return "Level 10";
+        return "Level 11";
     }
 
     @Override
     public String getDescription() {
-        return "Mixed 2";
+        return "Introduction to Multiplication";
     }
 
     @Override
@@ -72,9 +68,8 @@ public class DataHolderLevel10 implements DataHolderInterface {
 
     @Override
     public Integer getId() {
-        return 10;
+        return 11;
     }
-
     @Override
     public Integer getNumMonsters() {
         return NUM_MONSTERS;
@@ -92,7 +87,7 @@ public class DataHolderLevel10 implements DataHolderInterface {
 
     @Override
     public Integer getExpectedResult() {
-        return 14;
+        return 27;
     }
 
     @Override
@@ -115,9 +110,9 @@ public class DataHolderLevel10 implements DataHolderInterface {
         this.badge = badge;
     }
 
-    private static final DataHolderLevel10 holder = new DataHolderLevel10();
+    private static final DataHolderLevel11 holder = new DataHolderLevel11();
 
-    public static DataHolderLevel10 getInstance() {
+    public static DataHolderLevel11 getInstance() {
         return holder;
     }
 

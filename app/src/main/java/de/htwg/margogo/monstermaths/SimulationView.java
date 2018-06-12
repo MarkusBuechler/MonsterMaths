@@ -101,31 +101,6 @@ class SimulationView extends FrameLayout implements SensorEventListener {
             mVelY += ay * dT;
         }
 
-        public void computePhysicsMonster() {
-
-            counter = counter % 180;
-
-            final float dT = 0.005f;
-
-            final float ay = 0.5f/5;
-            final float ax = 0/5;
-
-            if (counter <= 90) {
-                mPosY += mVelY * dT + ay * dT * dT / 2;
-                mVelY += ay * dT;
-                mPosX += mVelX * dT + ay * dT * dT / 2;
-                mVelX += ay * dT;
-            } else {
-                mPosY -= mVelY * dT - ay * dT * dT / 2;
-                mVelY -= ay * dT;
-                mPosX -= mVelX * dT - ay * dT * dT / 2;
-                mVelX -= ay * dT;
-            }
-
-            counter++;
-
-        }
-
         public void computePhysicsMonsterDiagonaleRechtsHoch() {
 
             counter = counter % 180;
@@ -170,35 +145,6 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 mPosX -= mVelX * dT - ax * dT * dT / 2;
                 mVelX -= ax * dT;
             }
-
-
-
-
-        }
-
-        public void computePhysicsMonsterDiagonalLinksHochSave() {
-
-            counter = counter % 180;
-
-            final float dT = 0.01f;
-
-            final float ay = 0.5f/5;
-            final float ax = -0.5f/5;
-
-            if (counter <= 90) {
-                mPosY += mVelY * dT + ay * dT * dT / 2;
-                mVelY += ay * dT;
-                mPosX -= mVelX * dT + ax * dT * dT / 2;
-                mVelX -= ax * dT;
-            } else {
-                mPosY -= mVelY * dT - ax * dT * dT / 2;
-                mVelY -= ay * dT;
-                mPosX += mVelX * dT - ax * dT * dT / 2;
-                mVelX += ax * dT;
-            }
-
-            counter++;
-
 
         }
 
@@ -351,7 +297,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 myNumbers[i] = new Particle(getContext());
                 myNumbers[i].mPosX = numberDataHolder[i].getXPos();
                 myNumbers[i].mPosY = numberDataHolder[i].getYPos();
-                choosePicture(myNumbers[i], numberDataHolder[i].getValue());
+                choosePictureNumber(myNumbers[i], numberDataHolder[i].getValue());
 
                 myNumbers[i].setLayerType(LAYER_TYPE_HARDWARE, null);
                 addView(myNumbers[i], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
@@ -363,7 +309,8 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 myMonsters[i] = new Particle(getContext());
                 myMonsters[i].mPosX = monsterDataHolder[i].getXPos();
                 myMonsters[i].mPosY = monsterDataHolder[i].getYPos();
-                myMonsters[i].setBackgroundResource(R.drawable.blue_monster_128); // validate getType
+                choosePictureMonster(myMonsters[i], monsterDataHolder[i].getTyp());
+
                 myMonsters[i].typ = monsterDataHolder[i].getTyp();
                 myMonsters[i].setLayerType(LAYER_TYPE_HARDWARE, null);
                 addView(myMonsters[i], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
@@ -374,7 +321,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 myOperators[i] = new Particle(getContext());
                 myOperators[i].mPosX = operatorDataHolder[i].getXPos();
                 myOperators[i].mPosY = operatorDataHolder[i].getYPos();
-                choosePicture2(myOperators[i], operatorDataHolder[i].getOperation());
+                choosePictureOperator(myOperators[i], operatorDataHolder[i].getOperation());
 
                 myOperators[i].setLayerType(LAYER_TYPE_HARDWARE, null);
                 addView(myOperators[i], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
@@ -773,7 +720,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
-    private void choosePicture(SimulationView.Particle particle, int i) {
+    private void choosePictureNumber(SimulationView.Particle particle, int i) {
         switch (i) {
             case 1: particle.setBackgroundResource(R.drawable.one);
                 break;
@@ -801,7 +748,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
     }
 
-    private void choosePicture2(SimulationView.Particle particle, String s) {
+    private void choosePictureOperator(SimulationView.Particle particle, String s) {
         switch (s) {
             case "+": particle.setBackgroundResource(R.drawable.plus);
                 break;
@@ -815,6 +762,23 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 break;
         }
 
+    }
+
+    private void choosePictureMonster(SimulationView.Particle particle, int i) {
+        switch (i) {
+            case 1:
+            case 2:
+                particle.setBackgroundResource(R.drawable.blue_monster_128);
+                break;
+            case 3: particle.setBackgroundResource(R.drawable.green_monster_128);
+                break;
+            case 4: particle.setBackgroundResource(R.drawable.orange_monster_128);
+                break;
+            case 5: particle.setBackgroundResource(R.drawable.purple_monster_128);
+                break;
+            default: particle.setBackgroundResource(R.drawable.emoji_smile_256);
+                break;
+        }
     }
 
     private void updateOperation(String operation) {

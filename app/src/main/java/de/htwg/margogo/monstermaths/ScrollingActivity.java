@@ -10,16 +10,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel1;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel10;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel2;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel3;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel4;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel5;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel6;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel7;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel8;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel9;
+import de.htwg.margogo.monstermaths.levels.*;
 
 public class ScrollingActivity extends AppCompatActivity {
 
@@ -90,7 +81,36 @@ public class ScrollingActivity extends AppCompatActivity {
         DataHolderLevel10 dt10 = DataHolderLevel10.getInstance();
         DataModel dm10 = new DataModel(dt10.getName(), dt10.getId(), false, dt10.getDescription(), dt10.getScore(), dt10.getBadge());
 
-        /*
+        DataHolderLevel11 dt11 = DataHolderLevel11.getInstance();
+        DataModel dm11 = new DataModel(dt11.getName(), dt11.getId(), false, dt11.getDescription(), dt11.getScore(), dt11.getBadge());
+
+        DataHolderLevel12 dt12 = DataHolderLevel12.getInstance();
+        DataModel dm12 = new DataModel(dt12.getName(), dt12.getId(), false, dt12.getDescription(), dt12.getScore(), dt12.getBadge());
+
+        DataHolderLevel13 dt13 = DataHolderLevel13.getInstance();
+        DataModel dm13 = new DataModel(dt13.getName(), dt13.getId(), false, dt13.getDescription(), dt13.getScore(), dt13.getBadge());
+
+        DataHolderLevel14 dt14 = DataHolderLevel14.getInstance();
+        DataModel dm14 = new DataModel(dt14.getName(), dt14.getId(), false, dt14.getDescription(), dt14.getScore(), dt14.getBadge());
+
+        DataHolderLevel15 dt15 = DataHolderLevel15.getInstance();
+        DataModel dm15 = new DataModel(dt15.getName(), dt15.getId(), false, dt15.getDescription(), dt15.getScore(), dt15.getBadge());
+
+        DataHolderLevel16 dt16 = DataHolderLevel16.getInstance();
+        DataModel dm16 = new DataModel(dt16.getName(), dt16.getId(), false, dt16.getDescription(), dt16.getScore(), dt16.getBadge());
+
+        DataHolderLevel17 dt17 = DataHolderLevel17.getInstance();
+        DataModel dm17 = new DataModel(dt17.getName(), dt17.getId(), false, dt17.getDescription(), dt17.getScore(), dt17.getBadge());
+
+        DataHolderLevel18 dt18 = DataHolderLevel18.getInstance();
+        DataModel dm18 = new DataModel(dt18.getName(), dt18.getId(), false, dt18.getDescription(), dt18.getScore(), dt18.getBadge());
+
+        DataHolderLevel19 dt19 = DataHolderLevel19.getInstance();
+        DataModel dm19 = new DataModel(dt19.getName(), dt19.getId(), false, dt19.getDescription(), dt19.getScore(), dt19.getBadge());
+
+        DataHolderLevel20 dt20 = DataHolderLevel20.getInstance();
+        DataModel dm20 = new DataModel(dt20.getName(), dt20.getId(), false, dt20.getDescription(), dt20.getScore(), dt20.getBadge());
+
         dataModels.add(dm1);
         dataModels.add(dm2);
         dataModels.add(dm3);
@@ -99,9 +119,19 @@ public class ScrollingActivity extends AppCompatActivity {
         dataModels.add(dm6);
         dataModels.add(dm7);
         dataModels.add(dm8);
-        */
         dataModels.add(dm9);
         dataModels.add(dm10);
+        dataModels.add(dm11);
+        dataModels.add(dm12);
+        dataModels.add(dm13);
+        dataModels.add(dm14);
+        dataModels.add(dm15);
+        dataModels.add(dm16);
+        dataModels.add(dm17);
+        dataModels.add(dm18);
+        dataModels.add(dm19);
+        dataModels.add(dm20);
+
     }
 
     /** Needs method refresh !! Only updates data when restart activity. **/

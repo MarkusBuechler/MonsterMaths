@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // TODO: Remove this soon
+        // TODO: Remove this soon. Create something like subway surfer -> tap to run -> tap to continue
         Button btnStartGame = findViewById(R.id.btnStartGame);
         btnStartGame.setOnClickListener(new View.OnClickListener() {
             @Override

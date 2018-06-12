@@ -102,6 +102,9 @@ public class ScrollingActivity extends AppCompatActivity {
         DataHolderLevel17 dt17 = DataHolderLevel17.getInstance();
         DataModel dm17 = new DataModel(dt17.getName(), dt17.getId(), false, dt17.getDescription(), dt17.getScore(), dt17.getBadge());
 
+        DataHolderLevel18 dt18 = DataHolderLevel18.getInstance();
+        DataModel dm18 = new DataModel(dt18.getName(), dt18.getId(), false, dt18.getDescription(), dt18.getScore(), dt18.getBadge());
+
 
         dataModels.add(dm1);
         dataModels.add(dm2);
@@ -120,6 +123,7 @@ public class ScrollingActivity extends AppCompatActivity {
         dataModels.add(dm15);
         dataModels.add(dm16);
         dataModels.add(dm17);
+        dataModels.add(dm18);
 
     }
 

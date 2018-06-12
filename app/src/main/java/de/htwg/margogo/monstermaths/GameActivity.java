@@ -224,6 +224,8 @@ public class GameActivity extends Activity {
                 break;
             case 17: dataHolder = DataHolderLevel17.getInstance();
                 break;
+            case 18: dataHolder = DataHolderLevel18.getInstance();
+                break;
             default: dataHolder = DataHolderLevel1.getInstance();
                 break;
         }

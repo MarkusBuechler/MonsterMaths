@@ -1,10 +1,14 @@
 package de.htwg.margogo.monstermaths;
 
+import de.htwg.margogo.monstermaths.types.MonsterDataHolder;
+import de.htwg.margogo.monstermaths.types.NumberDataHolder;
+import de.htwg.margogo.monstermaths.types.OperatorDataHolder;
+
 public interface DataHolderInterface {
 
     boolean getLock();
 
-    int getScore();
+    Integer getScore();
 
     String getName();
 
@@ -18,9 +22,15 @@ public interface DataHolderInterface {
 
     Integer getNumNumbers();
 
+    Integer getNumOperators();
+
+    Integer getExpectedResult();
+
     MonsterDataHolder[] getMonsterDataHolderList();
 
     NumberDataHolder[] getNumberDataHolderList();
+
+    OperatorDataHolder[] getOperatorDataHolderList();
 
     void setLock(boolean lock);
 

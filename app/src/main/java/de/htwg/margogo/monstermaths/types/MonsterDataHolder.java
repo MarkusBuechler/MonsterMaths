@@ -1,4 +1,4 @@
-package de.htwg.margogo.monstermaths;
+package de.htwg.margogo.monstermaths.types;
 
 public class MonsterDataHolder {
 
@@ -14,17 +14,16 @@ public class MonsterDataHolder {
     }
 
     // 1 is blueMonster
+    public int getTyp() {
+        return typ;
+    }
 
-    public float getxPos() {
+    public float getXPos() {
         return xPos;
     }
 
-    public float getyPos() {
+    public float getYPos() {
         return yPos;
-    }
-
-    public int getTyp() {
-        return typ;
     }
 
 }

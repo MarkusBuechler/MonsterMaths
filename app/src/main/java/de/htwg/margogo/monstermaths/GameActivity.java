@@ -8,7 +8,6 @@ import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
@@ -16,6 +15,18 @@ import android.view.WindowManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel1;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel10;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel2;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel3;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel4;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel5;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel6;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel7;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel8;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel9;
 
 import static java.lang.Integer.parseInt;
 
@@ -37,14 +48,15 @@ public class GameActivity extends Activity {
     private PowerManager.WakeLock mWakeLock;
 
     TextView textViewTimer2;
+    TextView textViewCurrentOperation2;
+    TextView textViewResult2;
     long startTime = 0;
 
     DataHolderInterface dataHolder;
     Intent intent;
     String id;
-    int bla;
-
-
+    int dt_id;
+    String currentOperation = "+";
 
     //runs without a timer by reposting this handler at the end of the runnable
     Handler timerHandler = new Handler();
@@ -60,7 +72,13 @@ public class GameActivity extends Activity {
 
             textViewTimer2.setText(String.format("%d:%02d", minutes, seconds));
 
+            textViewCurrentOperation2.setText(currentOperation);
+            textViewResult2.setText(dataHolder.getExpectedResult().toString());
+
             if (dataHolder.getLock()) {
+
+                updateScore(seconds);
+
                 dataHolder.setScore(seconds);
                 dataHolder.setLock(false);
             } else {
@@ -70,6 +88,15 @@ public class GameActivity extends Activity {
             timerHandler.postDelayed(this, 500);
         }
     };
+
+    private void updateScore(int score) {
+        if (score < dataHolder.getScore() || dataHolder.getScore() == 0) {
+            dataHolder.setScore(score);
+            Toast.makeText(getApplicationContext(), "New highscore!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "No new highscore!", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     /** Called when the activity is first created. */
     @Override
@@ -91,34 +118,15 @@ public class GameActivity extends Activity {
         mWakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, getClass()
                 .getName());
 
-        /**
-        Button myButton = new Button(this);
-        myButton.setText("HI");
-
-        LayoutParams params = new LayoutParams(300,150);
-        myButton.setLayoutParams(params);
-        myButton.setX(myButton.getX() + 50);
-        myButton.setY(myButton.getY() + 50);
-         **/
-
         intent  = getIntent();
+
         Bundle extra = intent.getExtras();
         if (extra != null) {
             id = intent.getStringExtra("id");
-            bla = parseInt(id);
+            dt_id = parseInt(id);
         }
 
-        if (bla == 1) {
-            dataHolder = DataHolderLevel1.getInstance();
-            Log.i("dataholder", "chosen 1");
-        } else if (bla == 2){
-            dataHolder = DataHolderLevel2.getInstance();
-            Log.i("dataholder", "chosen 2");
-        }
-
-        Log.i("dataholder", "datatholder is" + dataHolder.toString());
-
-        // TODO: Do the same for expected sum, current sum, current operation ?
+        init_data_holder(dt_id);
 
         LayoutParams params = new LayoutParams(300,150);
         TextView textViewTimer = new TextView(this);
@@ -138,6 +146,41 @@ public class GameActivity extends Activity {
         textViewTimer2.setX(textViewTimer.getX() + 120);
         textViewTimer2.setY(textViewTimer.getY());
 
+        LayoutParams params2 = new LayoutParams(600,150);
+        TextView textViewCurrentOperation = new TextView(this);
+        textViewCurrentOperation.setText("Operation: ");
+        textViewCurrentOperation.setTextColor(Color.GRAY);
+        textViewCurrentOperation.setTextSize(18);
+        textViewCurrentOperation.setTypeface(null, Typeface.BOLD);
+        textViewCurrentOperation.setLayoutParams(params2);
+        textViewCurrentOperation.setX(textViewTimer.getX());
+        textViewCurrentOperation.setY(textViewTimer.getY() + 100);
+
+        textViewCurrentOperation2 = new TextView(this);
+        textViewCurrentOperation2.setTextColor(Color.GRAY);
+        textViewCurrentOperation2.setTextSize(18);
+        textViewCurrentOperation2.setTypeface(null, Typeface.BOLD);
+        textViewCurrentOperation2.setLayoutParams(params);
+        textViewCurrentOperation2.setX(textViewCurrentOperation.getX() + 270);
+        textViewCurrentOperation2.setY(textViewCurrentOperation.getY());
+
+        TextView textViewResult = new TextView(this);
+        textViewResult.setText("Ergebnis: ");
+        textViewResult.setTextColor(Color.GRAY);
+        textViewResult.setTextSize(18);
+        textViewResult.setTypeface(null, Typeface.BOLD);
+        textViewResult.setLayoutParams(params);
+        textViewResult.setX(textViewCurrentOperation.getX());
+        textViewResult.setY(textViewCurrentOperation.getY() + 100);
+
+        textViewResult2 = new TextView(this);
+        textViewResult2.setTextColor(Color.GRAY);
+        textViewResult2.setTextSize(18);
+        textViewResult2.setTypeface(null, Typeface.BOLD);
+        textViewResult2.setLayoutParams(params);
+        textViewResult2.setX(textViewResult.getX() + 250);
+        textViewResult2.setY(textViewResult.getY());
+
         startTime = System.currentTimeMillis();
         timerHandler.postDelayed(timerRunnable, 0);
 
@@ -146,8 +189,40 @@ public class GameActivity extends Activity {
         mSimulationView.setBackgroundResource(R.drawable.wood);
         mSimulationView.addView(textViewTimer);
         mSimulationView.addView(textViewTimer2);
+        mSimulationView.addView(textViewCurrentOperation);
+        mSimulationView.addView(textViewCurrentOperation2);
+        mSimulationView.addView(textViewResult);
+        mSimulationView.addView(textViewResult2);
         setContentView(mSimulationView);
 
+    }
+
+    private void init_data_holder(int id) {
+
+        switch (id) {
+            case 1 : dataHolder = DataHolderLevel1.getInstance();
+                break;
+            case 2: dataHolder = DataHolderLevel2.getInstance();
+                break;
+            case 3 : dataHolder = DataHolderLevel3.getInstance();
+                break;
+            case 4: dataHolder = DataHolderLevel4.getInstance();
+                break;
+            case 5 : dataHolder = DataHolderLevel5.getInstance();
+                break;
+            case 6: dataHolder = DataHolderLevel6.getInstance();
+                break;
+            case 7 : dataHolder = DataHolderLevel7.getInstance();
+                break;
+            case 8: dataHolder = DataHolderLevel8.getInstance();
+                break;
+            case 9: dataHolder = DataHolderLevel9.getInstance();
+                break;
+            case 10: dataHolder = DataHolderLevel10.getInstance();
+                break;
+            default: dataHolder = DataHolderLevel1.getInstance();
+                break;
+        }
     }
 
     @Override
@@ -184,4 +259,5 @@ public class GameActivity extends Activity {
         // and release our wake-lock
        // mWakeLock.release();
     }
+
 }

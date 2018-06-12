@@ -10,20 +10,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel1;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel10;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel11;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel12;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel13;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel14;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel2;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel3;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel4;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel5;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel6;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel7;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel8;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel9;
+import de.htwg.margogo.monstermaths.levels.*;
 
 public class ScrollingActivity extends AppCompatActivity {
 
@@ -106,6 +93,9 @@ public class ScrollingActivity extends AppCompatActivity {
         DataHolderLevel14 dt14 = DataHolderLevel14.getInstance();
         DataModel dm14 = new DataModel(dt14.getName(), dt14.getId(), false, dt14.getDescription(), dt14.getScore(), dt14.getBadge());
 
+        DataHolderLevel15 dt15 = DataHolderLevel15.getInstance();
+        DataModel dm15 = new DataModel(dt15.getName(), dt15.getId(), false, dt15.getDescription(), dt15.getScore(), dt15.getBadge());
+
 
         dataModels.add(dm1);
         dataModels.add(dm2);
@@ -121,6 +111,8 @@ public class ScrollingActivity extends AppCompatActivity {
         dataModels.add(dm12);
         dataModels.add(dm13);
         dataModels.add(dm14);
+        dataModels.add(dm15);
+
     }
 
     /** Needs method refresh !! Only updates data when restart activity. **/

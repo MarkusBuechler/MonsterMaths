@@ -17,21 +17,7 @@ import android.hardware.SensorEvent;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel1;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel10;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel11;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel12;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel13;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel14;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel2;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel3;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel4;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel5;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel6;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel7;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel8;
-import de.htwg.margogo.monstermaths.levels.DataHolderLevel9;
-
+import de.htwg.margogo.monstermaths.levels.*;
 import static java.lang.Integer.parseInt;
 
 /**
@@ -231,6 +217,8 @@ public class GameActivity extends Activity {
             case 13: dataHolder = DataHolderLevel13.getInstance();
                 break;
             case 14: dataHolder = DataHolderLevel14.getInstance();
+                break;
+            case 15: dataHolder = DataHolderLevel15.getInstance();
                 break;
             default: dataHolder = DataHolderLevel1.getInstance();
                 break;

@@ -63,7 +63,7 @@ public class DataHolderLevel8 implements DataHolderInterface {
 
     @Override
     public String getDescription() {
-        return "Subtraction 3";
+        return "Subtraction 2";
     }
 
     @Override

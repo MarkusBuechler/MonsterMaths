@@ -11,6 +11,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel1;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel10;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel2;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel3;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel4;
@@ -18,6 +19,7 @@ import de.htwg.margogo.monstermaths.levels.DataHolderLevel5;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel6;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel7;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel8;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel9;
 
 public class ScrollingActivity extends AppCompatActivity {
 
@@ -82,6 +84,13 @@ public class ScrollingActivity extends AppCompatActivity {
         DataHolderLevel8 dt8 = DataHolderLevel8.getInstance();
         DataModel dm8 = new DataModel(dt8.getName(), dt8.getId(), false, dt8.getDescription(), dt8.getScore(), dt8.getBadge());
 
+        DataHolderLevel9 dt9 = DataHolderLevel9.getInstance();
+        DataModel dm9 = new DataModel(dt9.getName(), dt9.getId(), false, dt9.getDescription(), dt9.getScore(), dt9.getBadge());
+
+        DataHolderLevel10 dt10 = DataHolderLevel10.getInstance();
+        DataModel dm10 = new DataModel(dt10.getName(), dt10.getId(), false, dt10.getDescription(), dt10.getScore(), dt10.getBadge());
+
+        /*
         dataModels.add(dm1);
         dataModels.add(dm2);
         dataModels.add(dm3);
@@ -90,6 +99,9 @@ public class ScrollingActivity extends AppCompatActivity {
         dataModels.add(dm6);
         dataModels.add(dm7);
         dataModels.add(dm8);
+        */
+        dataModels.add(dm9);
+        dataModels.add(dm10);
     }
 
     /** Needs method refresh !! Only updates data when restart activity. **/

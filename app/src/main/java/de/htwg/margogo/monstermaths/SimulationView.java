@@ -20,6 +20,9 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import de.htwg.margogo.monstermaths.types.MonsterDataHolder;
+import de.htwg.margogo.monstermaths.types.NumberDataHolder;
+
 import static de.htwg.margogo.monstermaths.MiscUtilities.distance;
 
 /**
@@ -341,9 +344,9 @@ class SimulationView extends FrameLayout implements SensorEventListener {
             // Loop over numbers
             for (int i = 0; i < myNumbers.length; i++) {
                 myNumbers[i] = new Particle(getContext());
-                myNumbers[i].mPosX = numberDataHolder[i].xPos;
-                myNumbers[i].mPosY = numberDataHolder[i].yPos;
-                choosePicture(myNumbers[i], numberDataHolder[i].value);
+                myNumbers[i].mPosX = numberDataHolder[i].getXPos();
+                myNumbers[i].mPosY = numberDataHolder[i].getYPos();
+                choosePicture(myNumbers[i], numberDataHolder[i].getValue());
 
                 myNumbers[i].setLayerType(LAYER_TYPE_HARDWARE, null);
                 addView(myNumbers[i], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
@@ -353,8 +356,8 @@ class SimulationView extends FrameLayout implements SensorEventListener {
             // Loop over monsters
             for (int i = 0; i < myMonsters.length; i++) {
                 myMonsters[i] = new Particle(getContext());
-                myMonsters[i].mPosX = monsterDataHolder[i].xPos;
-                myMonsters[i].mPosY = monsterDataHolder[i].yPos;
+                myMonsters[i].mPosX = monsterDataHolder[i].getXPos();
+                myMonsters[i].mPosY = monsterDataHolder[i].getYPos();
                 myMonsters[i].setBackgroundResource(R.drawable.blue_monster_128); // validate getType
                 myMonsters[i].typ = monsterDataHolder[i].getTyp();
                 myMonsters[i].setLayerType(LAYER_TYPE_HARDWARE, null);

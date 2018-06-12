@@ -1,5 +1,8 @@
 package de.htwg.margogo.monstermaths;
 
+import de.htwg.margogo.monstermaths.types.MonsterDataHolder;
+import de.htwg.margogo.monstermaths.types.NumberDataHolder;
+
 public interface DataHolderInterface {
 
     boolean getLock();

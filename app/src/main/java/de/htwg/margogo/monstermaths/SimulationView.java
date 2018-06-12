@@ -319,6 +319,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
 
         ParticleSystem() {
+
             /*
              * Initially our particles have no speed or acceleration
              */
@@ -359,7 +360,6 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 myMonsters[i].setLayerType(LAYER_TYPE_HARDWARE, null);
                 addView(myMonsters[i], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
             }
-
         }
 
 
@@ -369,8 +369,6 @@ class SimulationView extends FrameLayout implements SensorEventListener {
          */
         private void updatePositions(float sx, float sy, long timestamp) {
 
-            // sx :: links + 5-10, rechts, -5-10
-            // sy :: senkrecht nach vorne 10, rückseite vorne -10
             if (mLastT != 0) {
                 final float dT = (float) (timestamp - mLastT) / 3000.f;
                 myBall.computePhysics(sx, sy, dT);
@@ -378,7 +376,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 for (Particle monster : myMonsters) {
                     //monster.computePhysicsMonster();
                     if (monster.typ == 1) {
-                        //monster.computePhysicsMonster();
+                        monster.computePhysicsMonsterNachLinks();
                     }
                     if (monster.typ == 2) {
                         monster.computePhysicsMonsterNachRechts();
@@ -393,8 +391,6 @@ class SimulationView extends FrameLayout implements SensorEventListener {
             }
             mLastT = timestamp;
         }
-
-
 
         /*
          * Performs one iteration of the simulation. First updating the

@@ -21,6 +21,7 @@ import de.htwg.margogo.monstermaths.levels.DataHolderLevel1;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel2;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel3;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel4;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel5;
 
 import static java.lang.Integer.parseInt;
 
@@ -50,6 +51,7 @@ public class GameActivity extends Activity {
     Intent intent;
     String id;
     int dt_id;
+    String currentOperation = "+";
 
     //runs without a timer by reposting this handler at the end of the runnable
     Handler timerHandler = new Handler();
@@ -65,7 +67,7 @@ public class GameActivity extends Activity {
 
             textViewTimer2.setText(String.format("%d:%02d", minutes, seconds));
 
-            textViewCurrentOperation2.setText("+");
+            textViewCurrentOperation2.setText(currentOperation);
             textViewResult2.setText(dataHolder.getExpectedResult().toString());
 
             if (dataHolder.getLock()) {
@@ -201,9 +203,9 @@ public class GameActivity extends Activity {
                 break;
             case 4: dataHolder = DataHolderLevel4.getInstance();
                 break;
-                /*
             case 5 : dataHolder = DataHolderLevel5.getInstance();
                 break;
+                /*
             case 6: dataHolder = DataHolderLevel6.getInstance();
                 break;
             case 7 : dataHolder = DataHolderLevel7.getInstance();

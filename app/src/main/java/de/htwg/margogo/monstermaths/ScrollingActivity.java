@@ -15,6 +15,7 @@ import de.htwg.margogo.monstermaths.levels.DataHolderLevel2;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel3;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel4;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel5;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel6;
 
 public class ScrollingActivity extends AppCompatActivity {
 
@@ -70,11 +71,15 @@ public class ScrollingActivity extends AppCompatActivity {
         DataHolderLevel5 dt5 = DataHolderLevel5.getInstance();
         DataModel dm5 = new DataModel(dt5.getName(), dt5.getId(), false, dt5.getDescription(), dt5.getScore(), dt5.getBadge());
 
+        DataHolderLevel6 dt6 = DataHolderLevel6.getInstance();
+        DataModel dm6 = new DataModel(dt6.getName(), dt6.getId(), false, dt6.getDescription(), dt6.getScore(), dt6.getBadge());
+
         dataModels.add(dm1);
         dataModels.add(dm2);
         dataModels.add(dm3);
         dataModels.add(dm4);
         dataModels.add(dm5);
+        dataModels.add(dm6);
     }
 
     /** Needs method refresh !! Only updates data when restart activity. **/

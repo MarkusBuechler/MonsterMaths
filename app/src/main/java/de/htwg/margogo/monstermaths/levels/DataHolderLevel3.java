@@ -4,6 +4,7 @@ import de.htwg.margogo.monstermaths.Badge;
 import de.htwg.margogo.monstermaths.DataHolderInterface;
 import de.htwg.margogo.monstermaths.types.MonsterDataHolder;
 import de.htwg.margogo.monstermaths.types.NumberDataHolder;
+import de.htwg.margogo.monstermaths.types.OperatorDataHolder;
 
 /*
  * Singleton class. Dataholder for Level 3
@@ -34,6 +35,8 @@ public class DataHolderLevel3 implements DataHolderInterface {
     private MonsterDataHolder monsterDataHolder[] = new MonsterDataHolder[] {m1,m2, m3, m4};
 
     private NumberDataHolder numberDataHolder[] = new NumberDataHolder[] {n1,n2,n3,n4, n5, n6, n7};
+
+    private OperatorDataHolder operatorDataHolder[] = new OperatorDataHolder[] {};
 
     public void setLock(boolean lock) {
         this.lock = lock;
@@ -82,6 +85,11 @@ public class DataHolderLevel3 implements DataHolderInterface {
     }
 
     @Override
+    public Integer getNumOperators() {
+        return 0;
+    }
+
+    @Override
     public Integer getExpectedResult() {
         return 17;
     }
@@ -94,6 +102,11 @@ public class DataHolderLevel3 implements DataHolderInterface {
     @Override
     public NumberDataHolder[] getNumberDataHolderList() {
         return numberDataHolder;
+    }
+
+    @Override
+    public OperatorDataHolder[] getOperatorDataHolderList() {
+        return operatorDataHolder;
     }
 
     @Override

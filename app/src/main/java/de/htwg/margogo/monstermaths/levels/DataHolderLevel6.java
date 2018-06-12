@@ -7,30 +7,33 @@ import de.htwg.margogo.monstermaths.types.NumberDataHolder;
 import de.htwg.margogo.monstermaths.types.OperatorDataHolder;
 
 /*
- * Singleton class. Dataholder for Level 2
+ * Singleton class. Dataholder for Level 6
  */
-public class DataHolderLevel2 implements DataHolderInterface {
+public class DataHolderLevel6 implements DataHolderInterface {
 
     private boolean lock;
     private int score;
-    private Badge badge = Badge.Bronze; // need dafault type
+    private Badge badge = Badge.Bronze;
 
-    private static final int NUM_MONSTERS = 2;
+    private static final int NUM_MONSTERS = 3;
     private static final int NUM_NUMBERS = 3;
+    private static final int NUM_OPERATORS = 1;
 
-    private MonsterDataHolder m1 = new MonsterDataHolder(0.0275f,-0.03f,1);
-    private MonsterDataHolder m2 = new MonsterDataHolder(0.0200f,-0.01f,1);
+    private MonsterDataHolder m1 = new MonsterDataHolder(-0.005f,0.03f,2);
+    private MonsterDataHolder m2 = new MonsterDataHolder(-0.025f,-0.03f,3);
+    private MonsterDataHolder m3 = new MonsterDataHolder(0.025f,-0.03f,4);
 
-    private NumberDataHolder n1 = new NumberDataHolder(0f,-0.015f,5);
-    private NumberDataHolder n2 = new NumberDataHolder(0.02f,0.0065f,5);
-    private NumberDataHolder n3 = new NumberDataHolder(0.f,0.025f,2);
+    private NumberDataHolder n1 = new NumberDataHolder(0f,-0.03f,9);
+    private NumberDataHolder n2 = new NumberDataHolder(0f,0f,3);
+    private NumberDataHolder n3 = new NumberDataHolder(0f,0.02f,3);
 
+    private OperatorDataHolder o1 = new OperatorDataHolder(0f, -0.01f, "-");
 
-    private MonsterDataHolder monsterDataHolder[] = new MonsterDataHolder[] {m1,m2};
+    private MonsterDataHolder monsterDataHolder[] = new MonsterDataHolder[] {m1, m2, m3};
 
     private NumberDataHolder numberDataHolder[] = new NumberDataHolder[] {n1,n2,n3};
 
-    private OperatorDataHolder operatorDataHolder[] = new OperatorDataHolder[] {};
+    private OperatorDataHolder operatorDataHolder[] = new OperatorDataHolder[] {o1};
 
     public void setLock(boolean lock) {
         this.lock = lock;
@@ -50,12 +53,12 @@ public class DataHolderLevel2 implements DataHolderInterface {
 
     @Override
     public String getName() {
-        return "Level 2";
+        return "Level 6";
     }
 
     @Override
     public String getDescription() {
-        return "Introduction to Addition";
+        return "Introduction to Subtraction";
     }
 
     @Override
@@ -65,9 +68,8 @@ public class DataHolderLevel2 implements DataHolderInterface {
 
     @Override
     public Integer getId() {
-        return 2;
+        return 6;
     }
-
     @Override
     public Integer getNumMonsters() {
         return NUM_MONSTERS;
@@ -80,12 +82,12 @@ public class DataHolderLevel2 implements DataHolderInterface {
 
     @Override
     public Integer getNumOperators() {
-        return 0;
+        return NUM_OPERATORS;
     }
 
     @Override
     public Integer getExpectedResult() {
-        return 10;
+        return 3;
     }
 
     @Override
@@ -108,9 +110,10 @@ public class DataHolderLevel2 implements DataHolderInterface {
         this.badge = badge;
     }
 
-    private static final DataHolderLevel2 holder = new DataHolderLevel2();
+    private static final DataHolderLevel6 holder = new DataHolderLevel6();
 
-    public static DataHolderLevel2 getInstance() {
+    public static DataHolderLevel6 getInstance() {
         return holder;
     }
+
 }

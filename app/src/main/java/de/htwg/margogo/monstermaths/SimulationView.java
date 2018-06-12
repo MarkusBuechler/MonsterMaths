@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import de.htwg.margogo.monstermaths.types.MonsterDataHolder;
 import de.htwg.margogo.monstermaths.types.NumberDataHolder;
+import de.htwg.margogo.monstermaths.types.OperatorDataHolder;
 
 import static de.htwg.margogo.monstermaths.MiscUtilities.distance;
 
@@ -307,14 +308,18 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
         final int NUM_MONSTERS = accelerometerPlayActivity.dataHolder.getNumMonsters();
         final int NUM_NUMBERS = accelerometerPlayActivity.dataHolder.getNumNumbers();
+        final int NUM_OPERATORS = accelerometerPlayActivity.dataHolder.getNumOperators();
+
         MonsterDataHolder monsterDataHolder[] = accelerometerPlayActivity.dataHolder.getMonsterDataHolderList();
         NumberDataHolder numberDataHolder[] = accelerometerPlayActivity.dataHolder.getNumberDataHolderList();
+        OperatorDataHolder operatorDataHolder[] = accelerometerPlayActivity.dataHolder.getOperatorDataHolderList();
 
         private Particle myBall = new Particle(getContext());
         private Particle myGoal = new Particle(getContext());
 
         private Particle myMonsters[] = new Particle[NUM_MONSTERS];
         private Particle myNumbers[] = new Particle[NUM_NUMBERS];
+        private Particle myOperators[] = new Particle[NUM_OPERATORS];
 
         private boolean lockFinish = false;
         private Boolean[] uniqueNumberLocks = new Boolean[NUM_NUMBERS];
@@ -362,6 +367,18 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 myMonsters[i].typ = monsterDataHolder[i].getTyp();
                 myMonsters[i].setLayerType(LAYER_TYPE_HARDWARE, null);
                 addView(myMonsters[i], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
+            }
+
+            // Loop over operators
+            for (int i = 0; i < myOperators.length; i++) {
+                myOperators[i] = new Particle(getContext());
+                myOperators[i].mPosX = operatorDataHolder[i].getXPos();
+                myOperators[i].mPosY = operatorDataHolder[i].getYPos();
+                choosePicture2(myOperators[i], operatorDataHolder[i].getOperation());
+
+                myOperators[i].setLayerType(LAYER_TYPE_HARDWARE, null);
+                addView(myOperators[i], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
+                uniqueNumberLocks[i] = false;
             }
         }
 
@@ -690,6 +707,8 @@ class SimulationView extends FrameLayout implements SensorEventListener {
             particleSystem.myNumbers[i].setTranslationY(y4);
         }
 
+        // TODO: draw numbers and check for collision and resulting events
+
         // and make sure to redraw asap
         invalidate();
     }
@@ -719,6 +738,22 @@ class SimulationView extends FrameLayout implements SensorEventListener {
             case 9: particle.setBackgroundResource(R.drawable.nine);
                 break;
             case 0: particle.setBackgroundResource(R.drawable.zero);
+                break;
+            default: particle.setBackgroundResource(R.drawable.emoji_smile_256);
+                break;
+        }
+
+    }
+
+    private void choosePicture2(SimulationView.Particle particle, String s) {
+        switch (s) {
+            case "+": particle.setBackgroundResource(R.drawable.plus);
+                break;
+            case "-": particle.setBackgroundResource(R.drawable.minus);
+                break;
+            case "*": particle.setBackgroundResource(R.drawable.multiply);
+                break;
+            case "/": particle.setBackgroundResource(R.drawable.divide);
                 break;
             default: particle.setBackgroundResource(R.drawable.emoji_smile_256);
                 break;

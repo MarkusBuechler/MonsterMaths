@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,8 @@ class SimulationView extends FrameLayout implements SensorEventListener {
     private float mVerticalBound;
     private final ParticleSystem mParticleSystem;
 
+    private int currentResult = 0;
+    private String currentOperation = "+";
 
     /*
      * Each of our particle holds its previous and current position, its
@@ -323,7 +326,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
         private boolean lockFinish = false;
         private Boolean[] uniqueNumberLocks = new Boolean[NUM_NUMBERS];
-        private int currentResult = 0;
+        private Boolean[] uniqueOperatorLocks = new Boolean[NUM_OPERATORS];
 
 
         ParticleSystem() {
@@ -378,7 +381,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
                 myOperators[i].setLayerType(LAYER_TYPE_HARDWARE, null);
                 addView(myOperators[i], new ViewGroup.LayoutParams(mDstWidth, mDstHeight));
-                uniqueNumberLocks[i] = false;
+                uniqueOperatorLocks[i] = false;
             }
         }
 
@@ -424,6 +427,8 @@ class SimulationView extends FrameLayout implements SensorEventListener {
             checkFinish();
             checkCollision();
             checkNumberCollected();
+            checkOperatorCollected();
+
             myBall.resolveCollisionWithBounds();
 
             for (Particle monster : myMonsters) {
@@ -524,8 +529,33 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 if (dis < 0.004 && !uniqueNumberLocks[i])  {
                     myNumbers[i].setVisibility(INVISIBLE);
 
-                    currentResult += numberDataHolder[i].getValue();
+                    updateResult(numberDataHolder[i].getValue());
                     uniqueNumberLocks[i] = true;
+
+                }
+            }
+        }
+
+        /**
+         * Check if player collected the an operator.
+         */
+        private void checkOperatorCollected() {
+
+            Particle ball = myBall;
+            final float x1_1 = ball.mPosX;
+            final float y1_1 = ball.mPosY;
+
+            for (int i = 0; i < myOperators.length; i++) {
+                final float x1_2 = myOperators[i].mPosX;
+                final float y1_2 = myOperators[i].mPosY;
+                final double dis = distance(x1_1,y1_1,x1_2,y1_2);
+
+                if (dis < 0.004 && !uniqueOperatorLocks[i])  {
+                    myOperators[i].setVisibility(INVISIBLE);
+                    accelerometerPlayActivity.currentOperation = operatorDataHolder[i].getOperation();
+
+                    updateOperation(operatorDataHolder[i].getOperation());
+                    uniqueOperatorLocks[i] = true;
 
                 }
             }
@@ -554,6 +584,19 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
         private float getNumbersYPos(int i) {
             return myNumbers[i].mPosY;
+        }
+
+        // operations dürften sich auch nicht bewegen ...
+        private int getOperationsSize() {
+            return myOperators.length;
+        }
+
+        private float getOperationsXPos(int i) {
+            return myOperators[i].mPosX;
+        }
+
+        private float getOperationsYPos(int i) {
+            return myOperators[i].mPosY;
         }
 
     }
@@ -707,7 +750,20 @@ class SimulationView extends FrameLayout implements SensorEventListener {
             particleSystem.myNumbers[i].setTranslationY(y4);
         }
 
-        // TODO: draw numbers and check for collision and resulting events
+        /*
+         * OperationS
+         * We transform the canvas so that the coordinate system matches
+         * the sensors coordinate system with the origin in the center
+         * of the screen and the unit is the meter.
+         */
+        final int count4 = particleSystem.getOperationsSize();
+        for (int i = 0; i < count4; i++) {
+
+            final float x4 = xc + particleSystem.getOperationsXPos(i) * xs;
+            final float y4 = yc - particleSystem.getOperationsYPos(i) * ys;
+            particleSystem.myOperators[i].setTranslationX(x4);
+            particleSystem.myOperators[i].setTranslationY(y4);
+        }
 
         // and make sure to redraw asap
         invalidate();
@@ -756,6 +812,43 @@ class SimulationView extends FrameLayout implements SensorEventListener {
             case "/": particle.setBackgroundResource(R.drawable.divide);
                 break;
             default: particle.setBackgroundResource(R.drawable.emoji_smile_256);
+                break;
+        }
+
+    }
+
+    private void updateOperation(String operation) {
+        switch (operation) {
+            case "+":
+                this.currentOperation = "+";
+                break;
+            case "-":
+                this.currentOperation = "-";
+                break;
+            case "*":
+                this.currentOperation = "*";
+                break;
+            case "/":
+                this.currentOperation = "/";
+                break;
+        }
+
+    }
+
+    private void updateResult(int number) {
+        switch (this.currentOperation) {
+            case "+":
+                currentResult += number;
+                break;
+            case "-":
+                currentResult -= number;
+                Log.i("res", "updateResult: " + this.currentResult);
+                break;
+            case "*":
+                currentResult *= number;
+                break;
+            case "/":
+                currentResult /= number;
                 break;
         }
 

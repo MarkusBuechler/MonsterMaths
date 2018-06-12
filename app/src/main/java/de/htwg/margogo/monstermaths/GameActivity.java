@@ -21,6 +21,7 @@ import de.htwg.margogo.monstermaths.levels.DataHolderLevel1;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel10;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel11;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel12;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel13;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel2;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel3;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel4;
@@ -225,6 +226,8 @@ public class GameActivity extends Activity {
             case 11: dataHolder = DataHolderLevel11.getInstance();
                 break;
             case 12: dataHolder = DataHolderLevel12.getInstance();
+                break;
+            case 13: dataHolder = DataHolderLevel13.getInstance();
                 break;
             default: dataHolder = DataHolderLevel1.getInstance();
                 break;

@@ -17,8 +17,6 @@ public interface DataHolderInterface {
 
     void insertScore(int time);
 
-    Integer getScore();
-
     String getName();
 
     String getDescription();
@@ -28,6 +26,8 @@ public interface DataHolderInterface {
     void setBadge(Badge badge);
 
     Integer getId();
+
+    Integer getHighscore();
 
     Integer getNumMonsters();
 

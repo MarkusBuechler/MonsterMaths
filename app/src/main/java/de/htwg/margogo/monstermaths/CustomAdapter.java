@@ -49,7 +49,7 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
         {
             case R.id.bagde:
 
-                Snackbar.make(v, "Highscore for" + dataModel.getName() + ": " + dataModel.getPersonal_highscore(), Snackbar.LENGTH_SHORT)
+                Snackbar.make(v, "Highscore for " + dataModel.getName() + " is " + dataModel.getPersonal_highscore()+ " sec", Snackbar.LENGTH_SHORT)
                         .setAction("No action", null).show();
                 break;
         }

@@ -22,17 +22,18 @@ public class DataModel {
     Boolean locked;
     String description;
     int personal_highscore;
-    List<Double> highscore_list;
+    List<Integer> highscore_list;
     Badge badge;
 
 
-    public DataModel(String name, Integer id, Boolean locked, String description, Integer personal_highscore, Badge badge) {
+    public DataModel(String name, Integer id, Boolean locked, String description, Integer personal_highscore, List<Integer> highscore_List, Badge badge) {
         this.name = name;
         this.id = id;
         this.locked = locked;
         this.description = description;
         this.personal_highscore = personal_highscore;
         this.badge = badge;
+        this.highscore_list = highscore_List;
     }
 
     public String getName() {
@@ -55,7 +56,7 @@ public class DataModel {
         return personal_highscore;
     }
 
-    public List<Double> getHighscore_list() {
+    public List<Integer> getHighscore_list() {
         return highscore_list;
     }
 
@@ -83,7 +84,7 @@ public class DataModel {
         this.personal_highscore = personal_highscore;
     }
 
-    public void setHighscore_list(List<Double> highscore_list) {
+    public void setHighscore_list(List<Integer> highscore_list) {
         this.highscore_list = highscore_list;
     }
 

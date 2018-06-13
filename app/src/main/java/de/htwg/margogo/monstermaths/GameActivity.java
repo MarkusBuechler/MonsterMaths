@@ -68,9 +68,8 @@ public class GameActivity extends Activity {
             if (dataHolder.getLock()) {
 
                 updateScore(seconds);
-
-                dataHolder.setScore(seconds);
                 dataHolder.setLock(false);
+
             } else {
                  // nothing to do here
             }
@@ -80,12 +79,15 @@ public class GameActivity extends Activity {
     };
 
     private void updateScore(int score) {
-        if (score < dataHolder.getScore() || dataHolder.getScore() == 0) {
-            dataHolder.setScore(score);
+        dataHolder.insertScore(score);
+    // sort list and grep best and compare
+       /* if (score < dataHolder.getScore() || dataHolder.getScore() == 0) {
+            dataHolder.insertScore(score);
             Toast.makeText(getApplicationContext(), "New highscore!", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getApplicationContext(), "No new highscore!", Toast.LENGTH_SHORT).show();
         }
+        */
     }
 
     /** Called when the activity is first created. */

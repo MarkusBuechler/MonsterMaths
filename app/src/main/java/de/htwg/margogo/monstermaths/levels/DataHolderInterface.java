@@ -1,5 +1,7 @@
 package de.htwg.margogo.monstermaths.levels;
 
+import java.util.List;
+
 import de.htwg.margogo.monstermaths.Badge;
 import de.htwg.margogo.monstermaths.types.MonsterDataHolder;
 import de.htwg.margogo.monstermaths.types.NumberDataHolder;
@@ -11,9 +13,11 @@ public interface DataHolderInterface {
 
     void setLock(boolean lock);
 
-    Integer getScore();
+    List getScoreList();
 
-    void setScore(int time);
+    void insertScore(int time);
+
+    Integer getScore();
 
     String getName();
 

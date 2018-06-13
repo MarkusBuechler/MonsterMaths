@@ -1,5 +1,8 @@
 package de.htwg.margogo.monstermaths.levels;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.htwg.margogo.monstermaths.Badge;
 import de.htwg.margogo.monstermaths.types.MonsterDataHolder;
 import de.htwg.margogo.monstermaths.types.NumberDataHolder;
@@ -12,6 +15,7 @@ public class DataHolderLevel18 implements DataHolderInterface {
 
     private boolean lock;
     private int score;
+    private List scoreList = new ArrayList<Integer>();
     private Badge badge = Badge.Bronze;
 
     private static final int NUM_MONSTERS = 6;
@@ -44,12 +48,17 @@ public class DataHolderLevel18 implements DataHolderInterface {
         this.lock = lock;
     }
 
+    @Override
+    public List getScoreList() {
+        return scoreList;
+    }
+
     public boolean getLock() {
         return lock;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void insertScore(int score) {
+        scoreList.add(score);
     }
 
     public Integer getScore() {

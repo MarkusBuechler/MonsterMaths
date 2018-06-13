@@ -1,6 +1,7 @@
 package de.htwg.margogo.monstermaths;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +48,8 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
         switch (v.getId())
         {
             case R.id.bagde:
-                Snackbar.make(v, "Showing highscores for " + dataModel.getName(), Snackbar.LENGTH_SHORT)
+
+                Snackbar.make(v, "Highscore for" + dataModel.getName() + ": " + dataModel.getPersonal_highscore(), Snackbar.LENGTH_SHORT)
                         .setAction("No action", null).show();
                 break;
         }

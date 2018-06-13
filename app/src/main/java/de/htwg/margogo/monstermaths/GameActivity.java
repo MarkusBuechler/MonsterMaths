@@ -1,10 +1,12 @@
 package de.htwg.margogo.monstermaths;
 
 import android.app.Activity;
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.hardware.SensorManager;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.Bundle;
@@ -36,6 +38,8 @@ public class GameActivity extends Activity {
     private WindowManager mWindowManager;
     protected Display mDisplay;
     private PowerManager.WakeLock mWakeLock;
+
+    AppDatabase db;
 
     TextView textViewTimer2;
     TextView textViewCurrentOperation2;
@@ -78,8 +82,20 @@ public class GameActivity extends Activity {
         }
     };
 
-    private void updateScore(int score) {
+    private void updateScore(final int score) {
         dataHolder.insertScore(score);
+
+
+        new AsyncTask<Void, Void, Void>() {
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                db.highscoreDao().insertHighscore(new Highscore(1, score));
+                return null;
+            }
+        }.execute();
+
+
     // sort list and grep best and compare
        /* if (score < dataHolder.getScore() || dataHolder.getScore() == 0) {
             dataHolder.insertScore(score);
@@ -111,6 +127,9 @@ public class GameActivity extends Activity {
                 .getName());
 
         intent  = getIntent();
+
+        db = Room.databaseBuilder(GameActivity.this,
+                AppDatabase.class, "database-name-2").build();
 
         Bundle extra = intent.getExtras();
         if (extra != null) {

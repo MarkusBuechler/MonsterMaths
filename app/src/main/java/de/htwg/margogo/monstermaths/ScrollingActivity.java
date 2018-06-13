@@ -23,7 +23,6 @@ public class ScrollingActivity extends AppCompatActivity {
     ListView listView;
     private static CustomAdapter adapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +55,6 @@ public class ScrollingActivity extends AppCompatActivity {
         final AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "database-name-2").build();
 
-        final User user = new User();
-        user.setFirstName("Armin");
-        user.setLastName("Administrator");
-
         /*
         new AsyncTask<Void, Void, Void>() {
 
@@ -72,22 +67,18 @@ public class ScrollingActivity extends AppCompatActivity {
         */
 
 
-        AsyncTask<Void, Void, List<User>> a = new AsyncTask<Void, Void, List<User>>() {
+        AsyncTask<Void, Void, Integer> a = new AsyncTask<Void, Void, Integer>() {
 
             @Override
-            protected List<User> doInBackground(Void... voids) {
+            protected Integer doInBackground(Void... voids) {
 
-                return db.userDao().getAll();
+                return db.highscoreDao().getHighscoreLevelX(1);
             }
         };
 
         try {
-            List<User> ua = a.execute().get();
-            for (User u : ua)
-            {
-                Log.i("db", "onCreate: " + u.getFirstName() + " " + u.getLastName());
-            }
-            Log.i("db", "onCreate: " + ua.size());
+            Integer ua = a.execute().get();
+            Log.i("db", "highscore is: " + ua);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -196,9 +187,12 @@ public class ScrollingActivity extends AppCompatActivity {
 
      */
 
-    // needs to be connected
-    public void update() {
-         updateList();
+    @Override
+    public void onResume() {
+        super.onResume();
+        listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        updateList();
     }
 
     @Override

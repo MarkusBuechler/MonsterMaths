@@ -3,7 +3,8 @@ package de.htwg.margogo.monstermaths;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 
-@Database(entities = {User.class}, version = 2)
+@Database(entities = {Highscore.class}, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
-    public abstract UserDao userDao();
+    public abstract HighscoreDao highscoreDao();
 }
+

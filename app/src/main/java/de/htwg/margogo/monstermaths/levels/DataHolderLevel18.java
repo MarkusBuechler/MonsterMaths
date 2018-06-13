@@ -10,6 +10,7 @@ import de.htwg.margogo.monstermaths.types.OperatorDataHolder;
 
 /*
  * Singleton class. Dataholder for Level 18
+ * Fastest solution should be -> 8 -> 8 -> - -> 1 = 15
  */
 public class DataHolderLevel18 extends DataHolderPrototype implements DataHolderInterface {
 
@@ -66,6 +67,11 @@ public class DataHolderLevel18 extends DataHolderPrototype implements DataHolder
     @Override
     public OperatorDataHolder[] getOperatorDataHolderList() {
         return operatorDataHolder;
+    }
+
+    @Override
+    public BadgeCheck getBadgeCheck() {
+        return new BadgeCheck(6, 12,18);
     }
 
     @Override

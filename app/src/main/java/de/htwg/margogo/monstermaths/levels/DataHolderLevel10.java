@@ -49,7 +49,7 @@ public class DataHolderLevel10 extends DataHolderPrototype implements DataHolder
 
     @Override
     public Integer getExpectedResult() {
-        return 14;
+        return 22;
     }
 
     @Override
@@ -65,6 +65,11 @@ public class DataHolderLevel10 extends DataHolderPrototype implements DataHolder
     @Override
     public OperatorDataHolder[] getOperatorDataHolderList() {
         return operatorDataHolder;
+    }
+
+    @Override
+    public BadgeCheck getBadgeCheck() {
+        return new BadgeCheck(10, 15,20);
     }
 
     @Override

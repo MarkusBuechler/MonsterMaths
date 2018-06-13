@@ -140,7 +140,7 @@ public class GameActivity extends Activity {
         LayoutParams params = new LayoutParams(300,150);
         TextView textViewTimer = new TextView(this);
         textViewTimer.setText("Zeit: ");
-        textViewTimer.setTextColor(Color.GRAY);
+        textViewTimer.setTextColor(Color.BLACK);
         textViewTimer.setTextSize(18);
         textViewTimer.setTypeface(null, Typeface.BOLD);
         textViewTimer.setLayoutParams(params);
@@ -148,7 +148,7 @@ public class GameActivity extends Activity {
         textViewTimer.setY(textViewTimer.getY() + 50);
 
         textViewTimer2 = new TextView(this);
-        textViewTimer2.setTextColor(Color.GRAY);
+        textViewTimer2.setTextColor(Color.BLACK);
         textViewTimer2.setTextSize(18);
         textViewTimer2.setTypeface(null, Typeface.BOLD);
         textViewTimer2.setLayoutParams(params);
@@ -158,7 +158,7 @@ public class GameActivity extends Activity {
         LayoutParams params2 = new LayoutParams(600,150);
         TextView textViewCurrentOperation = new TextView(this);
         textViewCurrentOperation.setText("Operation: ");
-        textViewCurrentOperation.setTextColor(Color.GRAY);
+        textViewCurrentOperation.setTextColor(Color.BLACK);
         textViewCurrentOperation.setTextSize(18);
         textViewCurrentOperation.setTypeface(null, Typeface.BOLD);
         textViewCurrentOperation.setLayoutParams(params2);
@@ -166,7 +166,7 @@ public class GameActivity extends Activity {
         textViewCurrentOperation.setY(textViewTimer.getY() + 100);
 
         textViewCurrentOperation2 = new TextView(this);
-        textViewCurrentOperation2.setTextColor(Color.GRAY);
+        textViewCurrentOperation2.setTextColor(Color.BLACK);
         textViewCurrentOperation2.setTextSize(18);
         textViewCurrentOperation2.setTypeface(null, Typeface.BOLD);
         textViewCurrentOperation2.setLayoutParams(params);
@@ -175,7 +175,7 @@ public class GameActivity extends Activity {
 
         TextView textViewResult = new TextView(this);
         textViewResult.setText("Ergebnis: ");
-        textViewResult.setTextColor(Color.GRAY);
+        textViewResult.setTextColor(Color.BLACK);
         textViewResult.setTextSize(18);
         textViewResult.setTypeface(null, Typeface.BOLD);
         textViewResult.setLayoutParams(params);
@@ -183,7 +183,7 @@ public class GameActivity extends Activity {
         textViewResult.setY(textViewCurrentOperation.getY() + 100);
 
         textViewResult2 = new TextView(this);
-        textViewResult2.setTextColor(Color.GRAY);
+        textViewResult2.setTextColor(Color.BLACK);
         textViewResult2.setTextSize(18);
         textViewResult2.setTypeface(null, Typeface.BOLD);
         textViewResult2.setLayoutParams(params);
@@ -195,7 +195,7 @@ public class GameActivity extends Activity {
 
         // instantiate our simulation view and set it as the activity's content
         mSimulationView = new SimulationView(this, this);
-        mSimulationView.setBackgroundResource(R.drawable.wood);
+        mSimulationView.setBackgroundResource(R.drawable.background);
         mSimulationView.addView(textViewTimer);
         mSimulationView.addView(textViewTimer2);
         mSimulationView.addView(textViewCurrentOperation);

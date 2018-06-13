@@ -13,7 +13,6 @@ public class BadgeCheck {
         this.bronze = bronze;
     }
 
-    // 1 is blueMonster
     public int getGold() {
         return gold;
     }

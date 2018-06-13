@@ -118,13 +118,13 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
     private void updateMedal(DataModel dataModel, ViewHolder viewHolder) {
 
 
-        if (dataModel.getPersonal_highscore() < dataModel.getBadgeCheck().getBronze()) {
+        if (dataModel.getPersonal_highscore() <= dataModel.getBadgeCheck().getBronze()) {
             viewHolder.badge.setImageResource(R.drawable.medal_bronze_128);
         }
-        if (dataModel.getPersonal_highscore() < dataModel.getBadgeCheck().getSilver()) {
+        if (dataModel.getPersonal_highscore() <= dataModel.getBadgeCheck().getSilver()) {
             viewHolder.badge.setImageResource(R.drawable.medal_silver_128);
         }
-        if (dataModel.getPersonal_highscore() < dataModel.getBadgeCheck().getGold()) {
+        if (dataModel.getPersonal_highscore() <= dataModel.getBadgeCheck().getGold()) {
             viewHolder.badge.setImageResource(R.drawable.medal_gold_128);
         }
 

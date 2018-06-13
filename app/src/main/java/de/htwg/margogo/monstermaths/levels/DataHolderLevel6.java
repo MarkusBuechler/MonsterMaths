@@ -63,6 +63,11 @@ public class DataHolderLevel6 extends DataHolderPrototype implements DataHolderI
     }
 
     @Override
+    public BadgeCheck getBadgeCheck() {
+        return new BadgeCheck(3, 5,9);
+    }
+
+    @Override
     public Integer getNumMonsters() {
         return monsterDataHolder.length;
     }

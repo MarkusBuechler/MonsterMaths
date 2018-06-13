@@ -76,6 +76,10 @@ public class DataHolderLevel2 extends DataHolderPrototype implements DataHolderI
         return operatorDataHolder.length;
     }
 
+    @Override
+    public BadgeCheck getBadgeCheck() {
+        return new BadgeCheck(3, 5,9);
+    }
 
     private static final DataHolderLevel2 holder = new DataHolderLevel2();
 

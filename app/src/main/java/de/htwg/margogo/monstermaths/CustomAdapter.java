@@ -49,7 +49,15 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
         {
             case R.id.bagde:
 
-                Snackbar.make(v, "Highscore for " + dataModel.getName() + " is " + dataModel.getPersonal_highscore()+ " sec", Snackbar.LENGTH_SHORT)
+                String text = "";
+
+                if (dataModel.getPersonal_highscore() == 0) {
+                    text = "No highscore yet!";
+                } else {
+                    text = "Highscore for " + dataModel.getName() + " is " + dataModel.getPersonal_highscore()+ " sec";
+                }
+
+                Snackbar.make(v, text, Snackbar.LENGTH_SHORT)
                         .setAction("No action", null).show();
                 break;
         }
@@ -92,7 +100,8 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
 
         viewHolder.name.setText(dataModel.getName());
         viewHolder.score_text.setText("Score: ");
-        viewHolder.score_value.setText(dataModel.getPersonal_highscore().toString());
+
+        viewHolder.score_value.setText(dataModel.getPersonal_highscore() == 0 ? "-" : dataModel.getPersonal_highscore().toString());
         viewHolder.description.setText(dataModel.getDescription());
 
         updateMedal(dataModel, viewHolder);

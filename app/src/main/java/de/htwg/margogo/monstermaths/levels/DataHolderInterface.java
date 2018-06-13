@@ -17,10 +17,6 @@ public interface DataHolderInterface {
 
     String getDescription();
 
-    Badge getBadge();
-
-    void setBadge(Badge badge);
-
     Integer getId();
 
     Integer getNumMonsters();
@@ -36,5 +32,7 @@ public interface DataHolderInterface {
     NumberDataHolder[] getNumberDataHolderList();
 
     OperatorDataHolder[] getOperatorDataHolderList();
+
+    BadgeCheck getBadgeCheck();
 
 }

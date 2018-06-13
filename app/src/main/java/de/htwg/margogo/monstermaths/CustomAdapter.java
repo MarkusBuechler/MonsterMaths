@@ -111,18 +111,26 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
     }
 
     /**
-     * TODO: Add platin state and default(none) like empty
      * Comment: Java doesn't support switch casing on enums..
      * @param dataModel
      * @param viewHolder
      */
     private void updateMedal(DataModel dataModel, ViewHolder viewHolder) {
-        if (dataModel.getBadge() == Badge.Bronze) {
+
+
+        if (dataModel.getPersonal_highscore() < dataModel.getBadgeCheck().getBronze()) {
             viewHolder.badge.setImageResource(R.drawable.medal_bronze_128);
-        } else if (dataModel.getBadge() == Badge.Silver) {
+        }
+        if (dataModel.getPersonal_highscore() < dataModel.getBadgeCheck().getSilver()) {
             viewHolder.badge.setImageResource(R.drawable.medal_silver_128);
-        } else if (dataModel.getBadge() == Badge.Gold){
+        }
+        if (dataModel.getPersonal_highscore() < dataModel.getBadgeCheck().getGold()) {
             viewHolder.badge.setImageResource(R.drawable.medal_gold_128);
+        }
+
+        // default is no medal
+        if (dataModel.getPersonal_highscore() == 0) {
+            viewHolder.badge.setImageResource(0);
         }
     }
 }

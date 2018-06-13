@@ -1,10 +1,5 @@
 package de.htwg.margogo.monstermaths.levels;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import de.htwg.margogo.monstermaths.Badge;
 import de.htwg.margogo.monstermaths.types.MonsterDataHolder;
 import de.htwg.margogo.monstermaths.types.NumberDataHolder;
 import de.htwg.margogo.monstermaths.types.OperatorDataHolder;
@@ -12,7 +7,6 @@ import de.htwg.margogo.monstermaths.types.OperatorDataHolder;
 public class DataHolderPrototype implements DataHolderInterface {
 
     private boolean lock;
-    private Badge badge = Badge.Bronze;
 
     private MonsterDataHolder monsterDataHolder[] = new MonsterDataHolder[] {};
 
@@ -36,11 +30,6 @@ public class DataHolderPrototype implements DataHolderInterface {
     @Override
     public String getDescription() {
         return "Prototype";
-    }
-
-    @Override
-    public Badge getBadge() {
-        return badge;
     }
 
     @Override
@@ -84,8 +73,8 @@ public class DataHolderPrototype implements DataHolderInterface {
     }
 
     @Override
-    public void setBadge(Badge badge) {
-        this.badge = badge;
+    public BadgeCheck getBadgeCheck() {
+        return new BadgeCheck(0,0,0);
     }
 
 }

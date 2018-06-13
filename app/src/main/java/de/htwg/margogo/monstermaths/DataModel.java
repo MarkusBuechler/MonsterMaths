@@ -1,8 +1,7 @@
 package de.htwg.margogo.monstermaths;
 
-/*
- * TODO: Badge : Bronze, Silver, Gold, Platin if Player is in below certain limits in the highscore list.
- */
+import de.htwg.margogo.monstermaths.levels.BadgeCheck;
+
 public class DataModel {
 
     private String name;
@@ -10,16 +9,16 @@ public class DataModel {
     private Boolean locked;
     private String description;
     private int personal_highscore;
-    private Badge badge;
+    private BadgeCheck badgeCheck;
 
 
-    protected DataModel(String name, Integer id, Boolean locked, String description, Integer personal_highscore, Badge badge) {
+    protected DataModel(String name, Integer id, Boolean locked, String description, Integer personal_highscore, BadgeCheck badgeCheck) {
         this.name = name;
         this.id = id;
         this.locked = locked;
         this.description = description;
         this.personal_highscore = personal_highscore;
-        this.badge = badge;
+        this.badgeCheck = badgeCheck;
     }
 
     public String getName() {
@@ -42,9 +41,8 @@ public class DataModel {
         return personal_highscore;
     }
 
-
-    public Badge getBadge() {
-        return badge;
+    public BadgeCheck getBadgeCheck() {
+        return badgeCheck;
     }
 
     public void setName(String name) {
@@ -62,10 +60,5 @@ public class DataModel {
     public void setLocked(Boolean locked) {
         this.locked = locked;
     }
-
-    public void setBadge(Badge badge) {
-        this.badge = badge;
-    }
-
 
 }

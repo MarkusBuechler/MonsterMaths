@@ -17,14 +17,12 @@ import android.view.WindowManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import de.htwg.margogo.monstermaths.levels.*;
 import static java.lang.Integer.parseInt;
 
 /**
  * This activity handles the game activity for one level.
- * Should be later the prototype for each level
  *
  * @see SensorManager
  * @see SensorEvent
@@ -37,7 +35,6 @@ public class GameActivity extends Activity {
     private PowerManager mPowerManager;
     private WindowManager mWindowManager;
     protected Display mDisplay;
-    private PowerManager.WakeLock mWakeLock;
 
     AppDatabase db;
 
@@ -74,8 +71,6 @@ public class GameActivity extends Activity {
                 updateScore(seconds);
                 dataHolder.setLock(false);
 
-            } else {
-                 // nothing to do here
             }
 
             timerHandler.postDelayed(this, 500);
@@ -119,10 +114,6 @@ public class GameActivity extends Activity {
         // Get an instance of the WindowManager
         mWindowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         mDisplay = mWindowManager.getDefaultDisplay();
-
-        // Create a bright wake lock
-        mWakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, getClass()
-                .getName());
 
         intent  = getIntent();
 

@@ -12,7 +12,7 @@ import android.widget.Button;
 public class MainActivity extends Activity {
 
     Button btnStart;
-    Animation animation = new AlphaAnimation(1, 0); // Change alpha from fully visible to invisible
+    Animation animation = new AlphaAnimation(1, 0);
 
 
     @Override
@@ -20,14 +20,14 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        animation = new AlphaAnimation(1, 0); // Change alpha from fully visible to invisible
-        animation.setDuration(2000); // duration - half a second
-        animation.setInterpolator(new LinearInterpolator()); // do not alter animation rate
-        animation.setRepeatCount(Animation.INFINITE); // Repeat animation infinitely
-        animation.setRepeatMode(Animation.REVERSE); // Reverse animation at the end so the button will fade back in
+        animation = new AlphaAnimation(1, 0);
+        animation.setDuration(2000);
+        animation.setInterpolator(new LinearInterpolator());
+        animation.setRepeatCount(Animation.INFINITE);
+        animation.setRepeatMode(Animation.REVERSE);
 
         btnStart = findViewById(R.id.btnStartGame);
-        btnStart.startAnimation(animation); // not only on create
+        btnStart.startAnimation(animation);
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

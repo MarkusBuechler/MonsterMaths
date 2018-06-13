@@ -1,5 +1,6 @@
 package de.htwg.margogo.monstermaths;
 
+import android.annotation.SuppressLint;
 import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -12,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import de.htwg.margogo.monstermaths.levels.*;
 
@@ -61,7 +61,7 @@ public class ScrollingActivity extends AppCompatActivity {
 
         Integer result = 0;
 
-        AsyncTask<Integer, Void, Integer> a = new AsyncTask<Integer, Void, Integer>() {
+        @SuppressLint("StaticFieldLeak") AsyncTask<Integer, Void, Integer> a = new AsyncTask<Integer, Void, Integer>() {
 
             @Override
             protected Integer doInBackground(Integer... integers) {
@@ -76,17 +76,8 @@ public class ScrollingActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        updateBadge(level, result);
-
         return result;
     }
-
-    private void updateBadge(int level, Integer result) {
-        switch (level) {
-           // case 1: dataModels.
-        }
-    }
-
 
     private void updateList() {
         dataModels.clear();

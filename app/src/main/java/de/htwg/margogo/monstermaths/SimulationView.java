@@ -19,7 +19,6 @@ import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import de.htwg.margogo.monstermaths.types.MonsterDataHolder;
 import de.htwg.margogo.monstermaths.types.NumberDataHolder;
@@ -403,7 +402,6 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 if (dis < 0.003 && !catched)  {
 
                     catched = true;
-                    Toast.makeText(getContext(), "Game over!", Toast.LENGTH_SHORT).show();
                     Vibrator v = (Vibrator) accelerometerPlayActivity.getSystemService(Context.VIBRATOR_SERVICE);
                     if (v!= null) v.vibrate(300);
 
@@ -806,7 +804,6 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 break;
             case "-":
                 currentResult -= number;
-                Log.i("res", "updateResult: " + this.currentResult);
                 break;
             case "*":
                 currentResult *= number;

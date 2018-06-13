@@ -1,6 +1,8 @@
 package de.htwg.margogo.monstermaths;
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import de.htwg.margogo.monstermaths.levels.*;
 
@@ -18,6 +22,7 @@ public class ScrollingActivity extends AppCompatActivity {
     ArrayList<DataModel> dataModels;
     ListView listView;
     private static CustomAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,49 @@ public class ScrollingActivity extends AppCompatActivity {
 
             }
         });
+
+
+        final AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "database-name-2").build();
+
+        final User user = new User();
+        user.setFirstName("Armin");
+        user.setLastName("Administrator");
+
+        /*
+        new AsyncTask<Void, Void, Void>() {
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                db.userDao().insertUser(user);
+                return null;
+            }
+        }.execute();
+        */
+
+
+        AsyncTask<Void, Void, List<User>> a = new AsyncTask<Void, Void, List<User>>() {
+
+            @Override
+            protected List<User> doInBackground(Void... voids) {
+
+                return db.userDao().getAll();
+            }
+        };
+
+        try {
+            List<User> ua = a.execute().get();
+            for (User u : ua)
+            {
+                Log.i("db", "onCreate: " + u.getFirstName() + " " + u.getLastName());
+            }
+            Log.i("db", "onCreate: " + ua.size());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
 
     }
 

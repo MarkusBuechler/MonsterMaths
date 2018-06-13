@@ -1,7 +1,6 @@
 package de.htwg.margogo.monstermaths;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;

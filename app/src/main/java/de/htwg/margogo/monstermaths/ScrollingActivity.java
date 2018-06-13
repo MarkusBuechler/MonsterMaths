@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,7 +13,26 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import de.htwg.margogo.monstermaths.levels.*;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel1;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel10;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel11;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel12;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel13;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel14;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel15;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel16;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel17;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel18;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel19;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel2;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel20;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel3;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel4;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel5;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel6;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel7;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel8;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel9;
 
 public class ScrollingActivity extends AppCompatActivity {
 
@@ -61,6 +79,7 @@ public class ScrollingActivity extends AppCompatActivity {
 
         Integer result = 0;
 
+        //TODO: https://stackoverflow.com/questions/44309241/warning-this-asynctask-class-should-be-static-or-leaks-might-occur
         @SuppressLint("StaticFieldLeak") AsyncTask<Integer, Void, Integer> a = new AsyncTask<Integer, Void, Integer>() {
 
             @Override

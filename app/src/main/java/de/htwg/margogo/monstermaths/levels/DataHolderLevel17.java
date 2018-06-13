@@ -1,11 +1,5 @@
 package de.htwg.margogo.monstermaths.levels;
 
-import android.provider.ContactsContract;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import de.htwg.margogo.monstermaths.Badge;
 import de.htwg.margogo.monstermaths.types.MonsterDataHolder;
 import de.htwg.margogo.monstermaths.types.NumberDataHolder;
 import de.htwg.margogo.monstermaths.types.OperatorDataHolder;

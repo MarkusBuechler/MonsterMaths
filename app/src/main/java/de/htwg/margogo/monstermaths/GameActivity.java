@@ -5,20 +5,40 @@ import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
-import android.os.Bundle;
 import android.view.Display;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
-
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
 import android.widget.TextView;
 
-import de.htwg.margogo.monstermaths.levels.*;
+import de.htwg.margogo.monstermaths.levels.DataHolderInterface;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel1;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel10;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel11;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel12;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel13;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel14;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel15;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel16;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel17;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel18;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel19;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel2;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel20;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel3;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel4;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel5;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel6;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel7;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel8;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel9;
+
 import static java.lang.Integer.parseInt;
 
 /**

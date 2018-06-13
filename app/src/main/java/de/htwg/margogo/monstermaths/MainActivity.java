@@ -4,51 +4,45 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 
 public class MainActivity extends Activity {
 
-    // TODO Add a main menu with play, settings, highscores, exit etc..
-    // Or different navigation system. settings could be extracted somewhere else.
+    Button btnStart;
+    Animation animation = new AlphaAnimation(1, 0); // Change alpha from fully visible to invisible
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // TODO: Remove this soon. Create something like subway surfer -> tap to run -> tap to continue
-        Button btnStartGame = findViewById(R.id.btnStartGame);
-        btnStartGame.setOnClickListener(new View.OnClickListener() {
+        animation = new AlphaAnimation(1, 0); // Change alpha from fully visible to invisible
+        animation.setDuration(2000); // duration - half a second
+        animation.setInterpolator(new LinearInterpolator()); // do not alter animation rate
+        animation.setRepeatCount(Animation.INFINITE); // Repeat animation infinitely
+        animation.setRepeatMode(Animation.REVERSE); // Reverse animation at the end so the button will fade back in
+
+        btnStart = findViewById(R.id.btnStartGame);
+        btnStart.startAnimation(animation); // not only on create
+        btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, GameActivity.class);
-                //startActivity(intent);
-
-            }
-        });
-
-        Button btnBla = findViewById(R.id.btnBla);
-        btnBla.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                view.clearAnimation();
                 Intent intent = new Intent(MainActivity.this, ScrollingActivity.class);
                 startActivity(intent);
 
             }
         });
 
-        Button btnSettings = findViewById(R.id.btnSettings);
-        btnSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Create intent and start activity
-                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-                //intent.putExtra("key", targetGoal);
-                startActivity(intent);
+    }
 
-            }
-        });
-
+    protected void onRestart() {
+        super.onRestart();
+        btnStart.startAnimation(animation);
     }
 
 }

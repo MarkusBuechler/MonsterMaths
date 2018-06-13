@@ -1,39 +1,25 @@
 package de.htwg.margogo.monstermaths;
 
-
-import java.util.List;
-
-/**
- * Class representing a level.
- * What should every level have ?
- * - String: Name
- * - ID : int
- * - Boolean: Locked
- * - String Description maybe
- * - ? : Personal high score -> need to be saved somewhere
- * - ? : High score List -> List of other scores from different players
- * - ? : Badge : Bronze, Silver, Gold, Platin if Player is in top 30, 20, 10 or top 5% in the highscore list.
- * TODO: think
+/*
+ * TODO: Badge : Bronze, Silver, Gold, Platin if Player is in below certain limits in the highscore list.
  */
 public class DataModel {
 
-    String name;
-    Integer id;
-    Boolean locked;
-    String description;
-    int personal_highscore;
-    List<Integer> highscore_list;
-    Badge badge;
+    private String name;
+    protected Integer id;
+    private Boolean locked;
+    private String description;
+    private int personal_highscore;
+    private Badge badge;
 
 
-    public DataModel(String name, Integer id, Boolean locked, String description, Integer personal_highscore, List<Integer> highscore_List, Badge badge) {
+    protected DataModel(String name, Integer id, Boolean locked, String description, Integer personal_highscore, Badge badge) {
         this.name = name;
         this.id = id;
         this.locked = locked;
         this.description = description;
         this.personal_highscore = personal_highscore;
         this.badge = badge;
-        this.highscore_list = highscore_List;
     }
 
     public String getName() {
@@ -56,9 +42,6 @@ public class DataModel {
         return personal_highscore;
     }
 
-    public List<Integer> getHighscore_list() {
-        return highscore_list;
-    }
 
     public Badge getBadge() {
         return badge;
@@ -78,14 +61,6 @@ public class DataModel {
 
     public void setLocked(Boolean locked) {
         this.locked = locked;
-    }
-
-    public void setPersonal_highscore(Integer personal_highscore) {
-        this.personal_highscore = personal_highscore;
-    }
-
-    public void setHighscore_list(List<Integer> highscore_list) {
-        this.highscore_list = highscore_list;
     }
 
     public void setBadge(Badge badge) {

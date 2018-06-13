@@ -83,14 +83,12 @@ public class GameActivity extends Activity {
     };
 
     private void updateScore(final int score) {
-        dataHolder.insertScore(score);
-
 
         new AsyncTask<Void, Void, Void>() {
 
             @Override
             protected Void doInBackground(Void... voids) {
-                db.highscoreDao().insertHighscore(new Highscore(1, score));
+                db.highscoreDao().insertHighscore(new Highscore(dataHolder.getId(), score));
                 return null;
             }
         }.execute();

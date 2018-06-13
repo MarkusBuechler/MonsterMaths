@@ -13,10 +13,6 @@ public interface DataHolderInterface {
 
     void setLock(boolean lock);
 
-    List getScoreList();
-
-    void insertScore(int time);
-
     String getName();
 
     String getDescription();
@@ -26,8 +22,6 @@ public interface DataHolderInterface {
     void setBadge(Badge badge);
 
     Integer getId();
-
-    Integer getHighscore();
 
     Integer getNumMonsters();
 

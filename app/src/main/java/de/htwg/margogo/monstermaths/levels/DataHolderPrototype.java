@@ -12,7 +12,6 @@ import de.htwg.margogo.monstermaths.types.OperatorDataHolder;
 public class DataHolderPrototype implements DataHolderInterface {
 
     private boolean lock;
-    private List scoreList = new ArrayList<Integer>();
     private Badge badge = Badge.Bronze;
 
     private MonsterDataHolder monsterDataHolder[] = new MonsterDataHolder[] {};
@@ -25,22 +24,8 @@ public class DataHolderPrototype implements DataHolderInterface {
         this.lock = lock;
     }
 
-    @Override
-    public List getScoreList() {
-        return scoreList;
-    }
-
     public boolean getLock() {
         return lock;
-    }
-
-    public void insertScore(int score) {
-        scoreList.add(score);
-        Collections.sort(scoreList);
-    }
-
-    public Integer getHighscore() {
-        return scoreList.isEmpty() ? 0 : (Integer) scoreList.get(0);
     }
 
     @Override

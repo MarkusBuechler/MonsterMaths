@@ -47,7 +47,16 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
         switch (v.getId())
         {
             case R.id.bagde:
-                Snackbar.make(v, "Showing highscores for " + dataModel.getName(), Snackbar.LENGTH_SHORT)
+
+                String text = "";
+
+                if (dataModel.getPersonal_highscore() == 0) {
+                    text = "No highscore yet!";
+                } else {
+                    text = "Highscore for " + dataModel.getName() + " is " + dataModel.getPersonal_highscore()+ " sec";
+                }
+
+                Snackbar.make(v, text, Snackbar.LENGTH_SHORT)
                         .setAction("No action", null).show();
                 break;
         }
@@ -90,7 +99,8 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
 
         viewHolder.name.setText(dataModel.getName());
         viewHolder.score_text.setText("Score: ");
-        viewHolder.score_value.setText(dataModel.getPersonal_highscore().toString());
+
+        viewHolder.score_value.setText(dataModel.getPersonal_highscore() == 0 ? "-" : dataModel.getPersonal_highscore().toString());
         viewHolder.description.setText(dataModel.getDescription());
 
         updateMedal(dataModel, viewHolder);
@@ -101,18 +111,26 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
     }
 
     /**
-     * TODO: Add platin state and default(none) like empty
      * Comment: Java doesn't support switch casing on enums..
      * @param dataModel
      * @param viewHolder
      */
     private void updateMedal(DataModel dataModel, ViewHolder viewHolder) {
-        if (dataModel.getBadge() == Badge.Bronze) {
+
+
+        if (dataModel.getPersonal_highscore() <= dataModel.getBadgeCheck().getBronze()) {
             viewHolder.badge.setImageResource(R.drawable.medal_bronze_128);
-        } else if (dataModel.getBadge() == Badge.Silver) {
+        }
+        if (dataModel.getPersonal_highscore() <= dataModel.getBadgeCheck().getSilver()) {
             viewHolder.badge.setImageResource(R.drawable.medal_silver_128);
-        } else if (dataModel.getBadge() == Badge.Gold){
+        }
+        if (dataModel.getPersonal_highscore() <= dataModel.getBadgeCheck().getGold()) {
             viewHolder.badge.setImageResource(R.drawable.medal_gold_128);
+        }
+
+        // default is no medal
+        if (dataModel.getPersonal_highscore() == 0) {
+            viewHolder.badge.setImageResource(0);
         }
     }
 }

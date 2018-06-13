@@ -1,22 +1,14 @@
 package de.htwg.margogo.monstermaths.levels;
 
-import de.htwg.margogo.monstermaths.Badge;
 import de.htwg.margogo.monstermaths.types.MonsterDataHolder;
 import de.htwg.margogo.monstermaths.types.NumberDataHolder;
 import de.htwg.margogo.monstermaths.types.OperatorDataHolder;
 
 /*
  * Singleton class. Dataholder for Level 20
+ * Fastest solution should be -> 7 -> * -> 3 -> - -> 6 -> / -> 3 = 5
  */
-public class DataHolderLevel20 implements DataHolderInterface {
-
-    private boolean lock;
-    private int score;
-    private Badge badge = Badge.Bronze;
-
-    private static final int NUM_MONSTERS = 6;
-    private static final int NUM_NUMBERS = 4;
-    private static final int NUM_OPERATIONS = 3;
+public class DataHolderLevel20 extends DataHolderPrototype implements DataHolderInterface {
 
     private MonsterDataHolder m1 = new MonsterDataHolder(-0.005f,0.03f,2);
     private MonsterDataHolder m2 = new MonsterDataHolder(-0.025f,-0.03f,3);
@@ -35,26 +27,8 @@ public class DataHolderLevel20 implements DataHolderInterface {
     private OperatorDataHolder o3 = new OperatorDataHolder(-0.02f, 0f, "-");
 
     private MonsterDataHolder monsterDataHolder[] = new MonsterDataHolder[] {m1, m2, m3, m4, m5, m6};
-
     private NumberDataHolder numberDataHolder[] = new NumberDataHolder[] {n1,n2,n3, n4};
-
     private OperatorDataHolder operatorDataHolder[] = new OperatorDataHolder[] {o1, o2, o3};
-
-    public void setLock(boolean lock) {
-        this.lock = lock;
-    }
-
-    public boolean getLock() {
-        return lock;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public Integer getScore() {
-        return score;
-    }
 
     @Override
     public String getName() {
@@ -67,27 +41,8 @@ public class DataHolderLevel20 implements DataHolderInterface {
     }
 
     @Override
-    public Badge getBadge() {
-        return badge;
-    }
-
-    @Override
     public Integer getId() {
         return 20;
-    }
-    @Override
-    public Integer getNumMonsters() {
-        return NUM_MONSTERS;
-    }
-
-    @Override
-    public Integer getNumNumbers() {
-        return NUM_NUMBERS;
-    }
-
-    @Override
-    public Integer getNumOperators() {
-        return NUM_OPERATIONS;
     }
 
     @Override
@@ -111,8 +66,23 @@ public class DataHolderLevel20 implements DataHolderInterface {
     }
 
     @Override
-    public void setBadge(Badge badge) {
-        this.badge = badge;
+    public BadgeCheck getBadgeCheck() {
+        return new BadgeCheck(14, 20,30);
+    }
+
+    @Override
+    public Integer getNumMonsters() {
+        return monsterDataHolder.length;
+    }
+
+    @Override
+    public Integer getNumNumbers() {
+        return numberDataHolder.length;
+    }
+
+    @Override
+    public Integer getNumOperators() {
+        return operatorDataHolder.length;
     }
 
     private static final DataHolderLevel20 holder = new DataHolderLevel20();

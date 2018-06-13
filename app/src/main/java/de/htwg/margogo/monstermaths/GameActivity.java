@@ -1,28 +1,48 @@
 package de.htwg.margogo.monstermaths;
 
 import android.app.Activity;
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
-import android.os.Bundle;
 import android.view.Display;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
-
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import de.htwg.margogo.monstermaths.levels.*;
+import de.htwg.margogo.monstermaths.levels.DataHolderInterface;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel1;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel10;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel11;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel12;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel13;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel14;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel15;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel16;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel17;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel18;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel19;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel2;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel20;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel3;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel4;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel5;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel6;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel7;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel8;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel9;
+
 import static java.lang.Integer.parseInt;
 
 /**
  * This activity handles the game activity for one level.
- * Should be later the prototype for each level
  *
  * @see SensorManager
  * @see SensorEvent
@@ -35,7 +55,8 @@ public class GameActivity extends Activity {
     private PowerManager mPowerManager;
     private WindowManager mWindowManager;
     protected Display mDisplay;
-    private PowerManager.WakeLock mWakeLock;
+
+    AppDatabase db;
 
     TextView textViewTimer2;
     TextView textViewCurrentOperation2;
@@ -68,24 +89,34 @@ public class GameActivity extends Activity {
             if (dataHolder.getLock()) {
 
                 updateScore(seconds);
-
-                dataHolder.setScore(seconds);
                 dataHolder.setLock(false);
-            } else {
-                 // nothing to do here
+
             }
 
             timerHandler.postDelayed(this, 500);
         }
     };
 
-    private void updateScore(int score) {
-        if (score < dataHolder.getScore() || dataHolder.getScore() == 0) {
-            dataHolder.setScore(score);
+    private void updateScore(final int score) {
+
+        new AsyncTask<Void, Void, Void>() {
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                db.highscoreDao().insertHighscore(new Highscore(dataHolder.getId(), score));
+                return null;
+            }
+        }.execute();
+
+
+    // sort list and grep best and compare
+       /* if (score < dataHolder.getScore() || dataHolder.getScore() == 0) {
+            dataHolder.insertScore(score);
             Toast.makeText(getApplicationContext(), "New highscore!", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getApplicationContext(), "No new highscore!", Toast.LENGTH_SHORT).show();
         }
+        */
     }
 
     /** Called when the activity is first created. */
@@ -104,11 +135,10 @@ public class GameActivity extends Activity {
         mWindowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         mDisplay = mWindowManager.getDefaultDisplay();
 
-        // Create a bright wake lock
-        mWakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, getClass()
-                .getName());
-
         intent  = getIntent();
+
+        db = Room.databaseBuilder(GameActivity.this,
+                AppDatabase.class, "database-name-2").build();
 
         Bundle extra = intent.getExtras();
         if (extra != null) {
@@ -121,7 +151,7 @@ public class GameActivity extends Activity {
         LayoutParams params = new LayoutParams(300,150);
         TextView textViewTimer = new TextView(this);
         textViewTimer.setText("Zeit: ");
-        textViewTimer.setTextColor(Color.GRAY);
+        textViewTimer.setTextColor(Color.BLACK);
         textViewTimer.setTextSize(18);
         textViewTimer.setTypeface(null, Typeface.BOLD);
         textViewTimer.setLayoutParams(params);
@@ -129,7 +159,7 @@ public class GameActivity extends Activity {
         textViewTimer.setY(textViewTimer.getY() + 50);
 
         textViewTimer2 = new TextView(this);
-        textViewTimer2.setTextColor(Color.GRAY);
+        textViewTimer2.setTextColor(Color.BLACK);
         textViewTimer2.setTextSize(18);
         textViewTimer2.setTypeface(null, Typeface.BOLD);
         textViewTimer2.setLayoutParams(params);
@@ -139,7 +169,7 @@ public class GameActivity extends Activity {
         LayoutParams params2 = new LayoutParams(600,150);
         TextView textViewCurrentOperation = new TextView(this);
         textViewCurrentOperation.setText("Operation: ");
-        textViewCurrentOperation.setTextColor(Color.GRAY);
+        textViewCurrentOperation.setTextColor(Color.BLACK);
         textViewCurrentOperation.setTextSize(18);
         textViewCurrentOperation.setTypeface(null, Typeface.BOLD);
         textViewCurrentOperation.setLayoutParams(params2);
@@ -147,7 +177,7 @@ public class GameActivity extends Activity {
         textViewCurrentOperation.setY(textViewTimer.getY() + 100);
 
         textViewCurrentOperation2 = new TextView(this);
-        textViewCurrentOperation2.setTextColor(Color.GRAY);
+        textViewCurrentOperation2.setTextColor(Color.BLACK);
         textViewCurrentOperation2.setTextSize(18);
         textViewCurrentOperation2.setTypeface(null, Typeface.BOLD);
         textViewCurrentOperation2.setLayoutParams(params);
@@ -156,7 +186,7 @@ public class GameActivity extends Activity {
 
         TextView textViewResult = new TextView(this);
         textViewResult.setText("Ergebnis: ");
-        textViewResult.setTextColor(Color.GRAY);
+        textViewResult.setTextColor(Color.BLACK);
         textViewResult.setTextSize(18);
         textViewResult.setTypeface(null, Typeface.BOLD);
         textViewResult.setLayoutParams(params);
@@ -164,7 +194,7 @@ public class GameActivity extends Activity {
         textViewResult.setY(textViewCurrentOperation.getY() + 100);
 
         textViewResult2 = new TextView(this);
-        textViewResult2.setTextColor(Color.GRAY);
+        textViewResult2.setTextColor(Color.BLACK);
         textViewResult2.setTextSize(18);
         textViewResult2.setTypeface(null, Typeface.BOLD);
         textViewResult2.setLayoutParams(params);
@@ -176,7 +206,7 @@ public class GameActivity extends Activity {
 
         // instantiate our simulation view and set it as the activity's content
         mSimulationView = new SimulationView(this, this);
-        mSimulationView.setBackgroundResource(R.drawable.wood);
+        mSimulationView.setBackgroundResource(R.drawable.background);
         mSimulationView.addView(textViewTimer);
         mSimulationView.addView(textViewTimer2);
         mSimulationView.addView(textViewCurrentOperation);

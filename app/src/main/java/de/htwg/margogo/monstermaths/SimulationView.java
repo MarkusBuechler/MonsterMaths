@@ -1,6 +1,5 @@
 package de.htwg.margogo.monstermaths;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,17 +8,14 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import de.htwg.margogo.monstermaths.types.MonsterDataHolder;
 import de.htwg.margogo.monstermaths.types.NumberDataHolder;
@@ -42,8 +38,6 @@ class SimulationView extends FrameLayout implements SensorEventListener {
     private Sensor mAccelerometer;
     private long mLastT;
 
-    private float mXDpi;
-    private float mYDpi;
     private float mMetersToPixelsX;
     private float mMetersToPixelsY;
     private float mXOrigin;
@@ -81,12 +75,6 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
         public Particle(Context context, AttributeSet attrs, int defStyleAttr) {
             super(context, attrs, defStyleAttr);
-        }
-
-        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-        public Particle(Context context, AttributeSet attrs, int defStyleAttr,
-                        int defStyleRes) {
-            super(context, attrs, defStyleAttr, defStyleRes);
         }
 
         public void computePhysics(float sx, float sy, float dT) {
@@ -403,7 +391,6 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 if (dis < 0.003 && !catched)  {
 
                     catched = true;
-                    Toast.makeText(getContext(), "Game over!", Toast.LENGTH_SHORT).show();
                     Vibrator v = (Vibrator) accelerometerPlayActivity.getSystemService(Context.VIBRATOR_SERVICE);
                     if (v!= null) v.vibrate(300);
 
@@ -569,8 +556,8 @@ class SimulationView extends FrameLayout implements SensorEventListener {
         mAccelerometer = accelerometerPlayActivity.mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         DisplayMetrics metrics = new DisplayMetrics();
         accelerometerPlayActivity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        mXDpi = metrics.xdpi;
-        mYDpi = metrics.ydpi;
+        float mXDpi = metrics.xdpi;
+        float mYDpi = metrics.ydpi;
         mMetersToPixelsX = mXDpi / 0.0254f;
         mMetersToPixelsY = mYDpi / 0.0254f;
 
@@ -806,7 +793,6 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 break;
             case "-":
                 currentResult -= number;
-                Log.i("res", "updateResult: " + this.currentResult);
                 break;
             case "*":
                 currentResult *= number;

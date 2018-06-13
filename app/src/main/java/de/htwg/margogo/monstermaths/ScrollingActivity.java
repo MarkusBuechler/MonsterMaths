@@ -1,6 +1,9 @@
 package de.htwg.margogo.monstermaths;
 
+import android.annotation.SuppressLint;
+import android.arch.persistence.room.Room;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -10,17 +13,41 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import de.htwg.margogo.monstermaths.levels.*;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel1;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel10;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel11;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel12;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel13;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel14;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel15;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel16;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel17;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel18;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel19;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel2;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel20;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel3;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel4;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel5;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel6;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel7;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel8;
+import de.htwg.margogo.monstermaths.levels.DataHolderLevel9;
 
 public class ScrollingActivity extends AppCompatActivity {
 
     ArrayList<DataModel> dataModels;
     ListView listView;
     private static CustomAdapter adapter;
+    AppDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "database-name-2").build();
+
         setContentView(R.layout.activity_scrolling);
 
         listView = findViewById(R.id.list);
@@ -48,68 +75,91 @@ public class ScrollingActivity extends AppCompatActivity {
 
     }
 
+    private int getHighscore(int level) {
+
+        Integer result = 0;
+
+        //TODO: https://stackoverflow.com/questions/44309241/warning-this-asynctask-class-should-be-static-or-leaks-might-occur
+        @SuppressLint("StaticFieldLeak") AsyncTask<Integer, Void, Integer> a = new AsyncTask<Integer, Void, Integer>() {
+
+            @Override
+            protected Integer doInBackground(Integer... integers) {
+                return db.highscoreDao().getHighscoreLevelX(integers[0]);
+            }
+
+        };
+
+        try {
+            result = a.execute(level).get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
     private void updateList() {
         dataModels.clear();
 
         DataHolderLevel1 dt1 = DataHolderLevel1.getInstance();
-        DataModel dm1 = new DataModel(dt1.getName(), dt1.getId(), false, dt1.getDescription(), dt1.getScore(), dt1.getBadge());
+        DataModel dm1 = new DataModel(dt1.getName(), dt1.getId(), false, dt1.getDescription(), getHighscore(1), dt1.getBadgeCheck());
 
         DataHolderLevel2 dt2 = DataHolderLevel2.getInstance();
-        DataModel dm2 = new DataModel(dt2.getName(), dt2.getId(), false, dt2.getDescription(), dt2.getScore(), dt2.getBadge());
+        DataModel dm2 = new DataModel(dt2.getName(), dt2.getId(), false, dt2.getDescription(), getHighscore(2), dt2.getBadgeCheck());
 
         DataHolderLevel3 dt3 = DataHolderLevel3.getInstance();
-        DataModel dm3 = new DataModel(dt3.getName(), dt3.getId(), false, dt3.getDescription(), dt3.getScore(), dt3.getBadge());
+        DataModel dm3 = new DataModel(dt3.getName(), dt3.getId(), false, dt3.getDescription(), getHighscore(3), dt3.getBadgeCheck());
 
         DataHolderLevel4 dt4 = DataHolderLevel4.getInstance();
-        DataModel dm4 = new DataModel(dt4.getName(), dt4.getId(), false, dt4.getDescription(), dt4.getScore(), dt4.getBadge());
+        DataModel dm4 = new DataModel(dt4.getName(), dt4.getId(), false, dt4.getDescription(), getHighscore(4), dt4.getBadgeCheck());
 
         DataHolderLevel5 dt5 = DataHolderLevel5.getInstance();
-        DataModel dm5 = new DataModel(dt5.getName(), dt5.getId(), false, dt5.getDescription(), dt5.getScore(), dt5.getBadge());
+        DataModel dm5 = new DataModel(dt5.getName(), dt5.getId(), false, dt5.getDescription(), getHighscore(5), dt5.getBadgeCheck());
 
         DataHolderLevel6 dt6 = DataHolderLevel6.getInstance();
-        DataModel dm6 = new DataModel(dt6.getName(), dt6.getId(), false, dt6.getDescription(), dt6.getScore(), dt6.getBadge());
+        DataModel dm6 = new DataModel(dt6.getName(), dt6.getId(), false, dt6.getDescription(), getHighscore(6), dt6.getBadgeCheck());
 
         DataHolderLevel7 dt7 = DataHolderLevel7.getInstance();
-        DataModel dm7 = new DataModel(dt7.getName(), dt7.getId(), false, dt7.getDescription(), dt7.getScore(), dt7.getBadge());
+        DataModel dm7 = new DataModel(dt7.getName(), dt7.getId(), false, dt7.getDescription(), getHighscore(7), dt7.getBadgeCheck());
 
         DataHolderLevel8 dt8 = DataHolderLevel8.getInstance();
-        DataModel dm8 = new DataModel(dt8.getName(), dt8.getId(), false, dt8.getDescription(), dt8.getScore(), dt8.getBadge());
+        DataModel dm8 = new DataModel(dt8.getName(), dt8.getId(), false, dt8.getDescription(), getHighscore(8), dt8.getBadgeCheck());
 
         DataHolderLevel9 dt9 = DataHolderLevel9.getInstance();
-        DataModel dm9 = new DataModel(dt9.getName(), dt9.getId(), false, dt9.getDescription(), dt9.getScore(), dt9.getBadge());
+        DataModel dm9 = new DataModel(dt9.getName(), dt9.getId(), false, dt9.getDescription(), getHighscore(9), dt9.getBadgeCheck());
 
         DataHolderLevel10 dt10 = DataHolderLevel10.getInstance();
-        DataModel dm10 = new DataModel(dt10.getName(), dt10.getId(), false, dt10.getDescription(), dt10.getScore(), dt10.getBadge());
+        DataModel dm10 = new DataModel(dt10.getName(), dt10.getId(), false, dt10.getDescription(), getHighscore(10), dt10.getBadgeCheck());
 
         DataHolderLevel11 dt11 = DataHolderLevel11.getInstance();
-        DataModel dm11 = new DataModel(dt11.getName(), dt11.getId(), false, dt11.getDescription(), dt11.getScore(), dt11.getBadge());
+        DataModel dm11 = new DataModel(dt11.getName(), dt11.getId(), false, dt11.getDescription(), getHighscore(11), dt11.getBadgeCheck());
 
         DataHolderLevel12 dt12 = DataHolderLevel12.getInstance();
-        DataModel dm12 = new DataModel(dt12.getName(), dt12.getId(), false, dt12.getDescription(), dt12.getScore(), dt12.getBadge());
+        DataModel dm12 = new DataModel(dt12.getName(), dt12.getId(), false, dt12.getDescription(), getHighscore(12), dt12.getBadgeCheck());
 
         DataHolderLevel13 dt13 = DataHolderLevel13.getInstance();
-        DataModel dm13 = new DataModel(dt13.getName(), dt13.getId(), false, dt13.getDescription(), dt13.getScore(), dt13.getBadge());
+        DataModel dm13 = new DataModel(dt13.getName(), dt13.getId(), false, dt13.getDescription(), getHighscore(13), dt13.getBadgeCheck());
 
         DataHolderLevel14 dt14 = DataHolderLevel14.getInstance();
-        DataModel dm14 = new DataModel(dt14.getName(), dt14.getId(), false, dt14.getDescription(), dt14.getScore(), dt14.getBadge());
+        DataModel dm14 = new DataModel(dt14.getName(), dt14.getId(), false, dt14.getDescription(), getHighscore(14), dt14.getBadgeCheck());
 
         DataHolderLevel15 dt15 = DataHolderLevel15.getInstance();
-        DataModel dm15 = new DataModel(dt15.getName(), dt15.getId(), false, dt15.getDescription(), dt15.getScore(), dt15.getBadge());
+        DataModel dm15 = new DataModel(dt15.getName(), dt15.getId(), false, dt15.getDescription(), getHighscore(15), dt15.getBadgeCheck());
 
         DataHolderLevel16 dt16 = DataHolderLevel16.getInstance();
-        DataModel dm16 = new DataModel(dt16.getName(), dt16.getId(), false, dt16.getDescription(), dt16.getScore(), dt16.getBadge());
+        DataModel dm16 = new DataModel(dt16.getName(), dt16.getId(), false, dt16.getDescription(), getHighscore(16), dt16.getBadgeCheck());
 
         DataHolderLevel17 dt17 = DataHolderLevel17.getInstance();
-        DataModel dm17 = new DataModel(dt17.getName(), dt17.getId(), false, dt17.getDescription(), dt17.getScore(), dt17.getBadge());
+        DataModel dm17 = new DataModel(dt17.getName(), dt17.getId(), false, dt17.getDescription(), getHighscore(17), dt17.getBadgeCheck());
 
         DataHolderLevel18 dt18 = DataHolderLevel18.getInstance();
-        DataModel dm18 = new DataModel(dt18.getName(), dt18.getId(), false, dt18.getDescription(), dt18.getScore(), dt18.getBadge());
+        DataModel dm18 = new DataModel(dt18.getName(), dt18.getId(), false, dt18.getDescription(), getHighscore(18), dt18.getBadgeCheck());
 
         DataHolderLevel19 dt19 = DataHolderLevel19.getInstance();
-        DataModel dm19 = new DataModel(dt19.getName(), dt19.getId(), false, dt19.getDescription(), dt19.getScore(), dt19.getBadge());
+        DataModel dm19 = new DataModel(dt19.getName(), dt19.getId(), false, dt19.getDescription(), getHighscore(19), dt19.getBadgeCheck());
 
         DataHolderLevel20 dt20 = DataHolderLevel20.getInstance();
-        DataModel dm20 = new DataModel(dt20.getName(), dt20.getId(), false, dt20.getDescription(), dt20.getScore(), dt20.getBadge());
+        DataModel dm20 = new DataModel(dt20.getName(), dt20.getId(), false, dt20.getDescription(), getHighscore(20), dt20.getBadgeCheck());
 
         dataModels.add(dm1);
         dataModels.add(dm2);
@@ -132,23 +182,14 @@ public class ScrollingActivity extends AppCompatActivity {
         dataModels.add(dm19);
         dataModels.add(dm20);
 
+
     }
 
-    /** Needs method refresh !! Only updates data when restart activity. **/
-
-    /**
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-     */
-
-    // needs to be connected
-    public void update() {
-         updateList();
+    public void onResume() {
+        super.onResume();
+        updateList();
+        adapter.notifyDataSetChanged();
     }
 
     @Override

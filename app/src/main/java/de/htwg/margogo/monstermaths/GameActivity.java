@@ -11,7 +11,6 @@ import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.PowerManager;
 import android.view.Display;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
@@ -19,6 +18,8 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
+import de.htwg.margogo.monstermaths.database.AppDatabase;
+import de.htwg.margogo.monstermaths.database.Highscore;
 import de.htwg.margogo.monstermaths.levels.DataHolderInterface;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel1;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel10;

@@ -1,4 +1,4 @@
-package de.htwg.margogo.monstermaths;
+package de.htwg.margogo.monstermaths.database;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

@@ -17,6 +17,8 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 import de.htwg.margogo.monstermaths.levels.DataHolderInterface;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel1;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel10;
@@ -52,8 +54,6 @@ public class GameActivity extends Activity {
 
     private SimulationView mSimulationView;
     protected SensorManager mSensorManager;
-    private PowerManager mPowerManager;
-    private WindowManager mWindowManager;
     protected Display mDisplay;
 
     AppDatabase db;
@@ -81,7 +81,7 @@ public class GameActivity extends Activity {
             int minutes = seconds / 60;
             seconds = seconds % 60;
 
-            textViewTimer2.setText(String.format("%d:%02d", minutes, seconds));
+            textViewTimer2.setText(String.format(Locale.getDefault(), "%d:%02d", minutes, seconds));
 
             textViewCurrentOperation2.setText(currentOperation);
             textViewResult2.setText(dataHolder.getExpectedResult().toString());
@@ -119,11 +119,8 @@ public class GameActivity extends Activity {
         // Get an instance of the SensorManager
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
-        // Get an instance of the PowerManager
-        mPowerManager = (PowerManager) getSystemService(POWER_SERVICE);
-
         // Get an instance of the WindowManager
-        mWindowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+        WindowManager mWindowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         mDisplay = mWindowManager.getDefaultDisplay();
 
         intent  = getIntent();

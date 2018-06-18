@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnClickListener{
 
-    private ArrayList<DataModel> dataSet;
     private Context mContext;
 
     // View lookup cache
@@ -29,7 +28,6 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
 
     public CustomAdapter(ArrayList<DataModel> data, Context context) {
         super(context, R.layout.row_item, data);
-        this.dataSet = data;
         this.mContext=context;
 
     }
@@ -48,7 +46,7 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
         {
             case R.id.bagde:
 
-                String text = "";
+                String text;
 
                 if (dataModel.getPersonal_highscore() == 0) {
                     text = mContext.getString(R.string.NoHighscore);
@@ -68,6 +66,7 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         // Get the data item for this position
         DataModel dataModel = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
@@ -115,8 +114,6 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
 
     /**
      * Comment: Java doesn't support switch casing on enums..
-     * @param dataModel
-     * @param viewHolder
      */
     private void updateMedal(DataModel dataModel, ViewHolder viewHolder) {
 

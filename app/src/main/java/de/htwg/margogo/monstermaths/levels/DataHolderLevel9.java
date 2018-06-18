@@ -28,16 +28,6 @@ public class DataHolderLevel9 extends DataHolderPrototype implements DataHolderI
     private OperatorDataHolder operatorDataHolder[] = new OperatorDataHolder[] {o1, o2};
 
     @Override
-    public String getName() {
-        return "Level 9";
-    }
-
-    @Override
-    public String getDescription() {
-        return "Mixed 1";
-    }
-
-    @Override
     public Integer getId() {
         return 9;
     }

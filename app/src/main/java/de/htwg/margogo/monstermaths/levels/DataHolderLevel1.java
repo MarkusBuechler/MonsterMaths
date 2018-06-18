@@ -19,16 +19,6 @@ public class DataHolderLevel1 extends DataHolderPrototype implements DataHolderI
     private OperatorDataHolder operatorDataHolder[] = new OperatorDataHolder[] {};
 
     @Override
-    public String getName() {
-        return "Level 1";
-    }
-
-    @Override
-    public String getDescription() {
-        return "Basic Introduction to the game concept";
-    }
-
-    @Override
     public Integer getId() {
         return 1;
     }

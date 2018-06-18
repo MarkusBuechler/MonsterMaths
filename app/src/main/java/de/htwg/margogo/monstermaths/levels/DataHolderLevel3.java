@@ -1,5 +1,6 @@
 package de.htwg.margogo.monstermaths.levels;
 
+import de.htwg.margogo.monstermaths.R;
 import de.htwg.margogo.monstermaths.types.MonsterDataHolder;
 import de.htwg.margogo.monstermaths.types.NumberDataHolder;
 import de.htwg.margogo.monstermaths.types.OperatorDataHolder;
@@ -25,16 +26,6 @@ public class DataHolderLevel3 extends DataHolderPrototype implements DataHolderI
     private MonsterDataHolder monsterDataHolder[] = new MonsterDataHolder[] {m1,m2, m3, m4};
     private NumberDataHolder numberDataHolder[] = new NumberDataHolder[] {n1,n2,n3,n4, n5, n6, n7};
     private OperatorDataHolder operatorDataHolder[] = new OperatorDataHolder[] {};
-
-    @Override
-    public String getName() {
-        return "Level 3";
-    }
-
-    @Override
-    public String getDescription() {
-        return "Addition 1";
-    }
 
     @Override
     public Integer getId() {

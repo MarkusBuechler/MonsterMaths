@@ -27,16 +27,6 @@ public class DataHolderLevel5 extends DataHolderPrototype implements DataHolderI
     private OperatorDataHolder operatorDataHolder[] = new OperatorDataHolder[] {};
 
     @Override
-    public String getName() {
-        return "Level 5";
-    }
-
-    @Override
-    public String getDescription() {
-        return "Addition 3";
-    }
-
-    @Override
     public Integer getId() {
         return 5;
     }

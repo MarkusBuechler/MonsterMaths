@@ -23,16 +23,6 @@ public class DataHolderPrototype implements DataHolderInterface {
     }
 
     @Override
-    public String getName() {
-        return "Prototype";
-    }
-
-    @Override
-    public String getDescription() {
-        return "Prototype";
-    }
-
-    @Override
     public Integer getId() {
         return 0;
     }

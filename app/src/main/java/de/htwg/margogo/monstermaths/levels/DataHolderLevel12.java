@@ -25,16 +25,6 @@ public class DataHolderLevel12 extends DataHolderPrototype implements DataHolder
     private OperatorDataHolder operatorDataHolder[] = new OperatorDataHolder[] {o1};
 
     @Override
-    public String getName() {
-        return "Level 12";
-    }
-
-    @Override
-    public String getDescription() {
-        return "Multiplication 1";
-    }
-
-    @Override
     public Integer getId() {
         return 12;
     }

@@ -108,15 +108,6 @@ public class GameActivity extends Activity {
             }
         }.execute();
 
-
-    // sort list and grep best and compare
-       /* if (score < dataHolder.getScore() || dataHolder.getScore() == 0) {
-            dataHolder.insertScore(score);
-            Toast.makeText(getApplicationContext(), "New highscore!", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getApplicationContext(), "No new highscore!", Toast.LENGTH_SHORT).show();
-        }
-        */
     }
 
     /** Called when the activity is first created. */
@@ -150,7 +141,7 @@ public class GameActivity extends Activity {
 
         LayoutParams params = new LayoutParams(300,150);
         TextView textViewTimer = new TextView(this);
-        textViewTimer.setText("Zeit: ");
+        textViewTimer.setText(getString(R.string.Time));
         textViewTimer.setTextColor(Color.BLACK);
         textViewTimer.setTextSize(18);
         textViewTimer.setTypeface(null, Typeface.BOLD);
@@ -168,7 +159,7 @@ public class GameActivity extends Activity {
 
         LayoutParams params2 = new LayoutParams(600,150);
         TextView textViewCurrentOperation = new TextView(this);
-        textViewCurrentOperation.setText("Operation: ");
+        textViewCurrentOperation.setText(getString(R.string.Operation));
         textViewCurrentOperation.setTextColor(Color.BLACK);
         textViewCurrentOperation.setTextSize(18);
         textViewCurrentOperation.setTypeface(null, Typeface.BOLD);
@@ -185,7 +176,7 @@ public class GameActivity extends Activity {
         textViewCurrentOperation2.setY(textViewCurrentOperation.getY());
 
         TextView textViewResult = new TextView(this);
-        textViewResult.setText("Ergebnis: ");
+        textViewResult.setText(R.string.Result);
         textViewResult.setTextColor(Color.BLACK);
         textViewResult.setTextSize(18);
         textViewResult.setTypeface(null, Typeface.BOLD);

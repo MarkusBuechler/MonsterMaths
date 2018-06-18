@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Level1Desc">Einführung in das Spielkonzept</string>
+    <string name="Level2Desc">Einführung in die Addition</string>
+    <string name="Level6Desc">Einführung in die Subtraktion</string>
+    <string name="Level7Desc">Subtraktion 1</string>
+    <string name="Level8Desc">Subtraktion 2</string>
+    <string name="Level9Desc">Gemischt 1</string>
+    <string name="Level10Desc">Gemischt 2</string>
+    <string name="Level11Desc">Einführung in die Multiplikation</string>
+    <string name="Level12Desc">Multiplikation 1</string>
+    <string name="Level13Desc">Multiplikation 2</string>
+    <string name="Level14Desc">Multiplikation 3</string>
+    <string name="Level15Desc">Gemischt 3</string>
+    <string name="Level16Desc">Einführung in die Division</string>
+    <string name="Level17Desc">Gemischt 4</string>
+    <string name="Level18Desc">Gemischt 5</string>
+    <string name="Level19Desc">Gemischt 6</string>
+    <string name="Level20Desc">Gemischt 7</string>
+    <string name="Time">Zeit:</string>
+    <string name="Result">Ergebnis:</string>
+    <string name="TapToPlay">Berühren um fortzufahren</string>
+    <string name="NoHighscore">Noch kein Highscore!</string>
+    <string name="Highscore1">Highscore für </string>
+    <string name="Highscore2"> ist </string>
+    <string name="Highscore3"> Sek.</string>
+</resources>

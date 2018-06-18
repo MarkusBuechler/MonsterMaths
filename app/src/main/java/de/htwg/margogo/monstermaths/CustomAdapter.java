@@ -34,7 +34,7 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
 
     }
 
-    // TODO Optional disable locked levels.
+    // TODO Optional disable locked levels. -> Release 2
 
     @Override
     public void onClick(View v) {
@@ -51,9 +51,11 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
                 String text = "";
 
                 if (dataModel.getPersonal_highscore() == 0) {
-                    text = "No highscore yet!";
+                    text = mContext.getString(R.string.NoHighscore);
                 } else {
-                    text = "Highscore for " + dataModel.getName() + " is " + dataModel.getPersonal_highscore()+ " sec";
+                    text = mContext.getString(R.string.Highscore1) + " "
+                            + dataModel.getName() + " " + mContext.getString(R.string.Highscore2)
+                            + " " + dataModel.getPersonal_highscore() + " " + mContext.getString(R.string.Highscore3);
                 }
 
                 Snackbar.make(v, text, Snackbar.LENGTH_SHORT)
@@ -89,6 +91,7 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
 
             convertView.setTag(viewHolder);
         } else {
+
             viewHolder = (ViewHolder) convertView.getTag();
             result=convertView;
         }

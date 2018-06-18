@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation" >
+
     <string name="Level1Desc">Einführung in das Spielkonzept</string>
     <string name="Level2Desc">Einführung in die Addition</string>
     <string name="Level6Desc">Einführung in die Subtraktion</string>

@@ -1,6 +1,8 @@
 package de.htwg.margogo.monstermaths;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -388,21 +390,15 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 final float y1_2 = monster.mPosY;
                 final double dis = distance(x1_1,y1_1,x1_2,y1_2);
 
-                if (dis < 0.003 && !catched)  {
+                if (dis < 0.003 && !catched && !lockFinish)  {
 
                     catched = true;
+                    lockFinish = true;
+
                     Vibrator v = (Vibrator) accelerometerPlayActivity.getSystemService(Context.VIBRATOR_SERVICE);
                     if (v!= null) v.vibrate(300);
 
-                    // after 1 sec activity is closed
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            accelerometerPlayActivity.finish();
-                        }
-                    }, 1000);
+                    levelFailed(accelerometerPlayActivity.dataHolder.getExpectedResult(), true);
 
                 }
             }
@@ -423,27 +419,58 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
             final double dis = distance(x1,y1,x2,y2);
 
-            if (dis < 0.004 && !lockFinish && currentResult == accelerometerPlayActivity.dataHolder.getExpectedResult())  {
-
-                myGoal.setBackgroundResource(R.drawable.treasure_open_128);
+            if (dis < 0.004 && !lockFinish) {
 
                 lockFinish = true;
 
                 // share data between singleton class !
                 accelerometerPlayActivity.dataHolder.setLock(true);
+                int expectedResult = accelerometerPlayActivity.dataHolder.getExpectedResult();
 
-                // after 1 sec activity is closed
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        accelerometerPlayActivity.finish(); // finished activity, maybe add finish screen before
-                    }
-                }, 1000);
+                if (currentResult == expectedResult) { // success
+                    accelerometerPlayActivity.success = true;
 
+                    AlertDialog alertDialog = new AlertDialog.Builder(accelerometerPlayActivity).create();
+                    alertDialog.setTitle("Level geschafft.");
+                    alertDialog.setMessage("Level erfolgreich geschafft\nGlückwunsch!");
+                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    accelerometerPlayActivity.finish();
+                                }
+                            });
+                    alertDialog.setCancelable(false);
+                    alertDialog.show();
+                } else { // not successful
 
+                    levelFailed(expectedResult, false);
+                }
 
             }
+
+        }
+
+        private void levelFailed(int expectedResult, Boolean catched) {
+            AlertDialog alertDialog = new AlertDialog.Builder(accelerometerPlayActivity).create();
+            alertDialog.setTitle("Level nicht geschafft");
+            alertDialog.setMessage(catched ? "Du wurdest von einem Monster gefangen." : "Deine Lösung von " +  currentResult + " ist falsch. \nProbiere " + expectedResult + " zu erspielen.");
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Nochmal",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            accelerometerPlayActivity.recreate();
+                        }
+                    });
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Zurück",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            accelerometerPlayActivity.finish();
+                        }
+                    });
+            alertDialog.setCancelable(false);
+            alertDialog.show();
         }
 
         /**
@@ -460,7 +487,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 final float y1_2 = myNumbers[i].mPosY;
                 final double dis = distance(x1_1,y1_1,x1_2,y1_2);
 
-                if (dis < 0.004 && !uniqueNumberLocks[i])  {
+                if (dis < 0.004 && !uniqueNumberLocks[i] && !lockFinish)  {
                     myNumbers[i].setVisibility(INVISIBLE);
 
                     updateResult(numberDataHolder[i].getValue());
@@ -484,7 +511,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 final float y1_2 = myOperators[i].mPosY;
                 final double dis = distance(x1_1,y1_1,x1_2,y1_2);
 
-                if (dis < 0.004 && !uniqueOperatorLocks[i])  {
+                if (dis < 0.004 && !uniqueOperatorLocks[i] && !lockFinish)  {
                     myOperators[i].setVisibility(INVISIBLE);
                     accelerometerPlayActivity.currentOperation = operatorDataHolder[i].getOperation();
 

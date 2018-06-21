@@ -11,9 +11,11 @@ import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -59,15 +61,16 @@ public class GameActivity extends Activity {
 
     AppDatabase db;
 
-    TextView textViewTimer2;
-    TextView textViewCurrentOperation2;
+    ImageView ImageCurrentOperation2;
     TextView textViewResult2;
+    TextView textViewTimer2;
     long startTime = 0;
 
     DataHolderInterface dataHolder;
     Intent intent;
     String id;
     int dt_id;
+    Boolean success = false;
     String currentOperation = "+";
 
     //runs without a timer by reposting this handler at the end of the runnable
@@ -84,10 +87,10 @@ public class GameActivity extends Activity {
 
             textViewTimer2.setText(String.format(Locale.getDefault(), "%d:%02d", minutes, seconds));
 
-            textViewCurrentOperation2.setText(currentOperation);
+            updateCurrentOperation(currentOperation);
             textViewResult2.setText(dataHolder.getExpectedResult().toString());
 
-            if (dataHolder.getLock()) {
+            if (dataHolder.getLock() && success) {
 
                 updateScore(seconds);
                 dataHolder.setLock(false);
@@ -97,6 +100,22 @@ public class GameActivity extends Activity {
             timerHandler.postDelayed(this, 500);
         }
     };
+
+    private void updateCurrentOperation(String currentOperation) {
+
+        switch (currentOperation) {
+            case "+": ImageCurrentOperation2.setImageResource(R.drawable.plus);
+                break;
+            case "-": ImageCurrentOperation2.setImageResource(R.drawable.minus);
+                break;
+            case "*": ImageCurrentOperation2.setImageResource(R.drawable.multiply);
+                break;
+            case "/": ImageCurrentOperation2.setImageResource(R.drawable.divide);
+                break;
+            default: ImageCurrentOperation2.setImageResource(R.drawable.emoji_smile_256);
+                break;
+        }
+    }
 
     private void updateScore(final int score) {
 
@@ -137,15 +156,52 @@ public class GameActivity extends Activity {
 
         init_data_holder(dt_id);
 
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+
         LayoutParams params = new LayoutParams(300,150);
+        LayoutParams params2 = new LayoutParams(600,150);
+
+        TextView textViewCurrentOperation = new TextView(this);
+        textViewCurrentOperation.setText(getString(R.string.Operation));
+        textViewCurrentOperation.setTextColor(Color.BLACK);
+        textViewCurrentOperation.setTextSize(18);
+        textViewCurrentOperation.setTypeface(null, Typeface.BOLD);
+        textViewCurrentOperation.setLayoutParams(params2);
+        textViewCurrentOperation.setX(metrics.widthPixels - 450);
+        textViewCurrentOperation.setY(50);
+
+        LayoutParams params3 = new LayoutParams(150,150);
+        ImageCurrentOperation2 = new ImageView(this);
+        ImageCurrentOperation2.setImageResource(R.drawable.plus);
+        ImageCurrentOperation2.setLayoutParams(params3);
+        ImageCurrentOperation2.setX(metrics.widthPixels - 170);
+        ImageCurrentOperation2.setY(25);
+
+        TextView textViewResult = new TextView(this);
+        textViewResult.setText(R.string.Result);
+        textViewResult.setTextColor(Color.BLACK);
+        textViewResult.setTextSize(18);
+        textViewResult.setTypeface(null, Typeface.BOLD);
+        textViewResult.setX(50);
+        textViewResult.setY(50);
+
+        textViewResult2 = new TextView(this);
+        textViewResult2.setTextColor(Color.RED);
+        textViewResult2.setTextSize(45);
+        textViewResult2.setTypeface(null, Typeface.BOLD);
+        textViewResult2.setX(textViewResult.getX() + 250);
+        textViewResult2.setY(0);
+
         TextView textViewTimer = new TextView(this);
         textViewTimer.setText(getString(R.string.Time));
         textViewTimer.setTextColor(Color.BLACK);
         textViewTimer.setTextSize(18);
         textViewTimer.setTypeface(null, Typeface.BOLD);
         textViewTimer.setLayoutParams(params);
-        textViewTimer.setX(textViewTimer.getX() + 50);
-        textViewTimer.setY(textViewTimer.getY() + 50);
+        textViewTimer.setX(textViewCurrentOperation.getX());
+        textViewTimer.setY(textViewCurrentOperation.getY() + 70);
 
         textViewTimer2 = new TextView(this);
         textViewTimer2.setTextColor(Color.BLACK);
@@ -154,41 +210,6 @@ public class GameActivity extends Activity {
         textViewTimer2.setLayoutParams(params);
         textViewTimer2.setX(textViewTimer.getX() + 120);
         textViewTimer2.setY(textViewTimer.getY());
-
-        LayoutParams params2 = new LayoutParams(600,150);
-        TextView textViewCurrentOperation = new TextView(this);
-        textViewCurrentOperation.setText(getString(R.string.Operation));
-        textViewCurrentOperation.setTextColor(Color.BLACK);
-        textViewCurrentOperation.setTextSize(18);
-        textViewCurrentOperation.setTypeface(null, Typeface.BOLD);
-        textViewCurrentOperation.setLayoutParams(params2);
-        textViewCurrentOperation.setX(textViewTimer.getX());
-        textViewCurrentOperation.setY(textViewTimer.getY() + 100);
-
-        textViewCurrentOperation2 = new TextView(this);
-        textViewCurrentOperation2.setTextColor(Color.BLACK);
-        textViewCurrentOperation2.setTextSize(18);
-        textViewCurrentOperation2.setTypeface(null, Typeface.BOLD);
-        textViewCurrentOperation2.setLayoutParams(params);
-        textViewCurrentOperation2.setX(textViewCurrentOperation.getX() + 270);
-        textViewCurrentOperation2.setY(textViewCurrentOperation.getY());
-
-        TextView textViewResult = new TextView(this);
-        textViewResult.setText(R.string.Result);
-        textViewResult.setTextColor(Color.BLACK);
-        textViewResult.setTextSize(18);
-        textViewResult.setTypeface(null, Typeface.BOLD);
-        textViewResult.setLayoutParams(params);
-        textViewResult.setX(textViewCurrentOperation.getX());
-        textViewResult.setY(textViewCurrentOperation.getY() + 100);
-
-        textViewResult2 = new TextView(this);
-        textViewResult2.setTextColor(Color.BLACK);
-        textViewResult2.setTextSize(18);
-        textViewResult2.setTypeface(null, Typeface.BOLD);
-        textViewResult2.setLayoutParams(params);
-        textViewResult2.setX(textViewResult.getX() + 250);
-        textViewResult2.setY(textViewResult.getY());
 
         startTime = System.currentTimeMillis();
         timerHandler.postDelayed(timerRunnable, 0);
@@ -199,7 +220,7 @@ public class GameActivity extends Activity {
         mSimulationView.addView(textViewTimer);
         mSimulationView.addView(textViewTimer2);
         mSimulationView.addView(textViewCurrentOperation);
-        mSimulationView.addView(textViewCurrentOperation2);
+        mSimulationView.addView(ImageCurrentOperation2);
         mSimulationView.addView(textViewResult);
         mSimulationView.addView(textViewResult2);
         setContentView(mSimulationView);

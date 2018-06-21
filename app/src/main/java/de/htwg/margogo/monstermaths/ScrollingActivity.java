@@ -222,8 +222,8 @@ public class ScrollingActivity extends AppCompatActivity {
                 return true;
 
             case R.id.About:
-                Toast.makeText(this, "About page will be displayed",
-                        Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(ScrollingActivity.this, AboutActivity.class);
+                startActivity(intent);
                 return true;
 
             default:

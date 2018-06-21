@@ -428,6 +428,8 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 int expectedResult = accelerometerPlayActivity.dataHolder.getExpectedResult();
 
                 if (currentResult == expectedResult) { // success
+
+                    treasure.setBackgroundResource(R.drawable.treasure_open_128);
                     accelerometerPlayActivity.success = true;
 
                     AlertDialog alertDialog = new AlertDialog.Builder(accelerometerPlayActivity).create();

@@ -59,7 +59,7 @@ public class DataHolderLevel15 extends DataHolderPrototype implements DataHolder
 
     @Override
     public BadgeCheck getBadgeCheck() {
-        return new BadgeCheck(15, 22,30);
+        return new BadgeCheck(15, 22);
     }
 
     @Override

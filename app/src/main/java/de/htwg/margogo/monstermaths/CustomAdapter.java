@@ -117,10 +117,9 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
      */
     private void updateMedal(DataModel dataModel, ViewHolder viewHolder) {
 
+        // if any score is set show bronze medal.
+        viewHolder.badge.setImageResource(R.drawable.medal_bronze_128);
 
-        if (dataModel.getPersonal_highscore() <= dataModel.getBadgeCheck().getBronze()) {
-            viewHolder.badge.setImageResource(R.drawable.medal_bronze_128);
-        }
         if (dataModel.getPersonal_highscore() <= dataModel.getBadgeCheck().getSilver()) {
             viewHolder.badge.setImageResource(R.drawable.medal_silver_128);
         }
@@ -128,7 +127,7 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
             viewHolder.badge.setImageResource(R.drawable.medal_gold_128);
         }
 
-        // default is no medal
+        // default is no medal when no score is achieved.
         if (dataModel.getPersonal_highscore() == 0) {
             viewHolder.badge.setImageResource(0);
         }

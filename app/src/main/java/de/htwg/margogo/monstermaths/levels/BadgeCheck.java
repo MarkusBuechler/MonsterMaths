@@ -4,13 +4,10 @@ public class BadgeCheck {
 
     int gold;
     int silver;
-    int bronze;
 
-
-    public BadgeCheck (int gold, int silver, int bronze) {
+    public BadgeCheck (int gold, int silver) {
         this.gold = gold;
         this.silver = silver;
-        this.bronze = bronze;
     }
 
     public int getGold() {
@@ -21,7 +18,4 @@ public class BadgeCheck {
         return silver;
     }
 
-    public float getBronze() {
-        return bronze;
-    }
 }

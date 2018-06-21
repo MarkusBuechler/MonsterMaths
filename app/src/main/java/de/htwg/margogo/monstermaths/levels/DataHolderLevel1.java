@@ -11,8 +11,8 @@ public class DataHolderLevel1 extends DataHolderPrototype implements DataHolderI
 
     private MonsterDataHolder m1 = new MonsterDataHolder(0.0275f,-0.03f,1);
 
-    private NumberDataHolder n1 = new NumberDataHolder(0f,-0.015f,1);
-    private NumberDataHolder n2 = new NumberDataHolder(0.02f,0.0065f,1);
+    private NumberDataHolder n1 = new NumberDataHolder(0f,-0.015f,2);
+    private NumberDataHolder n2 = new NumberDataHolder(0.02f,0.0065f,2);
 
     private MonsterDataHolder monsterDataHolder[] = new MonsterDataHolder[] {m1};
     private NumberDataHolder numberDataHolder[] = new NumberDataHolder[] {n1,n2};
@@ -25,7 +25,7 @@ public class DataHolderLevel1 extends DataHolderPrototype implements DataHolderI
 
     @Override
     public Integer getExpectedResult() {
-        return 2;
+        return 4;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class DataHolderLevel1 extends DataHolderPrototype implements DataHolderI
 
     @Override
     public BadgeCheck getBadgeCheck() {
-        return new BadgeCheck(3, 5,9);
+        return new BadgeCheck(3, 5);
     }
 
     @Override

@@ -63,7 +63,7 @@ public class DataHolderLevel2 extends DataHolderPrototype implements DataHolderI
 
     @Override
     public BadgeCheck getBadgeCheck() {
-        return new BadgeCheck(3, 5,9);
+        return new BadgeCheck(3, 5);
     }
 
     private static final DataHolderLevel2 holder = new DataHolderLevel2();

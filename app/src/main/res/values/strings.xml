@@ -136,14 +136,14 @@
     <string name="Level18Name">Level 18</string>
     <string name="Level19Name">Level 19</string>
     <string name="Level20Name">Level 20</string>
-    <string name="Time">Time:</string>
-    <string name="Operation">Operation:</string>
-    <string name="Result">Result:</string>
+    <string name="Time">"Time: "</string>
+    <string name="Operation">"Operation: "</string>
+    <string name="Result">"Result: "</string>
     <string name="TapToPlay">Tap to play</string>
     <string name="NoHighscore">No highscore yet!</string>
     <string name="Highscore1">Highscore for </string>
-    <string name="Highscore2"> is </string>
-    <string name="Highscore3"> sec.</string>
+    <string name="Highscore2">" is "</string>
+    <string name="Highscore3">" sec."</string>
 
 
 </resources>

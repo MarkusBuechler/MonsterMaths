@@ -20,11 +20,11 @@
     <string name="Level18Desc">Gemischt 5</string>
     <string name="Level19Desc">Gemischt 6</string>
     <string name="Level20Desc">Gemischt 7</string>
-    <string name="Time">Zeit:</string>
-    <string name="Result">Ergebnis:</string>
+    <string name="Time">"Zeit: "</string>
+    <string name="Result">"Ergebnis: "</string>
     <string name="TapToPlay">Berühren um fortzufahren</string>
     <string name="NoHighscore">Noch kein Highscore!</string>
     <string name="Highscore1">Highscore für </string>
-    <string name="Highscore2"> ist </string>
-    <string name="Highscore3"> Sek.</string>
+    <string name="Highscore2">" ist "</string>
+    <string name="Highscore3">" Sek."</string>
 </resources>

@@ -60,6 +60,7 @@ public class ScrollingActivity extends AppCompatActivity {
 
 
         listView = findViewById(R.id.list);
+        listView.setLongClickable(true);
 
         dataModels = new ArrayList<>();
 
@@ -79,6 +80,17 @@ public class ScrollingActivity extends AppCompatActivity {
                 intent.putExtra("id", dataModel.id.toString());
                 startActivity(intent);
 
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long id) {
+
+                DataModel dataModel = dataModels.get(pos);
+                shareLevel(dataModel);
+
+                return true;
             }
         });
 
@@ -238,6 +250,16 @@ public class ScrollingActivity extends AppCompatActivity {
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "MonsterMaths");
         sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(sharingIntent, "MonsterMaths empfehlen via"));
+    }
+
+    private void shareLevel(DataModel dm) {
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "\nMein Highscore bei MonsterMaths für " + dm.getName() + " ist " + dm.getPersonal_highscore() + " Sekunden.\n\n";
+        shareBody = shareBody + "Schaffst du das auch?\n\n";
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "MonsterMaths");
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, dm.getName() + " teilen via"));
     }
 
     // Menu icons are inflated just as they were with actionbar

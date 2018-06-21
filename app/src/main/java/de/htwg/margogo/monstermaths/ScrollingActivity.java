@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -203,18 +204,45 @@ public class ScrollingActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.menuShare:
+
+                shareGame();
+                return true;
+
+            case R.id.Settings:
+                Toast.makeText(this, "Settings will be shown here",
+                        Toast.LENGTH_LONG).show();
+                return true;
+
+            case R.id.ShareLevel:
+                Toast.makeText(this, "Berühre ein Level lang, um dies zu teilen",
+                        Toast.LENGTH_LONG).show();
+                return true;
+
+            case R.id.About:
+                Toast.makeText(this, "About page will be displayed",
+                        Toast.LENGTH_LONG).show();
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
         }
 
-        return super.onOptionsItemSelected(item);
+    }
 
+    private void shareGame() {
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "\nProbiere diese tolle App aus\n\n";
+        shareBody = shareBody + "https://play.google.com/store/apps/details?id=de.htwg.margogo.monstermath \n\n";
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "MonsterMaths");
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "MonsterMaths empfehlen via"));
     }
 
     // Menu icons are inflated just as they were with actionbar

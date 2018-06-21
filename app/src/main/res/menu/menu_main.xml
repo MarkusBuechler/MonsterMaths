@@ -16,9 +16,6 @@
                 android:id="@+id/ShareLevel"
                 android:title="Score teilen" />
             <item
-                android:id="@+id/Settings"
-                android:title="Einstellungen" />
-            <item
                 android:id="@+id/About"
                 android:title="About" />
         </menu>

@@ -211,11 +211,6 @@ public class ScrollingActivity extends AppCompatActivity {
                 shareGame();
                 return true;
 
-            case R.id.Settings:
-                Toast.makeText(this, "Settings will be shown here",
-                        Toast.LENGTH_LONG).show();
-                return true;
-
             case R.id.ShareLevel:
                 Toast.makeText(this, "Berühre ein Level lang, um dies zu teilen",
                         Toast.LENGTH_LONG).show();

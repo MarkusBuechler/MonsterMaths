@@ -255,8 +255,18 @@ public class ScrollingActivity extends AppCompatActivity {
     private void shareLevel(DataModel dm) {
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
-        String shareBody = "\nMein Highscore bei MonsterMaths für " + dm.getName() + " ist " + dm.getPersonal_highscore() + " Sekunden.\n\n";
-        shareBody = shareBody + "Schaffst du das auch?\n\n";
+
+        int score = dm.getPersonal_highscore();
+        String shareBody;
+
+        if (score > 0) {
+            shareBody = "\nMein Highscore bei MonsterMaths für " + dm.getName() + " ist " + dm.getPersonal_highscore() + " Sekunden.\n\n";
+            shareBody = shareBody + "Schaffst du das auch?\n\n";
+        } else {
+            shareBody = "\nIch habe noch kein Score bei MonsterMaths für " + dm.getName() +".\n\n";
+            shareBody = shareBody + "Hast du das Level schon geschafft?\n\n";
+        }
+
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "MonsterMaths");
         sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(sharingIntent, dm.getName() + " teilen via"));

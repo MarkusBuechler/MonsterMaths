@@ -10,7 +10,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Handler;
 import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -433,8 +432,8 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                     accelerometerPlayActivity.success = true;
 
                     AlertDialog alertDialog = new AlertDialog.Builder(accelerometerPlayActivity).create();
-                    alertDialog.setTitle("Level geschafft.");
-                    alertDialog.setMessage("Level erfolgreich geschafft\nGlückwunsch!");
+                    alertDialog.setTitle(getContext().getString(R.string.LevelCompleted));
+                    alertDialog.setMessage(getContext().getString(R.string.LevelCompletedLong));
                     alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Ok",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
@@ -455,16 +454,16 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
         private void levelFailed(int expectedResult, Boolean catched) {
             AlertDialog alertDialog = new AlertDialog.Builder(accelerometerPlayActivity).create();
-            alertDialog.setTitle("Level nicht geschafft");
-            alertDialog.setMessage(catched ? "Du wurdest von einem Monster gefangen." : "Deine Lösung von " +  currentResult + " ist falsch. \nProbiere " + expectedResult + " zu erspielen.");
-            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Nochmal",
+            alertDialog.setTitle(getContext().getString(R.string.LevelFailed));
+            alertDialog.setMessage(catched ? getContext().getString(R.string.CaughtMonster) : getContext().getString(R.string.YourSolution) +  currentResult + getContext().getString(R.string.isWrong) + expectedResult + getContext().getString(R.string.zuScore));
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getContext().getString(R.string.Again),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                             accelerometerPlayActivity.recreate();
                         }
                     });
-            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Zurück",
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getContext().getString(R.string.Back),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();

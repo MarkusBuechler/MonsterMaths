@@ -27,4 +27,28 @@
     <string name="Highscore1">Highscore für </string>
     <string name="Highscore2">" ist "</string>
     <string name="Highscore3">" Sek."</string>
+    <string name="Hello">Hallo</string>
+    <string name="DialogLevel1">Versuche auf das Ergebnis 4 zu kommen. Du startest immer mit einer Addition von 0. Lass dich nicht von dem Monster fangen</string>
+    <string name="DoNotShowAgain">"Nicht erneut anzeigen"</string>
+    <string name="LevelCompleted">Level geschafft.</string>
+    <string name="LevelCompletedLong">"Level erfolgreich geschafft\nGlückwunsch!"</string>
+    <string name="LevelFailed">Level nicht geschafft</string>
+    <string name="Back">Zurück</string>
+    <string name="Again">Nochmal</string>
+    <string name="CaughtMonster">"Du wurdest von einem Monster gefangen!"</string>
+    <string name="YourSolution">"Deine Lösung von "</string>
+    <string name="isWrong">" ist falsch. Probiere "</string>
+    <string name="zuScore">" zu erspielen."</string>
+    <string name="TryApp">"Probiere diese tolle App aus"</string>
+    <string name="Recommend">"MonsterMaths empfehlen via"</string>
+    <string name="LongTap">"Berühre ein Level lang, um dies zu teilen"</string>
+    <string name="highscore1">"Mein Highscore bei MonsterMaths für"</string>
+    <string name="is">" ist "</string>
+    <string name="highscore3">" Sekunden."</string>
+    <string name="beatMe">"Schaffst du das auch?"</string>
+    <string name="NoScoreYet">"Ich habe noch kein Score bei MonsterMaths für "</string>
+    <string name="NoScoreYet2">"."</string>
+    <string name="ScoreYet3">"Hast du das Level schon geschafft?"</string>
+    <string name="ShareVia">" teilen via "</string>
+
 </resources>

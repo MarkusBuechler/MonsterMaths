@@ -224,7 +224,7 @@ public class ScrollingActivity extends AppCompatActivity {
                 return true;
 
             case R.id.ShareLevel:
-                Toast.makeText(this, "Berühre ein Level lang, um dies zu teilen",
+                Toast.makeText(this, R.string.LongTap,
                         Toast.LENGTH_LONG).show();
                 return true;
 
@@ -245,11 +245,11 @@ public class ScrollingActivity extends AppCompatActivity {
     private void shareGame() {
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
-        String shareBody = "\nProbiere diese tolle App aus\n\n";
+        String shareBody = getString(R.string.TryApp);
         shareBody = shareBody + "https://play.google.com/store/apps/details?id=de.htwg.margogo.monstermath \n\n";
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "MonsterMaths");
         sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
-        startActivity(Intent.createChooser(sharingIntent, "MonsterMaths empfehlen via"));
+        startActivity(Intent.createChooser(sharingIntent, getString(R.string.Recommend)));
     }
 
     private void shareLevel(DataModel dm) {
@@ -260,16 +260,16 @@ public class ScrollingActivity extends AppCompatActivity {
         String shareBody;
 
         if (score > 0) {
-            shareBody = "\nMein Highscore bei MonsterMaths für " + dm.getName() + " ist " + dm.getPersonal_highscore() + " Sekunden.\n\n";
-            shareBody = shareBody + "Schaffst du das auch?\n\n";
+            shareBody = getString(R.string.highscore1) + dm.getName() + getString(R.string.is) + dm.getPersonal_highscore() + getString(R.string.highscore3);
+            shareBody = shareBody + getString(R.string.beatMe);
         } else {
-            shareBody = "\nIch habe noch kein Score bei MonsterMaths für " + dm.getName() +".\n\n";
-            shareBody = shareBody + "Hast du das Level schon geschafft?\n\n";
+            shareBody = getString(R.string.NoScoreYet) + dm.getName() +getString(R.string.NoScoreYet2);
+            shareBody = shareBody + getString(R.string.ScoreYet3);
         }
 
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "MonsterMaths");
         sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
-        startActivity(Intent.createChooser(sharingIntent, dm.getName() + " teilen via"));
+        startActivity(Intent.createChooser(sharingIntent, dm.getName() + getString(R.string.ShareVia)));
     }
 
     // Menu icons are inflated just as they were with actionbar

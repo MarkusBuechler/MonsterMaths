@@ -1,8 +1,12 @@
 package de.htwg.margogo.monstermaths;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.arch.persistence.room.Room;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.hardware.Sensor;
@@ -13,6 +17,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -72,6 +77,9 @@ public class GameActivity extends Activity {
     int dt_id;
     Boolean success = false;
     String currentOperation = "+";
+    Boolean show_again = true;
+
+    public static final String MY_PREFS_NAME = "de.htwg.margogo.monstermaths.PREFERENCE_FILE_KEY";
 
     //runs without a timer by reposting this handler at the end of the runnable
     Handler timerHandler = new Handler();
@@ -211,9 +219,6 @@ public class GameActivity extends Activity {
         textViewTimer2.setX(textViewTimer.getX() + 120);
         textViewTimer2.setY(textViewTimer.getY());
 
-        startTime = System.currentTimeMillis();
-        timerHandler.postDelayed(timerRunnable, 0);
-
         // instantiate our simulation view and set it as the activity's content
         mSimulationView = new SimulationView(this, this);
         mSimulationView.setBackgroundResource(R.drawable.background);
@@ -224,6 +229,53 @@ public class GameActivity extends Activity {
         mSimulationView.addView(textViewResult);
         mSimulationView.addView(textViewResult2);
         setContentView(mSimulationView);
+
+        // get value from shared preferences
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        show_again = prefs.getBoolean("show_again", true);
+
+        // Show information on first level
+        if (dt_id == 1 && show_again) {
+
+            textViewTimer2.setVisibility(View.INVISIBLE);
+
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle(getString(R.string.Hello));
+            alertDialog.setMessage(getString(R.string.DialogLevel1));
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+
+                            startTime = System.currentTimeMillis();
+                            timerHandler.postDelayed(timerRunnable, 0);
+                            textViewTimer2.setVisibility(View.VISIBLE);
+                        }
+                    });
+
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.DoNotShowAgain),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+
+
+                            SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                            editor.putBoolean("show_again", false);
+                            editor.apply();
+
+                            startTime = System.currentTimeMillis();
+                            timerHandler.postDelayed(timerRunnable, 0);
+                            textViewTimer2.setVisibility(View.VISIBLE);
+                        }
+                    });
+
+            alertDialog.show();
+
+        } else {
+
+            startTime = System.currentTimeMillis();
+            timerHandler.postDelayed(timerRunnable, 0);
+        }
 
     }
 

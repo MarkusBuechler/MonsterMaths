@@ -7,13 +7,15 @@
 | master      | [![build status](https://gitlab.in.htwg-konstanz.de/mobile-ss18/mobile-ss18-13/badges/master/build.svg)](https://gitlab.in.htwg-konstanz.de/mobile-ss18/mobile-ss18-13/commits/master) |
 | dev      | [![build status](https://gitlab.in.htwg-konstanz.de/mobile-ss18/mobile-ss18-13/badges/dev/build.svg)](https://gitlab.in.htwg-konstanz.de/mobile-ss18/mobile-ss18-13/commits/dev) |
 
+
+## Beschreibung
 In dem Spiel Monster Maths geht es darum mathematische Gleichung auf eine spielerische Art zu lösen.  
-Der Spieler steuert einen Avatar mit Hilfe des Beschleunigungssensors am Handy durch eine kleine Spielwelt.  
-Ziel eines Levels ist es auf ein vorgegebenes Ergebnis zu kommen.   
+Durch Kippbewegungen müssen verschiedene Zahlen und Operatoren eingesammelt werden um auf das korrekte Ergebnis zu kommen.
+Lass dich dabei nur nicht von den Monstern erwischen.  
 Die einzelnen Teile des Lösungswegs sind auf den Bildschirm verteilt und müssen in der korrekten Reihenfolge eingesammelt werden.   
-Damit das Spiel nicht ganz zu einfach ist, bewegen sich verschiedene Monster auch über den Bildschirm und blockieren den Benutzer.   
-Ein Timer misst, wie lange der User für die Lösung benötigt.   
-Anhand des Timers kann für jedes Level eine Rangliste erstellt werden, in der User sich vergleichen können.  
+Der Schwierigkeitsgrad steigt schnell an von einfachen Additionsaufgaben über die Subtraktion, Multiplikation bis hin zur Division. 
+Gleichzeitig wird es immer schwieriger den Monstern auszuweichen.
+Schaffst du es in jedem Level dir die Goldmedaille zu holen ?
 
 ## Getting Started
 Gehe in den Google Play Store und lade dir die App herunter. (Hier Link einfügen)  
@@ -29,31 +31,6 @@ kommt später noch hinzu
 - __Woche 4__ [x] Level Design (20 angestrebt) 
 - __Woche 5__ [x] Highscore Listen inklusive lokalem Server (Room) und Medaillen, für jedes Level.
 - __Woche 6__ [ ] Vorbereitung für das Deployment (Ziel: Play Store), Performance, Bug Fixes, Optimierungen
-
-## Running the tests
-
-Um eine hohe Codequalität zu erreichen ist es sinnvoll Tests zu schreiben.  
-Mit Gradle kann dies automatisiert werden.
-
-Alle Unit Tests lassen sich mit einen Befehl ausführen
-
-```
-gradle test
-```
-
-Komponenten Tests sowie UI Tests sind noch unklar ob diese benötigt werden.
-
-### And coding style tests
-
-Über Code Style tests muss auch noch diskutiert werden
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 

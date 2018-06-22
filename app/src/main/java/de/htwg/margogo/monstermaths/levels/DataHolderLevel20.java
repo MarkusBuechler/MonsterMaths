@@ -31,16 +31,6 @@ public class DataHolderLevel20 extends DataHolderPrototype implements DataHolder
     private OperatorDataHolder operatorDataHolder[] = new OperatorDataHolder[] {o1, o2, o3};
 
     @Override
-    public String getName() {
-        return "Level 20";
-    }
-
-    @Override
-    public String getDescription() {
-        return "Mixed 7";
-    }
-
-    @Override
     public Integer getId() {
         return 20;
     }
@@ -67,7 +57,7 @@ public class DataHolderLevel20 extends DataHolderPrototype implements DataHolder
 
     @Override
     public BadgeCheck getBadgeCheck() {
-        return new BadgeCheck(14, 20,30);
+        return new BadgeCheck(14, 20);
     }
 
     @Override

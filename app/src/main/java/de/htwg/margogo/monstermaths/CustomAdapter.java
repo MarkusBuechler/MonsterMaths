@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnClickListener{
 
-    private ArrayList<DataModel> dataSet;
     private Context mContext;
 
     // View lookup cache
@@ -29,12 +28,11 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
 
     public CustomAdapter(ArrayList<DataModel> data, Context context) {
         super(context, R.layout.row_item, data);
-        this.dataSet = data;
         this.mContext=context;
 
     }
 
-    // TODO Optional disable locked levels.
+    // TODO Optional disable locked levels. -> Release 2
 
     @Override
     public void onClick(View v) {
@@ -48,12 +46,14 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
         {
             case R.id.bagde:
 
-                String text = "";
+                String text;
 
                 if (dataModel.getPersonal_highscore() == 0) {
-                    text = "No highscore yet!";
+                    text = mContext.getString(R.string.NoHighscore);
                 } else {
-                    text = "Highscore for " + dataModel.getName() + " is " + dataModel.getPersonal_highscore()+ " sec";
+                    text = mContext.getString(R.string.Highscore1) + " "
+                            + dataModel.getName() + " " + mContext.getString(R.string.Highscore2)
+                            + " " + dataModel.getPersonal_highscore() + " " + mContext.getString(R.string.Highscore3);
                 }
 
                 Snackbar.make(v, text, Snackbar.LENGTH_SHORT)
@@ -66,6 +66,7 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         // Get the data item for this position
         DataModel dataModel = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
@@ -89,6 +90,7 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
 
             convertView.setTag(viewHolder);
         } else {
+
             viewHolder = (ViewHolder) convertView.getTag();
             result=convertView;
         }
@@ -112,15 +114,12 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
 
     /**
      * Comment: Java doesn't support switch casing on enums..
-     * @param dataModel
-     * @param viewHolder
      */
     private void updateMedal(DataModel dataModel, ViewHolder viewHolder) {
 
+        // if any score is set show bronze medal.
+        viewHolder.badge.setImageResource(R.drawable.medal_bronze_128);
 
-        if (dataModel.getPersonal_highscore() <= dataModel.getBadgeCheck().getBronze()) {
-            viewHolder.badge.setImageResource(R.drawable.medal_bronze_128);
-        }
         if (dataModel.getPersonal_highscore() <= dataModel.getBadgeCheck().getSilver()) {
             viewHolder.badge.setImageResource(R.drawable.medal_silver_128);
         }
@@ -128,7 +127,7 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
             viewHolder.badge.setImageResource(R.drawable.medal_gold_128);
         }
 
-        // default is no medal
+        // default is no medal when no score is achieved.
         if (dataModel.getPersonal_highscore() == 0) {
             viewHolder.badge.setImageResource(0);
         }

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation" >
+
+    <string name="Level1Desc">Einführung in das Spielkonzept</string>
+    <string name="Level2Desc">Einführung in die Addition</string>
+    <string name="Level6Desc">Einführung in die Subtraktion</string>
+    <string name="Level7Desc">Subtraktion 1</string>
+    <string name="Level8Desc">Subtraktion 2</string>
+    <string name="Level9Desc">Gemischt 1</string>
+    <string name="Level10Desc">Gemischt 2</string>
+    <string name="Level11Desc">Einführung in die Multiplikation</string>
+    <string name="Level12Desc">Multiplikation 1</string>
+    <string name="Level13Desc">Multiplikation 2</string>
+    <string name="Level14Desc">Multiplikation 3</string>
+    <string name="Level15Desc">Gemischt 3</string>
+    <string name="Level16Desc">Einführung in die Division</string>
+    <string name="Level17Desc">Gemischt 4</string>
+    <string name="Level18Desc">Gemischt 5</string>
+    <string name="Level19Desc">Gemischt 6</string>
+    <string name="Level20Desc">Gemischt 7</string>
+    <string name="Time">"Zeit: "</string>
+    <string name="Result">"Ergebnis: "</string>
+    <string name="TapToPlay">Berühren um fortzufahren</string>
+    <string name="NoHighscore">Noch kein Highscore!</string>
+    <string name="Highscore1">Highscore für </string>
+    <string name="Highscore2">" ist "</string>
+    <string name="Highscore3">" Sek."</string>
+    <string name="Hello">Hallo</string>
+    <string name="DialogLevel1">Versuche auf das Ergebnis 4 zu kommen. Du startest immer mit einer Addition von 0. Lass dich nicht von dem Monster fangen</string>
+    <string name="DoNotShowAgain">"Nicht erneut anzeigen"</string>
+    <string name="LevelCompleted">Level geschafft.</string>
+    <string name="LevelCompletedLong">"Level erfolgreich geschafft\nGlückwunsch!"</string>
+    <string name="LevelFailed">Level nicht geschafft</string>
+    <string name="Back">Zurück</string>
+    <string name="Again">Nochmal</string>
+    <string name="CaughtMonster">"Du wurdest von einem Monster gefangen!"</string>
+    <string name="YourSolution">"Deine Lösung von "</string>
+    <string name="isWrong">" ist falsch. Probiere "</string>
+    <string name="zuScore">" zu erspielen."</string>
+    <string name="TryApp">"Probiere diese tolle App aus"</string>
+    <string name="Recommend">"MonsterMaths empfehlen via"</string>
+    <string name="LongTap">"Berühre ein Level lang, um dies zu teilen"</string>
+    <string name="highscore1">"Mein Highscore bei MonsterMaths für"</string>
+    <string name="is">" ist "</string>
+    <string name="highscore3">" Sekunden."</string>
+    <string name="beatMe">"Schaffst du das auch?"</string>
+    <string name="NoScoreYet">"Ich habe noch kein Score bei MonsterMaths für "</string>
+    <string name="NoScoreYet2">"."</string>
+    <string name="ScoreYet3">"Hast du das Level schon geschafft?"</string>
+    <string name="ShareVia">" teilen via "</string>
+    <string name="ShareScore">Share score</string>
+    <string name="aboutText">"Version 1.0   Idee und Umsetzung von Markus Büchler  Die Bilder und Icons sind von  https://blog.spoongraphics.co.uk/  http://www.iconarchive.com/show/red-orb-alphabet-icons-by-iconarchive.html  https://sparklestuff.deviantart.com/art/Green-Watercolor-BG-Thing-11-x-17-488277713   Vielen Dank dafür"</string>
+
+</resources>

@@ -6,13 +6,17 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import de.htwg.margogo.monstermaths.database.AppDatabase;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel1;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel10;
 import de.htwg.margogo.monstermaths.levels.DataHolderLevel11;
@@ -50,7 +54,13 @@ public class ScrollingActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_scrolling);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (toolbar != null) getSupportActionBar().setTitle("MonsterMaths");
+
+
         listView = findViewById(R.id.list);
+        listView.setLongClickable(true);
 
         dataModels = new ArrayList<>();
 
@@ -70,6 +80,17 @@ public class ScrollingActivity extends AppCompatActivity {
                 intent.putExtra("id", dataModel.id.toString());
                 startActivity(intent);
 
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long id) {
+
+                DataModel dataModel = dataModels.get(pos);
+                shareLevel(dataModel);
+
+                return true;
             }
         });
 
@@ -102,64 +123,64 @@ public class ScrollingActivity extends AppCompatActivity {
         dataModels.clear();
 
         DataHolderLevel1 dt1 = DataHolderLevel1.getInstance();
-        DataModel dm1 = new DataModel(dt1.getName(), dt1.getId(), false, dt1.getDescription(), getHighscore(1), dt1.getBadgeCheck());
+        DataModel dm1 = new DataModel(getString(R.string.Level1Name), dt1.getId(), false, getString(R.string.Level1Desc), getHighscore(1), dt1.getBadgeCheck());
 
         DataHolderLevel2 dt2 = DataHolderLevel2.getInstance();
-        DataModel dm2 = new DataModel(dt2.getName(), dt2.getId(), false, dt2.getDescription(), getHighscore(2), dt2.getBadgeCheck());
+        DataModel dm2 = new DataModel(getString(R.string.Level2Name), dt2.getId(), false, getString(R.string.Level2Desc), getHighscore(2), dt2.getBadgeCheck());
 
         DataHolderLevel3 dt3 = DataHolderLevel3.getInstance();
-        DataModel dm3 = new DataModel(dt3.getName(), dt3.getId(), false, dt3.getDescription(), getHighscore(3), dt3.getBadgeCheck());
+        DataModel dm3 = new DataModel(getString(R.string.Level3Name), dt3.getId(), false, getString(R.string.Level3Desc), getHighscore(3), dt3.getBadgeCheck());
 
         DataHolderLevel4 dt4 = DataHolderLevel4.getInstance();
-        DataModel dm4 = new DataModel(dt4.getName(), dt4.getId(), false, dt4.getDescription(), getHighscore(4), dt4.getBadgeCheck());
+        DataModel dm4 = new DataModel(getString(R.string.Level4Name), dt4.getId(), false, getString(R.string.Level4Desc), getHighscore(4), dt4.getBadgeCheck());
 
         DataHolderLevel5 dt5 = DataHolderLevel5.getInstance();
-        DataModel dm5 = new DataModel(dt5.getName(), dt5.getId(), false, dt5.getDescription(), getHighscore(5), dt5.getBadgeCheck());
+        DataModel dm5 = new DataModel(getString(R.string.Level5Name), dt5.getId(), false, getString(R.string.Level5Desc), getHighscore(5), dt5.getBadgeCheck());
 
         DataHolderLevel6 dt6 = DataHolderLevel6.getInstance();
-        DataModel dm6 = new DataModel(dt6.getName(), dt6.getId(), false, dt6.getDescription(), getHighscore(6), dt6.getBadgeCheck());
+        DataModel dm6 = new DataModel(getString(R.string.Level6Name), dt6.getId(), false, getString(R.string.Level6Desc), getHighscore(6), dt6.getBadgeCheck());
 
         DataHolderLevel7 dt7 = DataHolderLevel7.getInstance();
-        DataModel dm7 = new DataModel(dt7.getName(), dt7.getId(), false, dt7.getDescription(), getHighscore(7), dt7.getBadgeCheck());
+        DataModel dm7 = new DataModel(getString(R.string.Level7Name), dt7.getId(), false, getString(R.string.Level7Desc), getHighscore(7), dt7.getBadgeCheck());
 
         DataHolderLevel8 dt8 = DataHolderLevel8.getInstance();
-        DataModel dm8 = new DataModel(dt8.getName(), dt8.getId(), false, dt8.getDescription(), getHighscore(8), dt8.getBadgeCheck());
+        DataModel dm8 = new DataModel(getString(R.string.Level8Name), dt8.getId(), false, getString(R.string.Level8Desc), getHighscore(8), dt8.getBadgeCheck());
 
         DataHolderLevel9 dt9 = DataHolderLevel9.getInstance();
-        DataModel dm9 = new DataModel(dt9.getName(), dt9.getId(), false, dt9.getDescription(), getHighscore(9), dt9.getBadgeCheck());
+        DataModel dm9 = new DataModel(getString(R.string.Level9Name), dt9.getId(), false, getString(R.string.Level9Desc), getHighscore(9), dt9.getBadgeCheck());
 
         DataHolderLevel10 dt10 = DataHolderLevel10.getInstance();
-        DataModel dm10 = new DataModel(dt10.getName(), dt10.getId(), false, dt10.getDescription(), getHighscore(10), dt10.getBadgeCheck());
+        DataModel dm10 = new DataModel(getString(R.string.Level10Name), dt10.getId(), false, getString(R.string.Level10Desc), getHighscore(10), dt10.getBadgeCheck());
 
         DataHolderLevel11 dt11 = DataHolderLevel11.getInstance();
-        DataModel dm11 = new DataModel(dt11.getName(), dt11.getId(), false, dt11.getDescription(), getHighscore(11), dt11.getBadgeCheck());
+        DataModel dm11 = new DataModel(getString(R.string.Level11Name), dt11.getId(), false, getString(R.string.Level11Desc), getHighscore(11), dt11.getBadgeCheck());
 
         DataHolderLevel12 dt12 = DataHolderLevel12.getInstance();
-        DataModel dm12 = new DataModel(dt12.getName(), dt12.getId(), false, dt12.getDescription(), getHighscore(12), dt12.getBadgeCheck());
+        DataModel dm12 = new DataModel(getString(R.string.Level12Name), dt12.getId(), false, getString(R.string.Level12Desc), getHighscore(12), dt12.getBadgeCheck());
 
         DataHolderLevel13 dt13 = DataHolderLevel13.getInstance();
-        DataModel dm13 = new DataModel(dt13.getName(), dt13.getId(), false, dt13.getDescription(), getHighscore(13), dt13.getBadgeCheck());
+        DataModel dm13 = new DataModel(getString(R.string.Level13Name), dt13.getId(), false, getString(R.string.Level13Desc), getHighscore(13), dt13.getBadgeCheck());
 
         DataHolderLevel14 dt14 = DataHolderLevel14.getInstance();
-        DataModel dm14 = new DataModel(dt14.getName(), dt14.getId(), false, dt14.getDescription(), getHighscore(14), dt14.getBadgeCheck());
+        DataModel dm14 = new DataModel(getString(R.string.Level14Name), dt14.getId(), false, getString(R.string.Level14Desc), getHighscore(14), dt14.getBadgeCheck());
 
         DataHolderLevel15 dt15 = DataHolderLevel15.getInstance();
-        DataModel dm15 = new DataModel(dt15.getName(), dt15.getId(), false, dt15.getDescription(), getHighscore(15), dt15.getBadgeCheck());
+        DataModel dm15 = new DataModel(getString(R.string.Level15Name), dt15.getId(), false, getString(R.string.Level15Desc), getHighscore(15), dt15.getBadgeCheck());
 
         DataHolderLevel16 dt16 = DataHolderLevel16.getInstance();
-        DataModel dm16 = new DataModel(dt16.getName(), dt16.getId(), false, dt16.getDescription(), getHighscore(16), dt16.getBadgeCheck());
+        DataModel dm16 = new DataModel(getString(R.string.Level16Name), dt16.getId(), false, getString(R.string.Level16Desc), getHighscore(16), dt16.getBadgeCheck());
 
         DataHolderLevel17 dt17 = DataHolderLevel17.getInstance();
-        DataModel dm17 = new DataModel(dt17.getName(), dt17.getId(), false, dt17.getDescription(), getHighscore(17), dt17.getBadgeCheck());
+        DataModel dm17 = new DataModel(getString(R.string.Level17Name), dt17.getId(), false, getString(R.string.Level17Desc), getHighscore(17), dt17.getBadgeCheck());
 
         DataHolderLevel18 dt18 = DataHolderLevel18.getInstance();
-        DataModel dm18 = new DataModel(dt18.getName(), dt18.getId(), false, dt18.getDescription(), getHighscore(18), dt18.getBadgeCheck());
+        DataModel dm18 = new DataModel(getString(R.string.Level18Name), dt18.getId(), false, getString(R.string.Level18Desc), getHighscore(18), dt18.getBadgeCheck());
 
         DataHolderLevel19 dt19 = DataHolderLevel19.getInstance();
-        DataModel dm19 = new DataModel(dt19.getName(), dt19.getId(), false, dt19.getDescription(), getHighscore(19), dt19.getBadgeCheck());
+        DataModel dm19 = new DataModel(getString(R.string.Level19Name), dt19.getId(), false, getString(R.string.Level19Desc), getHighscore(19), dt19.getBadgeCheck());
 
         DataHolderLevel20 dt20 = DataHolderLevel20.getInstance();
-        DataModel dm20 = new DataModel(dt20.getName(), dt20.getId(), false, dt20.getDescription(), getHighscore(20), dt20.getBadgeCheck());
+        DataModel dm20 = new DataModel(getString(R.string.Level20Name), dt20.getId(), false, getString(R.string.Level20Desc), getHighscore(20), dt20.getBadgeCheck());
 
         dataModels.add(dm1);
         dataModels.add(dm2);
@@ -194,17 +215,69 @@ public class ScrollingActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+
+        switch (item.getItemId()) {
+            case R.id.menuShare:
+
+                shareGame();
+                return true;
+
+            case R.id.ShareLevel:
+                Toast.makeText(this, R.string.LongTap,
+                        Toast.LENGTH_LONG).show();
+                return true;
+
+            case R.id.About:
+                Intent intent = new Intent(ScrollingActivity.this, AboutActivity.class);
+                startActivity(intent);
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
         }
 
-        return super.onOptionsItemSelected(item);
+    }
+
+    private void shareGame() {
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = getString(R.string.TryApp);
+        shareBody = shareBody + "https://play.google.com/store/apps/details?id=de.htwg.margogo.monstermath \n\n";
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "MonsterMaths");
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, getString(R.string.Recommend)));
+    }
+
+    private void shareLevel(DataModel dm) {
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+
+        int score = dm.getPersonal_highscore();
+        String shareBody;
+
+        if (score > 0) {
+            shareBody = getString(R.string.highscore1) + dm.getName() + getString(R.string.is) + dm.getPersonal_highscore() + getString(R.string.highscore3);
+            shareBody = shareBody + getString(R.string.beatMe);
+        } else {
+            shareBody = getString(R.string.NoScoreYet) + dm.getName() +getString(R.string.NoScoreYet2);
+            shareBody = shareBody + getString(R.string.ScoreYet3);
+        }
+
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "MonsterMaths");
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, dm.getName() + getString(R.string.ShareVia)));
+    }
+
+    // Menu icons are inflated just as they were with actionbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
 }

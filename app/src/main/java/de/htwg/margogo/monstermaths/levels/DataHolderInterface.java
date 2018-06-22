@@ -10,10 +10,6 @@ public interface DataHolderInterface {
 
     void setLock(boolean lock);
 
-    String getName();
-
-    String getDescription();
-
     Integer getId();
 
     Integer getNumMonsters();

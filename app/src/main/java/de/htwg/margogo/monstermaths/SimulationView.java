@@ -1,6 +1,8 @@
 package de.htwg.margogo.monstermaths;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -8,7 +10,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Handler;
 import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -388,21 +389,15 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 final float y1_2 = monster.mPosY;
                 final double dis = distance(x1_1,y1_1,x1_2,y1_2);
 
-                if (dis < 0.003 && !catched)  {
+                if (dis < 0.003 && !catched && !lockFinish)  {
 
                     catched = true;
+                    lockFinish = true;
+
                     Vibrator v = (Vibrator) accelerometerPlayActivity.getSystemService(Context.VIBRATOR_SERVICE);
                     if (v!= null) v.vibrate(300);
 
-                    // after 1 sec activity is closed
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            accelerometerPlayActivity.finish();
-                        }
-                    }, 1000);
+                    levelFailed(accelerometerPlayActivity.dataHolder.getExpectedResult(), true);
 
                 }
             }
@@ -423,27 +418,60 @@ class SimulationView extends FrameLayout implements SensorEventListener {
 
             final double dis = distance(x1,y1,x2,y2);
 
-            if (dis < 0.004 && !lockFinish && currentResult == accelerometerPlayActivity.dataHolder.getExpectedResult())  {
-
-                myGoal.setBackgroundResource(R.drawable.treasure_open_128);
+            if (dis < 0.004 && !lockFinish) {
 
                 lockFinish = true;
 
                 // share data between singleton class !
                 accelerometerPlayActivity.dataHolder.setLock(true);
+                int expectedResult = accelerometerPlayActivity.dataHolder.getExpectedResult();
 
-                // after 1 sec activity is closed
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        accelerometerPlayActivity.finish(); // finished activity, maybe add finish screen before
-                    }
-                }, 1000);
+                if (currentResult == expectedResult) { // success
 
+                    treasure.setBackgroundResource(R.drawable.treasure_open_128);
+                    accelerometerPlayActivity.success = true;
 
+                    AlertDialog alertDialog = new AlertDialog.Builder(accelerometerPlayActivity).create();
+                    alertDialog.setTitle(getContext().getString(R.string.LevelCompleted));
+                    alertDialog.setMessage(getContext().getString(R.string.LevelCompletedLong));
+                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    accelerometerPlayActivity.finish();
+                                }
+                            });
+                    alertDialog.setCancelable(false);
+                    alertDialog.show();
+                } else { // not successful
+
+                    levelFailed(expectedResult, false);
+                }
 
             }
+
+        }
+
+        private void levelFailed(int expectedResult, Boolean catched) {
+            AlertDialog alertDialog = new AlertDialog.Builder(accelerometerPlayActivity).create();
+            alertDialog.setTitle(getContext().getString(R.string.LevelFailed));
+            alertDialog.setMessage(catched ? getContext().getString(R.string.CaughtMonster) : getContext().getString(R.string.YourSolution) +  currentResult + getContext().getString(R.string.isWrong) + expectedResult + getContext().getString(R.string.zuScore));
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getContext().getString(R.string.Again),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            accelerometerPlayActivity.recreate();
+                        }
+                    });
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getContext().getString(R.string.Back),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            accelerometerPlayActivity.finish();
+                        }
+                    });
+            alertDialog.setCancelable(false);
+            alertDialog.show();
         }
 
         /**
@@ -460,7 +488,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 final float y1_2 = myNumbers[i].mPosY;
                 final double dis = distance(x1_1,y1_1,x1_2,y1_2);
 
-                if (dis < 0.004 && !uniqueNumberLocks[i])  {
+                if (dis < 0.004 && !uniqueNumberLocks[i] && !lockFinish)  {
                     myNumbers[i].setVisibility(INVISIBLE);
 
                     updateResult(numberDataHolder[i].getValue());
@@ -484,7 +512,7 @@ class SimulationView extends FrameLayout implements SensorEventListener {
                 final float y1_2 = myOperators[i].mPosY;
                 final double dis = distance(x1_1,y1_1,x1_2,y1_2);
 
-                if (dis < 0.004 && !uniqueOperatorLocks[i])  {
+                if (dis < 0.004 && !uniqueOperatorLocks[i] && !lockFinish)  {
                     myOperators[i].setVisibility(INVISIBLE);
                     accelerometerPlayActivity.currentOperation = operatorDataHolder[i].getOperation();
 

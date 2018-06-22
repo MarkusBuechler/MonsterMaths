@@ -1,4 +1,7 @@
 <resources>
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation" >
+
     <string name="app_name">MonsterMaths</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="large_text">
@@ -91,4 +94,81 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="game_activity">Game Activity</string>
+
+    <string name="Level1Desc">Basic Introduction to the game</string>
+    <string name="Level2Desc">Introduction to Addition</string>
+    <string name="Level3Desc">Addition 1</string>
+    <string name="Level4Desc">Addition 2</string>
+    <string name="Level5Desc">Addition 3</string>
+    <string name="Level6Desc">Introduction to Subtraction</string>
+    <string name="Level7Desc">Subtraction 1</string>
+    <string name="Level8Desc">Subtraction 2</string>
+    <string name="Level9Desc">Mixed 1</string>
+    <string name="Level10Desc">Mixed 2</string>
+    <string name="Level11Desc">Introduction to Multiplication</string>
+    <string name="Level12Desc">Multiplication 1</string>
+    <string name="Level13Desc">Multiplication 2</string>
+    <string name="Level14Desc">Multiplication 3</string>
+    <string name="Level15Desc">Mixed 3</string>
+    <string name="Level16Desc">Introduction to Division</string>
+    <string name="Level17Desc">Mixed 4</string>
+    <string name="Level18Desc">Mixed 5</string>
+    <string name="Level19Desc">Mixed 6</string>
+    <string name="Level20Desc">Mixed 7</string>
+
+    <string name="Level1Name">Level 1</string>
+    <string name="Level2Name">Level 2</string>
+    <string name="Level3Name">Level 3</string>
+    <string name="Level4Name">Level 4</string>
+    <string name="Level5Name">Level 5</string>
+    <string name="Level6Name">Level 6</string>
+    <string name="Level7Name">Level 7</string>
+    <string name="Level8Name">Level 8</string>
+    <string name="Level9Name">Level 9</string>
+    <string name="Level10Name">Level 10</string>
+    <string name="Level11Name">Level 11</string>
+    <string name="Level12Name">Level 12</string>
+    <string name="Level13Name">Level 13</string>
+    <string name="Level14Name">Level 14</string>
+    <string name="Level15Name">Level 15</string>
+    <string name="Level16Name">Level 16</string>
+    <string name="Level17Name">Level 17</string>
+    <string name="Level18Name">Level 18</string>
+    <string name="Level19Name">Level 19</string>
+    <string name="Level20Name">Level 20</string>
+    <string name="Time">"Time: "</string>
+    <string name="Operation">"Operation: "</string>
+    <string name="Result">"Result: "</string>
+    <string name="TapToPlay">Tap to play</string>
+    <string name="NoHighscore">No highscore yet!</string>
+    <string name="Highscore1">Highscore for </string>
+    <string name="Highscore2">" is "</string>
+    <string name="Highscore3">" sec."</string>
+    <string name="Hello">Hello</string>
+    <string name="DialogLevel1">"Try to score 4. You always start with an addition beginning at 0. Don't get caught by a monster."</string>
+    <string name="DoNotShowAgain">"Do not show again"</string>
+    <string name="LevelCompleted">Level completed.</string>
+    <string name="LevelCompletedLong">"Level successful completed\nCongratulations!"</string>
+    <string name="LevelFailed">"Level not completed"</string>
+    <string name="Back">Back</string>
+    <string name="Again">Again</string>
+    <string name="CaughtMonster">"You got caught by a monster. "</string>
+    <string name="YourSolution">"Your solution "</string>
+    <string name="isWrong">" is wrong. Try "</string>
+    <string name="zuScore">" to get "</string>
+    <string name="TryApp">"Check out this amazing App"</string>
+    <string name="Recommend">"Recommend MonsterMaths via"</string>
+    <string name="LongTap">"Touch and hold a level to share it."</string>
+    <string name="highscore1">"My personal high score in MonsterMaths for "</string>
+    <string name="is">" is "</string>
+    <string name="highscore3">" seconds."</string>
+    <string name="beatMe">Can you defeat me?</string>
+    <string name="NoScoreYet">"I haven't completed "</string>
+    <string name="NoScoreYet2">"yet in MonsterMaths."</string>
+    <string name="ScoreYet3">"Did you?"</string>
+    <string name="ShareVia">" share with"</string>
+    <string name="ShareScore">Share score</string>
+    <string name="aboutText">"Version 1.0\n\nIdea and implementation: Markus Büchler\n\nThe pictures and icons can be found at\nhttps://blog.spoongraphics.co.uk/\nhttp://www.iconarchive.com/show/red-orb-alphabet-icons-by-iconarchive.html\nhttps://sparklestuff.deviantart.com/art/Green-Watercolor-BG-Thing-11-x-17-488277713\n\nThank you"</string>
+
+
 </resources>

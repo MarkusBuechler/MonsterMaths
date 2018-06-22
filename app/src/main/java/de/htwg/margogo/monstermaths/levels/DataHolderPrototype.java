@@ -23,16 +23,6 @@ public class DataHolderPrototype implements DataHolderInterface {
     }
 
     @Override
-    public String getName() {
-        return "Prototype";
-    }
-
-    @Override
-    public String getDescription() {
-        return "Prototype";
-    }
-
-    @Override
     public Integer getId() {
         return 0;
     }
@@ -74,7 +64,7 @@ public class DataHolderPrototype implements DataHolderInterface {
 
     @Override
     public BadgeCheck getBadgeCheck() {
-        return new BadgeCheck(0,0,0);
+        return new BadgeCheck(0,0);
     }
 
 }

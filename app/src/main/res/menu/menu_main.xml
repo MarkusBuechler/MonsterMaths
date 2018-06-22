@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menuShare"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/share"
+        android:title="Share">
+    </item>
+    <item
+        android:id="@+id/menuMore"
+        android:icon="@drawable/more"
+        app:showAsAction="ifRoom"
+        android:title="More">
+        <menu>
+            <item
+                android:id="@+id/ShareLevel"
+                android:title="@string/ShareScore" />
+            <item
+                android:id="@+id/About"
+                android:title="About" />
+        </menu>
+    </item>
+</menu>

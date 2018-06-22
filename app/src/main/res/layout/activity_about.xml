@@ -100,7 +100,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:text="Version 1.0\n\n Idee und Umsetzung von Markus Büchler\n\nDie Bilder und Icons sind von \nhttps://blog.spoongraphics.co.uk/ \nhttp://www.iconarchive.com/show/red-orb-alphabet-icons-by-iconarchive.html \nhttps://sparklestuff.deviantart.com/art/Green-Watercolor-BG-Thing-11-x-17-488277713 \n\nVielen Dank dafür"
+        android:text="@string/aboutText"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

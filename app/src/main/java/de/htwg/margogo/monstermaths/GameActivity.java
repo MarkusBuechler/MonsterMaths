@@ -216,7 +216,7 @@ public class GameActivity extends Activity {
         textViewTimer2.setTextSize(18);
         textViewTimer2.setTypeface(null, Typeface.BOLD);
         textViewTimer2.setLayoutParams(params);
-        textViewTimer2.setX(textViewTimer.getX() + 120);
+        textViewTimer2.setX(textViewTimer.getX() + 140);
         textViewTimer2.setY(textViewTimer.getY());
 
         // instantiate our simulation view and set it as the activity's content

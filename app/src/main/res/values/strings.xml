@@ -154,8 +154,8 @@
     <string name="Again">Again</string>
     <string name="CaughtMonster">"You got caught by a monster. "</string>
     <string name="YourSolution">"Your solution "</string>
-    <string name="isWrong">"is wrong. Try"</string>
-    <string name="zuScore">"to get scored"</string>
+    <string name="isWrong">" is wrong. Try "</string>
+    <string name="zuScore">" to get "</string>
     <string name="TryApp">"Check out this amazing App"</string>
     <string name="Recommend">"Recommend MonsterMaths via"</string>
     <string name="LongTap">"Touch and hold a level to share it."</string>
@@ -167,6 +167,8 @@
     <string name="NoScoreYet2">"yet in MonsterMaths."</string>
     <string name="ScoreYet3">"Did you?"</string>
     <string name="ShareVia">" share with"</string>
+    <string name="ShareScore">Share score</string>
+    <string name="aboutText">"Version 1.0\n\nIdea and implementation: Markus Büchler\n\nThe pictures and icons can be found at\nhttps://blog.spoongraphics.co.uk/\nhttp://www.iconarchive.com/show/red-orb-alphabet-icons-by-iconarchive.html\nhttps://sparklestuff.deviantart.com/art/Green-Watercolor-BG-Thing-11-x-17-488277713\n\nThank you"</string>
 
 
 </resources>

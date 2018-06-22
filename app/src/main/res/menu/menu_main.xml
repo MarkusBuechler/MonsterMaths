@@ -14,7 +14,7 @@
         <menu>
             <item
                 android:id="@+id/ShareLevel"
-                android:title="Score teilen" />
+                android:title="@string/ShareScore" />
             <item
                 android:id="@+id/About"
                 android:title="About" />

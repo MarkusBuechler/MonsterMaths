@@ -28,7 +28,7 @@ Da die App den Bewegungssensor verwendet und das gesamte Spielprinzip auf diesen
 ist eine erhöhte Konzentration vom Anwender und eine ruhige Umgebung für ein optimales App Erlebnis empfehlenswert.
 
 ## Getting Started
-Gehe in den Google Play Store und lade dir die App herunter. (Hier Link einfügen)  
+Gehe in den Google Play Store und lade dir die App [hier](https://play.google.com/store/apps/details?id=de.htwg.margogo.monstermaths) herunter.  
 Oder benutze alternativ die git clone Funktion um das Projekt in Android Studio zu importieren.
 
 ## Planung
